@@ -1,0 +1,126 @@
+{ 
+   "title":"bookmarklets",
+   "children":[ 
+      { 
+         "guid":"FcZQW0i3uq4G",
+         "title":"Clear Ads",
+         "index":0,
+         "dateAdded":1575721733931000,
+         "lastModified":1575721744265000,
+         "id":583,
+         "typeCode":1,
+         "type":"text/x-moz-place",
+         "uri":"javascript:function C(o){o.removeNode(true);}function A(d){for(j=0;t=['iframe','embed','object','marquee'][j];++j){o=d.getElementsByTagName(t);for(i=o.length-1;i>=0;i--)C(o[i]);}g=d.images;for(k=g.length-1;k>=0;k--)if({'88x31':1,'110x50':1,'120x60':1,'120x90':1,'120x240':1,'120x600':1,'125x125':1,'125x400':1,'125x600':1,'160x600':1,'300x250':1,'336x280':1,'468x60':1,'728x90':1,'750x100':1}[g[k].width+'x'+g[k].height])C(g[k]);}A(document);for(f=0;z=frames[f];++f)A(z.document);"
+      },
+      { 
+         "guid":"SrzJIwdgBVAA",
+         "title":"Clear Geocities",
+         "index":1,
+         "dateAdded":1575721758574000,
+         "lastModified":1575721763285000,
+         "id":584,
+         "typeCode":1,
+         "type":"text/x-moz-place",
+         "uri":"javascript:function KG(){try{if(frames.length)if(PUprop){var FS=document.getElementsByTagName('frameset')[0];FS.cols='*,0,0';}}catch(e){}}KG();"
+      },
+      { 
+         "guid":"Kgv3O3VLIEz0",
+         "title":"Clear IntelliTxt",
+         "index":2,
+         "dateAdded":1575721767454000,
+         "lastModified":1575721771289000,
+         "id":585,
+         "typeCode":1,
+         "type":"text/x-moz-place",
+         "uri":"javascript:function getTxt(obj){if(obj.nodeType==3)return obj.nodeValue;var txt=new Array(),i=0;while(obj.childNodes[i]){txt[txt.length]=getTxt(obj.childNodes[i++]);}return txt.join('');}function kill(w){try{for(var j=w.document.links.length-1;j>0;j--){L=w.document.links[j];if(L.href.indexOf('itxt.vibrantmedia.com')>=0||L.oncontextmenu!=null){t=w.document.createTextNode(getTxt(L));L.parentNode.replaceChild(t,L);}}for(var i=0;F=w.frames[i];i++){kill(F);}}catch(e){}}kill(window);"
+      },
+      { 
+         "guid":"nOqko95WnQKf",
+         "title":"Clear Trails",
+         "index":3,
+         "dateAdded":1575721779320000,
+         "lastModified":1575721781792000,
+         "id":586,
+         "typeCode":1,
+         "type":"text/x-moz-place",
+         "uri":"javascript:function A(w,t){H(w,t);for(j=0;j<w.frames.length;j++){H(w.frames[j],t);}}function H(w,t){try{o=w.document.getElementsByTagName(t);for(i=o.length-1;N=o[i];i--){if(t=='span'){if({texttail:1,spanstyle:1}[N.className])N.removeNode(true);}else{if(N.style.left&&parseInt(N.style.left)<=0){p=N.parentNode;if(p.tagName=='DIV'&&p.style.position=='absolute'){p.removeNode(true);}}}}}catch(e){}}onerror=function(){return true;};A(window,'span');A(window,'div');A(window,'img');"
+      },
+      { 
+         "guid":"f_hdhQ5JB2lK",
+         "title":"Clear Layers",
+         "index":4,
+         "dateAdded":1575721785142000,
+         "lastModified":1575721787890000,
+         "id":587,
+         "typeCode":1,
+         "type":"text/x-moz-place",
+         "uri":"javascript:function clrObj(w,t){var os=w.document.getElementsByTagName(t);for(i=os.length-1;i>=0;i--)if(os[i].style.position=='absolute')os[i].removeNode(true);}function kill(w){try{clrObj(w,'div');clrObj(w,'span');clrObj(w,'layer');for(var j=0;F=w.frames[j];j++)kill(F);}catch(e){}}kill(window);"
+      },
+      { 
+         "guid":"1dV69k6OObYi",
+         "title":"Allow Right-click",
+         "index":5,
+         "dateAdded":1575721792568000,
+         "lastModified":1575721797892000,
+         "id":588,
+         "typeCode":1,
+         "type":"text/x-moz-place",
+         "uri":"javascript:function kill(d){d.onmousedown=d.onmouseup=d.oncontextmenu=d.onselectstart=d.ondragstart=function(){return true;};}try{kill(document);for(var j=0;F=frames[j];++j)kill(F.document);}catch(e){}"
+      },
+      { 
+         "guid":"bipZHFDiFhTy",
+         "title":"Drop-down to List",
+         "index":6,
+         "dateAdded":1575721802983000,
+         "lastModified":1575721807772000,
+         "id":589,
+         "typeCode":1,
+         "type":"text/x-moz-place",
+         "uri":"javascript:function resizeCombos(w){try{combos=w.document.getElementsByTagName('select');for(var j=0;COMBO=combos[j];j++){COMBO.multiple=true;COMBO.size=Math.min(COMBO.length,12);}for(var i=0;F=w.frames[i];i++){resizeCombos(F);}}catch(e){}}resizeCombos(window);"
+      },
+      { 
+         "guid":"5ffmhJSAzyH6",
+         "title":"List to Drop-down",
+         "index":7,
+         "dateAdded":1575721817463000,
+         "lastModified":1575721820653000,
+         "id":590,
+         "typeCode":1,
+         "type":"text/x-moz-place",
+         "uri":"javascript:function resizeCombos(w){try{combos=w.document.getElementsByTagName('select');for(var j=0;COMBO=combos[j];j++){COMBO.size=1;COMBO.multiple=false;}for(var i=0;F=w.frames[i];i++){resizeCombos(F);}}catch(e){}}resizeCombos(window);"
+      },
+      { 
+         "guid":"NT6qst7GO1OW",
+         "title":"Bigger Text Areas",
+         "index":8,
+         "dateAdded":1575721825783000,
+         "lastModified":1575721828555000,
+         "id":591,
+         "typeCode":1,
+         "type":"text/x-moz-place",
+         "uri":"javascript:function resize(w){try{var areas=w.document.getElementsByTagName('textarea');for(i=0;A=areas[i];i++){A.cols*=2;A.rows*=2;if(document.all&&!w.opera){A.runtimeStyle.height=DS(A.currentStyle.height);A.runtimeStyle.width=DS(A.currentStyle.width);}}for(var i=0;F=w.frames[i];i++){resize(F);}}catch(e){}}function DS(s){var c=parseInt(s);if(!isNaN(c)){var u=s.replace(c,'');if(u.indexOf('%')>=0)return s;return ((c*2)+u);}}resize(window);"
+      },
+      { 
+         "guid":"xH3p_dgXWlqm",
+         "title":"Resizable Frames",
+         "index":9,
+         "dateAdded":1575721831870000,
+         "lastModified":1575721834770000,
+         "id":592,
+         "typeCode":1,
+         "type":"text/x-moz-place",
+         "uri":"javascript:(function(){if(frames.length==0||document.getElementsByTagName('frameset').length==0)alert('No frames.');else{var fs='<html>'+document.documentElement.innerHTML+'</html>';fs=fs.replace(/noresize/gi,'').replace(/border=0/gi,'border=1').replace(/framespacing=0/gi,'framespacing=1');with(document){open();write(fs);close();}}})()"
+      },
+      { 
+         "guid":"ZIxpuyN0yTKm",
+         "title":"Clear",
+         "index":10,
+         "dateAdded":1575721842678000,
+         "lastModified":1575721847404000,
+         "id":593,
+         "typeCode":1,
+         "type":"text/x-moz-place",
+         "uri":"javascript:/* Clear Ads */function C(d,o){v=d.createElement('div');o.parentNode.replaceChild(v,o);}function A(d){for(j=0;t=['iframe','embed','object','marquee'][j];++j){o=d.getElementsByTagName(t);for(i=o.length-1;i>=0;i--)C(d,o[i]);}g=d.images;for(k=g.length-1;k>=0;k--)if({'21x21':1,'48x48':1,'60x468':1,'88x31':1,'88x33':1,'88x62':1,'90x30':1,'90x32':1,'90x90':1,'100x30':1,'100x37':1,'100x45':1,'100x50':1,'100x70':1,'100x100':1,'100x275':1,'110x50':1,'110x55':1,'110x60':1,'110x110':1,'120x30':1,'120x60':1,'120x80':1,'120x90':1,'120x120':1,'120x163':1,'120x181':1,'120x234':1,'120x240':1,'120x300':1,'120x400':1,'120x410':1,'120x500':1,'120x600':1,'120x800':1,'125x40':1,'125x60':1,'125x65':1,'125x72':1,'125x80':1,'125x125':1,'125x170':1,'125x250':1,'125x255':1,'125x300':1,'125x350':1,'125x400':1,'125x600':1,'125x800':1,'126x110':1,'130x60':1,'130x65':1,'130x158':1,'130x200':1,'132x70':1,'140x55':1,'140x350':1,'145x145':1,'146x60':1,'150x26':1,'150x60':1,'150x90':1,'150x100':1,'150x150':1,'155x275':1,'155x470':1,'160x80':1,'160x126':1,'160x600':1,'180x30':1,'180x66':1,'180x132':1,'180x150':1,'194x165':1,'200x60':1,'220x100':1,'225x70':1,'230x30':1,'230x33':1,'230x60':1,'234x60':1,'234x68':1,'240x80':1,'240x300':1,'250x250':1,'275x60':1,'280x280':1,'300x60':1,'300x100':1,'300x250':1,'320x50':1,'320x70':1,'336x280':1,'350x300':1,'350x850':1,'360x300':1,'380x112':1,'380x250':1,'392x72':1,'400x40':1,'400x50':1,'425x600':1,'430x225':1,'440x40':1,'464x62':1,'468x16':1,'468x60':1,'468x76':1,'468x120':1,'468x248':1,'470x60':1,'480x400':1,'486x60':1,'545x90':1,'550x5':1,'600x30':1,'720x90':1,'720x300':1,'725x90':1,'728x90':1,'734x96':1,'745x90':1,'750x25':1,'750x100':1,'750x150':1,'850x120':1}[g[k].width+'x'+g[k].height])C(d,g[k]);}A(document);for(f=0;z=frames[f];++f)A(z.document);/* Clear IntelliTxt */javascript:function getTxt(obj){if(obj.nodeType==3)return obj.nodeValue;var txt=new Array(),i=0;while(obj.childNodes[i]){txt[txt.length]=getTxt(obj.childNodes[i++]);}return txt.join('');}function kill(w){try{for(var j=w.document.links.length-1;j>0;j--){L=w.document.links[j];if(L.href.indexOf('itxt.vibrantmedia.com')>=0||L.oncontextmenu!=null){t=w.document.createTextNode(getTxt(L));L.parentNode.replaceChild(t,L);}}for(var i=0;F=w.frames[i];i++){kill(F);}}catch(e){}}kill(window);/* Clear Geocities */function KG(){try{if(frames.length)if(PUprop){var FS=document.getElementsByTagName('frameset')[0];FS.cols='*,0,0';}}catch(e){}}KG();/* Clear Trails */function B(w,t){H(w,t);for(j=0;j<w.frames.length;j++){H(w.frames[j],t);}}function H(w,t){try{o=w.document.getElementsByTagName(t);for(i=o.length-1;N=o[i];i--){if(t=='span'){if({texttail:1,spanstyle:1}[N.className])N.removeNode(true);}else{if(N.id){p=N.parentNode;if(p.tagName=='DIV'&&p.style.position=='absolute'){p.removeNode(true);}}}}}catch(e){}}onerror=function(){return true;};B(window,'span');B(window,'div');B(window,'img');/* Allow Right-click */function kill2(d){d.onmousedown=d.onmouseup=d.oncontextmenu=d.onselectstart=d.ondragstart=function(){return true;};}try{kill2(document);for(var j=0;F=frames[j];++j)kill2(F.document);}catch(e){}"
+      }
+   ]
+}

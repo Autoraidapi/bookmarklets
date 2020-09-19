@@ -1,0 +1,17 @@
+{
+   "title":"bookmarklets",
+   "children":[
+      {
+         "title":"find links to squarefree",
+         "uri":"javascript:(function(){var%20s=%22squarefree%22,D=document,N,h,i,r;if(window.mlT!=s){mlT=s;mlL=[];for(i=0;h=D.links[i];++i)if(h.href.indexOf(s)!=-1)mlL.push(h);mlI=0}N=mlL.length;if(N){if(mlI==N)mlI=0;h=mlL[mlI++];h.onfocus=function(){return!1};h.focus();h.onfocus=null;if(D.createRange){r=D.createRange();r.selectNode(h);getSelection().addRange(r)}if(i=D.selection){r=i.createRange();r.moveToElementText(h);r.select()}top.status=s+%22:%20match%20%22+mlI+%22%20of%20%22+N+%22:%20%22+h.href}else%20top.status=s+%22:%20no%20matching%20links.%22})()"
+      },
+      {
+         "title":"query as link text",
+         "uri":"javascript:for%20(j=0;%20L=document.links[j];%20++j)%20{%20Q=[];%20c=L.search.slice(1).split('&');%20for%20(i%20in%20c)%20{%20f=c[i].split('=');%20if%20(f[0]=='q'%20||%20f[0]=='as_q'%20||%20f[0]=='p'%20||%20f[0]=='query')%20if%20(f[1])%20Q.push(f[1])%20}%20R=unescape(Q.join(';%20').replace(/\\+/g,%22%20%22));%20if(R)%20{%20while%20(h=L.childNodes[0])%20L.removeChild(h);%20L.appendChild(document.createTextNode(L.host%20+%20%22:%20%22%20+%20R));%20L.style.fontSize=%2290%%22;%20L.style.fontFamily=%22sans-serif%22;%20L.style.background=%22#ddd%22%20}%20}%20void%200"
+      },
+      {
+         "title":"linkify",
+         "uri":"javascript:(function(){var%20D=document;%20D.body.normalize();%20F(D.body);%20function%20F(n){var%20u,A,M,R,c,x;%20if(n.nodeType==3){%20u=n.data.search(/https?\\:\\/\\/[^\\s]*[^.,;'%22%3E\\s\\)\\]]/);%20if(u%3E=0)%20{%20M=n.splitText(u);%20R=M.splitText(RegExp.lastMatch.length);%20A=document.createElement(%22A%22);%20A.href=M.data;%20A.appendChild(M);%20R.parentNode.insertBefore(A,R);%20}%20}else%20if(n.tagName!=%22STYLE%22%20&&%20n.tagName!=%22SCRIPT%22%20&&%20n.tagName!=%22A%22)for(c=0;x=n.childNodes[c];++c)F(x);%20}%20})();"
+      }
+   ]
+}

@@ -1,0 +1,204 @@
+{ 
+   "title":"bookmarklets",
+   "children":[ 
+      { 
+         "title":"google",
+         "uri":"javascript:q%20=%20%22%22%20+%20(window.getSelection%20?%20window.getSelection()%20:%20document.getSelection%20?%20document.getSelection()%20:%20document.selection.createRange().text);%20if%20(!q)%20q%20=%20prompt(%22You%20didn't%20select%20any%20text.%20Enter%20a%20search%20phrase:%22,%20%22%22);%20if%20(q!=null)%20location=%22http://www.google.com/search?q=%22%20+%20escape(q).replace(/%20/g,%20%22+%22);%20void%200"
+      },
+      { 
+         "title":"google site search",
+         "uri":"javascript:q%20=%20%22%22%20+%20(window.getSelection%20?%20window.getSelection()%20:%20document.getSelection%20?%20document.getSelection()%20:%20document.selection.createRange().text);%20if%20(!q)%20q%20=%20prompt(%22You%20didn't%20select%20any%20text.%20Enter%20a%20search%20phrase:%22,%20%22%22);%20if%20(q!=null)%20location=(%22http://www.google.com/search?num=100&q=site:%22%20+%20escape(location.hostname)%20+%20%22%20\\%22%22%20+%20escape(q.replace(/\\%22/g,%22%22))%20+%20%22\\%22%22).replace(/%20/g,%20%22+%22);%20void%200"
+      },
+      { 
+         "title":"google site search: title",
+         "uri":"javascript:location=(%22http://www.google.com/search?num=100&q=site:%22%20+%20escape(location.hostname)%20+%20%22%20\\%22%22%20+%20escape(document.title.replace(/\\%22/g,%22%22))%20+%20%22\\%22%22).replace(/%20/g,%20%22+%22);%20void%200"
+      },
+      { 
+         "title":"num=100",
+         "uri":"javascript:N=%22num=100%22;%20R%20=%20/num=\\d*/;%20if%20(R.exec(location.search))%20location.search%20=%20location.search.replace(R,%20N);%20else%20location.search%20+=%20%22&%22%20+%20N;%20void%200"
+      },
+      { 
+         "title":"num=10",
+         "uri":"javascript:N=%22num=10%22;%20R%20=%20/num=\\d*/;%20if%20(R.exec(location.search))%20location.search%20=%20location.search.replace(R,%20N);%20else%20location.search%20+=%20%22&%22%20+%20N;%20void%200"
+      },
+      { 
+         "title":"num=1",
+         "uri":"javascript:N=%22num=1%22;%20R%20=%20/num=\\d*/;%20if%20(R.exec(location.search))%20location.search%20=%20location.search.replace(R,%20N);%20else%20location.search%20+=%20%22&%22%20+%20N;%20void%200"
+      },
+      { 
+         "title":"filter=0",
+         "uri":"javascript:N=%22filter=0%22;%20R%20=%20/filter=\\d*/;%20if%20(R.exec(location.search))%20location.search%20=%20location.search.replace(R,%20N);%20else%20location.search%20+=%20%22&%22%20+%20N;%20void%200"
+      },
+      { 
+         "title":"@google",
+         "uri":"javascript:Q=[];%20c=location.search.slice(1).split('&');%20for%20(i%20in%20c)%20{%20f=c[i].split('=');%20if%20(f[0]=='q'%20||%20f[0]=='as_q'%20||%20f[0]=='p'%20||%20f[0]=='query')%20if%20(f[1])%20Q.push(f[1])%20}%20R=unescape(Q.join(';%20').replace(/\\+/g,'%20'));%20location%20=%20'http://www.google.com/search?q='%20+%20escape(R);"
+      },
+      { 
+         "title":"@alltheweb",
+         "uri":"javascript:Q=[];%20c=location.search.slice(1).split('&');%20for%20(i%20in%20c)%20{%20f=c[i].split('=');%20if%20(f[0]=='q'%20||%20f[0]=='as_q'%20||%20f[0]=='p'%20||%20f[0]=='query')%20if%20(f[1])%20Q.push(f[1])%20}%20R=unescape(Q.join(';%20').replace(/\\+/g,'%20'));%20location%20=%20'http://www.alltheweb.com/search?q='%20+%20escape(R);"
+      },
+      { 
+         "title":"@teoma",
+         "uri":"javascript:Q=[];%20c=location.search.slice(1).split('&');%20for%20(i%20in%20c)%20{%20f=c[i].split('=');%20if%20(f[0]=='q'%20||%20f[0]=='as_q'%20||%20f[0]=='p'%20||%20f[0]=='query')%20if%20(f[1])%20Q.push(f[1])%20}%20R=unescape(Q.join(';%20').replace(/\\+/g,'%20'));%20location%20=%20'http://s.teoma.com/search?q='%20+%20escape(R);"
+      },
+      { 
+         "title":"@msn",
+         "uri":"javascript:Q=[];%20c=location.search.slice(1).split('&');%20for%20(i%20in%20c)%20{%20f=c[i].split('=');%20if%20(f[0]=='q'%20||%20f[0]=='as_q'%20||%20f[0]=='p'%20||%20f[0]=='query')%20if%20(f[1])%20Q.push(f[1])%20}%20R=unescape(Q.join(';%20').replace(/\\+/g,'%20'));%20location%20=%20'http://search.msn.com/results.aspx?q='%20+%20escape(R);"
+      },
+      { 
+         "title":"@altavista",
+         "uri":"javascript:Q=[];%20c=location.search.slice(1).split('&');%20for%20(i%20in%20c)%20{%20f=c[i].split('=');%20if%20(f[0]=='q'%20||%20f[0]=='as_q'%20||%20f[0]=='p'%20||%20f[0]=='query')%20if%20(f[1])%20Q.push(f[1])%20}%20R=unescape(Q.join(';%20').replace(/\\+/g,'%20'));%20location%20=%20'http://altavista.com/web/results?q='%20+%20escape(R);"
+      },
+      { 
+         "title":"wayback newest",
+         "uri":"javascript:void(location.href='http://web.archive.org/'+escape(location.href));"
+      },
+      { 
+         "title":"wayback search",
+         "uri":"javascript:void(location.href='http://web.archive.org/web/*/'+escape(location.href));"
+      },
+      { 
+         "guid":"uQHNiUnouHXl",
+         "title":"Hilite Text",
+         "index":0,
+         "dateAdded":1575722451443000,
+         "lastModified":1575722458537000,
+         "id":627,
+         "typeCode":1,
+         "type":"text/x-moz-place",
+         "uri":"javascript:function H(w,s){r=w.document.body.createTextRange();for(i=0;r.findText(s);i++){r.execCommand('BackColor','','yellow');r.collapse(false);}return i;}function G(){if(frames.length==0)return document.selection.createRange().text;else for(k=0;F=frames[k];++k){u=F.document.selection.createRange().text;if(u)return u;}}function P(){var t=0,s=G();if(!s)s=prompt('Find:','');if(s){if(frames.length==0)t+=H(window,s);else for(j=0;F=frames[j];++j)t+=H(F,s);alert(t+' found.');}}P();"
+      },
+      { 
+         "guid":"ZfuiEmOp-rjz",
+         "title":"Search Google",
+         "index":1,
+         "dateAdded":1575722464214000,
+         "lastModified":1575722468733000,
+         "id":628,
+         "typeCode":1,
+         "type":"text/x-moz-place",
+         "uri":"javascript:q=document.getSelection();for(i=0;i<frames.length;i++){q=frames[i].document.getSelection();if(q)break;}if(!q)void(q=prompt('Search Google using these keywords:',''));if(q)void(open('http://www.google.com/search?q='+escape(q),'',''));"
+      },
+      { 
+         "guid":"9RRKCSqas4tK",
+         "title":"Search Dictionary.com",
+         "index":2,
+         "dateAdded":1575722472316000,
+         "lastModified":1575722475309000,
+         "id":629,
+         "typeCode":1,
+         "type":"text/x-moz-place",
+         "uri":"javascript:q=document.getSelection();for(i=0;i<frames.length;i++){q=frames[i].document.getSelection();if(q)break;}if(!q)void(q=prompt('Search Dictionary.com using these keywords:',''));if(q)void(open('http://www.dictionary.com/search?q='+escape(q),'',''));"
+      },
+      { 
+         "guid":"QiAInMQGd53G",
+         "title":"Wikilookup",
+         "index":3,
+         "dateAdded":1575722479747000,
+         "lastModified":1575722486333000,
+         "id":630,
+         "typeCode":1,
+         "type":"text/x-moz-place",
+         "uri":"javascript:q=document.getSelection();for(i=0;i<frames.length;i++){q=frames[i].document.getSelection();if(q)break;}if(!q)void(q=prompt('Lookup in Wikipedia:',''));if(q)void(open('http://en.wikipedia.org/wiki/wiki.phtml?search='+escape(q),'',''));"
+      },
+      { 
+         "guid":"vkIMc24dDcyQ",
+         "title":"Wikirandom",
+         "index":4,
+         "dateAdded":1575722492690000,
+         "lastModified":1575722495294000,
+         "id":631,
+         "typeCode":1,
+         "type":"text/x-moz-place",
+         "uri":"javascript:function add(o){var as=o.getElementsByTagName('a');for(var i=0;i<as.length;i++){var a=as[i];var pos=a.href.lastIndexOf('/');if(pos>=0){var n=decodeURIComponent(a.href).substring(pos+1);var p=n.indexOf('#');if(p>=0)n=n.substring(0,p);if(n!=''&&n.indexOf(':')<0&&a.title==n.replace(/\\_/g,'%20')){A.push(a);}}}}function%20go(){if(A.length==0)alert('No%20wiki%20links%20to%20follow.');else{location.href=A[Math.floor(Math.random()*A.length)].href;}}var%20A=new%20Array();var%20d=document.getElementsByTagName('div');for(var%20i=0;i<d.length;i++){if(d[i].id=='bodyContent'){add(d[i]);break;}}go();"
+      },
+      { 
+         "guid":"tc_QEqkDfnKd",
+         "title":"Translate Selection",
+         "index":5,
+         "dateAdded":1575722502815000,
+         "lastModified":1575722510277000,
+         "id":632,
+         "typeCode":1,
+         "type":"text/x-moz-place",
+         "uri":"javascript:q=document.getSelection();for(i=0;i<frames.length;i++){q=frames[i].document.getSelection();if(q)break;}if(!q)void(q=prompt('Text to translate:',''));if(q)void(open('http://babelfish.altavista.com/tr?doit=done&urltext='+escape(q)+'&lp=en_fr','',''));"
+      },
+      { 
+         "guid":"LMR6s4NVDV-c",
+         "title":"Translate Page (Eng-Fre)",
+         "index":6,
+         "dateAdded":1575722513549000,
+         "lastModified":1575722516259000,
+         "id":633,
+         "typeCode":1,
+         "type":"text/x-moz-place",
+         "uri":"javascript:q=(document.location.href);void(open('http://babelfish.altavista.com/babelfish/trurl_pagecontent?lp=en_fr&url='+escape(q),'','resizable,location,menubar,toolbar,scrollbars,status'));"
+      },
+      { 
+         "guid":"yyiqrsBFP0YL",
+         "title":"Translate Page (Fre-Eng)",
+         "index":7,
+         "dateAdded":1575722518860000,
+         "lastModified":1575722521538000,
+         "id":634,
+         "typeCode":1,
+         "type":"text/x-moz-place",
+         "uri":"javascript:q=(document.location.href);void(open('http://babelfish.altavista.com/babelfish/trurl_pagecontent?lp=fr_en&url='+escape(q),'','resizable,location,menubar,toolbar,scrollbars,status'));"
+      },
+      { 
+         "guid":"VSWD7SgAzwl0",
+         "title":"Translate Page (Eng-Spa)",
+         "index":8,
+         "dateAdded":1575722524873000,
+         "lastModified":1575722527474000,
+         "id":635,
+         "typeCode":1,
+         "type":"text/x-moz-place",
+         "uri":"javascript:q=(document.location.href);void(open('http://babelfish.altavista.com/babelfish/trurl_pagecontent?lp=en_es&url='+escape(q),'','resizable,location,menubar,toolbar,scrollbars,status'));"
+      },
+      { 
+         "guid":"Hy7b8gkhTDYN",
+         "title":"Translate Page (Spa-Eng)",
+         "index":9,
+         "dateAdded":1575722530848000,
+         "lastModified":1575722533411000,
+         "id":636,
+         "typeCode":1,
+         "type":"text/x-moz-place",
+         "uri":"javascript:q=(document.location.href);void(open('http://babelfish.altavista.com/babelfish/trurl_pagecontent?lp=es_en&url='+escape(q),'','resizable,location,menubar,toolbar,scrollbars,status'));"
+      },
+      { 
+         "guid":"kgsJRvALe4Uw",
+         "title":"Translate Page (Eng-Ger)",
+         "index":10,
+         "dateAdded":1575722536578000,
+         "lastModified":1575722539432000,
+         "id":637,
+         "typeCode":1,
+         "type":"text/x-moz-place",
+         "uri":"javascript:q=(document.location.href);void(open('http://babelfish.altavista.com/babelfish/trurl_pagecontent?lp=en_de&url='+escape(q),'','resizable,location,menubar,toolbar,scrollbars,status'));"
+      },
+      { 
+         "guid":"vcBGD3m1MOAQ",
+         "title":"Translate Page (Ger-Eng)",
+         "index":11,
+         "dateAdded":1575722542359000,
+         "lastModified":1575722544891000,
+         "id":638,
+         "typeCode":1,
+         "type":"text/x-moz-place",
+         "uri":"javascript:q=(document.location.href);void(open('http://babelfish.altavista.com/babelfish/trurl_pagecontent?lp=de_en&url='+escape(q),'','resizable,location,menubar,toolbar,scrollbars,status'));"
+      },
+      { 
+         "guid":"h-okznLlKByv",
+         "title":"Validate Page (Hitbox)",
+         "index":12,
+         "dateAdded":1575722548277000,
+         "lastModified":1575722551845000,
+         "id":639,
+         "typeCode":1,
+         "type":"text/x-moz-place",
+         "uri":"javascript:var geturl=prompt('URL of page to check:',location.href);if(geturl!=null){var valurl='http://tools2.hitbox.com/cgi-bin/doctor/cgi/doctor.cgi?url='+geturl+'&response=lc&response=hv&response=mt&response=lt&response=sc';void(open(valurl,'','resizable,location,menubar,toolbar,scrollbars,status'));}"
+      }
+   ]
+}
