@@ -1,0 +1,41 @@
+{
+   "title":"bookmarklets",
+   "children":[
+      {
+         "title":"google backlinks",
+         "uri":"javascript:location%20=%20'http://www.google.com/search?q=link:'%20+%20escape(location);"
+      },
+      {
+         "title":"atw internal backlinks",
+         "uri":"javascript:location%20=%20'http://www.alltheweb.com/search?q=link.all:'%20+%20escape(location.href)%20+%20'+site:'%20+%20escape(location.host);"
+      },
+      {
+         "title":"atw external backlinks",
+         "uri":"javascript:location%20=%20'http://www.alltheweb.com/search?q=link.all:'%20+%20escape(location.href)%20+%20'+-site:'%20+%20escape(location.host);"
+      },
+      {
+         "title":"atw plaintext backlinks",
+         "uri":"javascript:location%20=%20'http://www.alltheweb.com/search?q='%20+%20escape(location.href)%20+%20'+-link.all:'%20+%20escape(location.href);"
+      },
+      {
+         "title":"google site search: all",
+         "uri":"javascript:location=%22http://www.google.com/search?num=100&q=site:%22%20+%20escape(location.hostname);%20void%200"
+      },
+      {
+         "title":"atw site search: all",
+         "uri":"javascript:location%20=%20'http://www.alltheweb.com/search?q=%'%20+%20'2Burl.all:'%20+%20escape(location.hostname);"
+      },
+      {
+         "title":"number google hits",
+         "uri":"javascript:(function(){%20var%20x,%20i,%20p,%20s=0,%20n=0,%20R=/start=([^&]*)/;%20if%20((x=R.exec(location.search))%20&&%20x[1])%20s%20=%20n%20=%20parseInt(unescape(x[1]),10);%20for%20(i=0;p=document.getElementsByTagName(%22p%22)[i];++i)%20if%20(p.className%20==%20'g')%20p.insertBefore(document.createTextNode(++n%20+%20%22.%20%22),%20p.firstChild);%20if%20(n==s)%20alert(%22This%20page%20doesn't%20contain%20Google%20search%20results.%22);%20})()"
+      },
+      {
+         "title":"open in ie",
+         "uri":"javascript:location%20=%20%22data:application/PLEASE-OPEN-WITH-IE,%3Chtml%3E%3Cbody%3E%3Cscript%3Elocation='%22%20+%20escape(location.href.replace(/\\\\/g,%22\\\\\\\\%22).replace(/\\%22/g,%22\\\\\\%22%22))%20+%20%22';%3C/script%3E%22;"
+      },
+      {
+         "title":"word frequency",
+         "uri":"javascript:(function(){var%20T={},W=[],C=0,s,i;%20function%20F(n){var%20i,x,a,w,t=n.tagName;if(n.nodeType==3){a=n.data.toLowerCase().split(/[\\s\\(\\)\\:\\,\\.;\\%3C\\%3E\\&\\'\\%22]/);for(i%20in%20a)if(w=a[i]){w=%22%20%22+w;T[w]=T[w]?T[w]+1:1;++C;}}if(t!=%22SCRIPT%22&&t!=%22STYLE%22)for(i=0;x=n.childNodes[i];++i)F(x)}F(document);for(i%20in%20T)W.push([T[i],i]);W.sort(function(a,b){var%20x=b[0]-a[0];return%20x?x:((b[1]%3Ca[1])?1:-1)});%20s=%22%3Ch3%3E%22+C+%22%20words%3C/h3%3E%22;for(i%20in%20W)s+=W[i][0]+%22:%22+W[i][1]+%22%3Cbr%3E%22;with(open().document){write(s);close()}})()"
+      }
+   ]
+}
