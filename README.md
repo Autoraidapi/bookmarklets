@@ -1,17 +1,15 @@
-JavaScript Bookmarklets
-
-- [Bookmarklet Panel](https://000538127.codepen.website/assets/html/bookmarklets/BlackBerryBookmark.processed.html)
+[JavaScript Bookmarklets](https://autoraidapi.github.io/bookmarklets/)
 
 A Template for adding various bookmarklet links to improve users browsing experience.
 
 ```javascript
 
 (function(fragment){
-	
+
+	// all styles could be embedded here
 	const link = document.createElement('link');
-	link.id='blackberry-bookmark';
-	// all styles can be embedded here
-	link.href = 'data:text/css, .blackberry-bar { height : 1px; box-sizing : border-box; }';
+	link.id='mobile-bookmark';
+	link.href = 'data:text/css, .mobile-bar { height : 1px; box-sizing : border-box; }';
 	document.head.appendChild(link);
 	
 	const section = document.createElement('section');
