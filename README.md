@@ -16,6 +16,12 @@ Sometimes the view of pages is less than ideal. Bookmarklets here are meant to i
 
 ---
 
+[Developer](https://github.com/Autoraidapi/bookmarklets/wiki/Developer)
+
+These bookmarklets are debug oriented.
+
+---
+
 [Template](https://github.com/Autoraidapi/bookmarklets/wiki/Bookmarklet-Panel)
 
 Injects a script into the page pointed at the source of the Bookmarklet Panel.
