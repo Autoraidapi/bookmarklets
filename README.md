@@ -1,4 +1,4 @@
-[JavaScript Bookmarklets](https://autoraidapi.github.io/bookmarklets/)
+### [JavaScript Bookmarklets](https://autoraidapi.github.io/bookmarklets/)
 
 [Layout](https://github.com/Autoraidapi/bookmarklets/wiki/Layout)
 
