@@ -22,6 +22,12 @@ These bookmarklets are debug oriented.
 
 ---
 
+[Media](https://github.com/Autoraidapi/bookmarklets/wiki/Media)
+
+Image, Video, and Audio oriented bookmarklets.
+
+---
+
 [Template](https://github.com/Autoraidapi/bookmarklets/wiki/Bookmarklet-Panel)
 
 Injects a script into the page pointed at the source of the Bookmarklet Panel.
