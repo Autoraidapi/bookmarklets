@@ -28,7 +28,7 @@ Image, Video, and Audio oriented bookmarklets.
 
 ---
 
-[Template](https://github.com/Autoraidapi/bookmarklets/wiki/Bookmarklet-Panel)
+[Template](https://github.com/Autoraidapi/bookmarklets/wiki/Template)
 
 Injects a script into the page pointed at the source of the Bookmarklet Panel.
 
