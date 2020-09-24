@@ -14,8 +14,7 @@ function Tmp(options){
 		'<td><a href="<%= this.uri %>"><%= this.title %></a><div class="container-fluid">lorem</div></td>'+
 		'<td></td>'+
 		'<td></td>'
-	)
-	this.target = document.getElementById('tablebody');
+	);
 	this.fragment = document.createDocumentFragment();
 	this.node = document.createElement('tr');
 	this.initialize();
@@ -48,7 +47,7 @@ function populate(json){
 	json.children.forEach(function(object){
 		new Tmp(object);		
 	});
-	this.target.appendChild(buffer);
+	document.getElementById('tablebody').appendChild(buffer);
 }
 
 
