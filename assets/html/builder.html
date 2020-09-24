@@ -1,0 +1,1299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bookmark Builder</title>
+    <meta name="viewport" content="width=device-width, initial-scale=0.75, minimum-scale=0.75, maximum-scale=1.0">
+    <style>
+        .button {
+            width: 100px;
+        }
+
+        xxtextarea {
+            width: 660px;
+        }
+    </style>
+
+</head>
+<body translate="no">
+
+    <form onSubmit='return false' style='margin-top:0px; margin-bottom:0px'>
+
+        <table cellpadding='0' cellspacing='0' border='0'>
+            <tr>
+                <td width='260'>Bookmarklet name:</td>
+                <td width='100'>&nbsp;&nbsp;Rows:</td>
+                <td width='100'><br></td>
+                <td width='*'><br></td>
+            </tr>
+            <tr>
+                <td><input type='text' name='bmkname' value='Name' size='35'></td>
+                <td nowrap>&nbsp;&nbsp;<input type='text' name='jscodeheight' value='24' size='3'
+                        onKeyPress='javascript: if(event.keyCode==13){setEditorHeight(this.form);return false}'>&nbsp;<input
+                        type='button' value='Set' onClick='javascript: setEditorHeight(this.form)'></td>
+                <td valign='middle' nowrap>&nbsp;&nbsp;<a href='jsbuilderhelp.htm' target='jshelp'>Help</a> for
+                    Bookmarklet Builder&nbsp;&nbsp;</td>
+                <td valign='middle' nowrap>&nbsp;&nbsp;<span id='cursorpos'></span></td>
+            </tr>
+            <!--
+  <tr>
+    <td colspan='2'>Javascript code:<br><textarea name='jscode' rows='24' cols='80' wrap='soft'>javascript:
+    </textarea></td>
+  </tr>
+-->
+        </table>
+
+        Javascript code:<br>
+        <textarea name='jscode' rows='24' cols='80' wrap='soft' style='width:100%'>javascript:
+</textarea>
+        <br>
+
+        <table cellpadding='2' cellspacing='0' border='0'>
+            <tr valign='baseline'>
+                <td nowrap><input type='button' class='button' value='  Format  '
+                        onClick='javascript: presentFormattedSource(this.form)'></td>
+                <td nowrap><input type='button' class='button' value=' Compress '
+                        onClick='javascript: presentCompressedSource(this.form)'></td>
+                <td nowrap valign='middle'><input type='checkbox' name='WrapChk'
+                        onClick='javascript: wrapText(this.form)' checked>Wrap&nbsp;text&nbsp;</td>
+                <td nowrap><input type='button' class='button' value='Replace...'
+                        onClick='javascript: replaceAll(this.form)'></td>
+                <td nowrap><input type='button' class='button' value='Replace %20'
+                        onClick='javascript: replaceEscape20(this.form)'></td>
+                <td nowrap><input type='button' class='button' value='DOM Browser'
+                        onClick='javascript: open("dombrowser.htm", "", "width=500,height=550,resizable,status");'></td>
+                <td nowrap><input type='button' class='button' name='JumpBtn' value='Go to...'
+                        onClick='javascript: promptCursorPos()'></td>
+                <td nowrap><input type='button' class='button' name='FuncBtn' value='(function...)'
+                        onClick='javascript: addBraces(this.form)'></td>
+                <!--
+    <td nowrap><input type='button' class='button' name='FavBtn' value='Add to Fav.' onClick='javascript: addToFavorites(this.form)'></td>
+-->
+            </tr>
+        </table>
+
+        <br>
+        <span id='bookmark'><u>(Bookmarklet)</u></span>
+        <br>
+
+        <font face='courier new'>
+
+            <pre><span id='formatsrc'></span></pre>
+
+        </font>
+    </form>
+
+
+
+    <script id="rendered-js">
+        /*
+         * Parse
+         */
+        "use strict";
+        var BLOCK_GENERIC = 0;
+        var BLOCK_IF = 1;
+        var BLOCK_FOR = 2;
+        var BLOCK_WHILE = 3;
+        var BLOCK_WITH = 4;
+        var BLOCK_SWITCH = 5;
+        var BLOCK_ELSE_SPACE = 6;
+        var rootBlock;
+        var parseErrors = [];
+        var prevIfBlock = null;
+        var isInsideVoidFunction = false;
+
+        function ParseError(str, pos) {
+            this.length = 2;
+            this.str = str;
+            this.pos = pos
+        }
+
+        function BlockElement(parent) {
+            this.length = 8;
+            this.strStart = "";
+            this.strEnd = "";
+            this.type = BLOCK_GENERIC;
+            this.level = 0;
+            this.pos = -1;
+            this.indented = false;
+            this.parent = parent;
+            this.children = [];
+            if (this.parent != null) {
+                parent.children[parent.children.length] = this;
+                this.level = parent.level + 1
+            }
+        }
+
+        function addParseError(str, pos) {
+            parseErr = new ParseError(str, pos);
+            parseErrors[parseErrors.length] = parseErr
+        }
+
+        function scan(str) {
+            parseErrors.length = 0;
+            return doScan(str)
+        }
+
+        function doScan(str) {
+            function isNextStatementChild(block, str, strpos) {
+                if (block.type != BLOCK_GENERIC) {
+                    var cc = nextSignificantChar(str, strpos + 1);
+                    if (cc != '{' && cc != ';') {
+                        return true
+                    }
+                }
+                return false
+            }
+
+            function insertChildBlock(block) {
+                block = new BlockElement(block);
+                return block
+            }
+
+            function insertSiblingBlock(block) {
+                block = new BlockElement(block.parent);
+                return block
+            }
+
+            function nonIndentedParent(block) {
+                var parentBlock = block;
+                while (parentBlock.indented) {
+                    if (parentBlock.parent == null) {
+                        return parentBlock
+                    }
+                    parentBlock = parentBlock.parent
+                }
+                return parentBlock
+            }
+            var c;
+            var strpos = -1;
+            var substr = "";
+            var block = null;
+            var parseErr;
+            block = new BlockElement(null);
+            block.level = -1;
+            rootBlock = block;
+            block = new BlockElement(block);
+            while (strpos < str.length) {
+                strpos += 1;
+                c = str.charAt(strpos);
+                switch (c) {
+                    default:
+                        substr += c;
+                        block.strStart = substr;
+                        break;
+                    case '"':
+                    case '\'':
+                        var pos = endOfStringIndex(str, c, strpos, false);
+                        if (pos != -1) {
+                            substr += str.substring(strpos, pos + 1);
+                            strpos = pos;
+                            block.strStart = substr
+                        } else {
+                            return false
+                        }
+                        break;
+                    case ';':
+                        substr += c;
+                        if (getStatementType(substr) != BLOCK_IF) {
+                            if (block.parent != null && block.parent.type != BLOCK_IF) {
+                                prevIfBlock = null
+                            }
+                        }
+                        block.strStart = substr;
+                        if (nextSignificantChar(str, strpos + 1) == '/') {} else {
+                            substr = "";
+                            if (block.indented) {
+                                var nipb = nonIndentedParent(block);
+                                if (nipb != null) {
+                                    block = insertSiblingBlock(nipb)
+                                } else {
+                                    block = insertSiblingBlock(block)
+                                }
+                            } else {
+                                block = insertSiblingBlock(block)
+                            }
+                        }
+                        break;
+                    case '\n':
+                        break;
+                    case '\r':
+                        break;
+                    case '(':
+                        substr += c;
+                        block.strStart = substr;
+                        block.type = getStatementType(substr);
+                        if (block.type == BLOCK_IF) {
+                            prevIfBlock = block
+                        } else {
+                            prevIfBlock = null;
+                        }
+                        if (str.substring(strpos).indexOf("(function()") == 0) {
+                            substr = "(function()";
+                            strpos = strpos + substr.length - 1;
+                            block.strStart = substr;
+                            isInsideVoidFunction = true
+                        } else {
+                            var pos = matchingParenthesisIndex(str, "(", ")", strpos - 1);
+                            if (pos == -1) {
+                                addParseError("Expression is missing closing parenthesis )", strpos);
+                                return false
+                            } else {
+                                substr += str.substring(strpos + 1, pos + 1);
+                                strpos = pos;
+                                block.strStart = substr
+                            }
+                            if (isNextStatementChild(block, str, strpos)) {
+                                substr = "";
+                                block = new BlockElement(block);
+                                block.indented = true
+                            }
+                        }
+                        break;
+                    case ')':
+                        if (str.substring(strpos).replace(/[ \n\r]/g, "").indexOf(")()") == 0) {
+                            substr = ")()";
+                            strpos += str
+                                .substring(strpos + 1)
+                                .indexOf(")") + 1;
+                            strpos += str
+                                .substring(strpos + 1)
+                                .indexOf(")") + 1;
+                            block.strStart = substr;
+                            isInsideVoidFunction = false
+                        } else {
+                            addParseError("Closing parenthesis ) without opening parenthesis (", strpos);
+                            return false
+                        }
+                        break;
+                    case '{':
+                        substr += c;
+                        block.strStart = substr;
+                        block = insertChildBlock(block);
+                        if (matchingParenthesisIndex(str, "{", "}", strpos - substr.length) == -1) {
+                            addParseError("Expression is missing closing bracket }", strpos);
+                            return false
+                        }
+                        substr = "";
+                        break;
+                    case '}':
+                        if (prevSignificantChar(str, strpos - 1) != ';') {
+                            if (block.indented) {
+                                var nipb = nonIndentedParent(block);
+                                if (nipb != null) {
+                                    block = insertSiblingBlock(nipb)
+                                }
+                            }
+                        }
+                        block = block.parent;
+                        if (block != null) {
+                            block.strEnd = c;
+                            if (block.strStart.indexOf('{') == -1) {
+                                addParseError("Closing bracket } without opening bracket {", strpos);
+                                return false;
+                                break
+                            }
+                            var nipb = nonIndentedParent(block);
+                            if (nipb != null) {
+                                block = insertSiblingBlock(nipb)
+                            } else {
+                                block = insertSiblingBlock(block)
+                            }
+                        }
+                        substr = "";
+                        break;
+                    case ':':
+                        substr += c;
+                        if (trimLeadingSpaces(substr) == "javascript:") {
+                            block.strStart = substr;
+                            substr = "";
+                            block = insertSiblingBlock(block)
+                        }
+                        break;
+                    case 'e':
+                        substr += c;
+                        if (trimLeadingSpaces(substr) == "else") {
+                            if (nextSignificantChar(str, strpos + 1) != '{') {
+                                var cc = str.charAt(strpos + 1);
+                                if (cc == ' ' || cc == '\r' || cc == '\n' || cc == '\t') {
+                                    if (prevIfBlock == null) {
+                                        if (block.parent != null && block.parent.children.length > 1) {
+                                            var prevSibling = block.parent.children[block.parent.children.length - 2];
+                                            if (prevSibling.type != BLOCK_IF) {
+                                                addParseError("ELSE without IF", strpos);
+                                                return false;
+                                                break
+                                            } else {
+                                                prevIfBlock = prevSibling
+                                            }
+                                        }
+                                    }
+                                    block.parent.children.length -= 1;
+                                    block = null;
+                                    block = insertSiblingBlock(prevIfBlock);
+                                    block.indented = prevIfBlock.indented;
+                                    prevIfBlock = null;
+                                    block.strStart = substr;
+                                    substr = "";
+                                    block.type = BLOCK_ELSE_SPACE;
+                                    if (isNextStatementChild(block, str, strpos)) {
+                                        substr = "";
+                                        block = new BlockElement(block);
+                                        block.indented = true
+                                    }
+                                }
+                            }
+                        }
+                        break;
+                    case '\\':
+                        substr += c;
+                        strpos += 1;
+                        substr += getChar(str, strpos);
+                        block.strStart = substr;
+                        break;
+                    case '/':
+                        var cc = prevSignificantChar(str, strpos);
+                        if (cc == '(' || cc == '=') {
+                            var pos = endOfStringIndex(str, c, strpos, true);
+                            if (pos != -1) {
+                                substr += str.substring(strpos, pos + 1);
+                                strpos = pos;
+                                block.strStart = substr
+                            } else {
+                                return false
+                            }
+                        } else if (str.charAt(strpos - 1) == '/' && nextSignificantChar(str, strpos + 1) != '*') {
+                            var pos = endOfLineIndex(str, strpos);
+                            if (pos != -1) {
+                                strpos = pos - 1;
+                                substr = substr.substring(0, substr.length - 1) + '\n';
+                                block.strStart = ""
+                            } else {
+                                return false
+                            }
+                        } else {
+                            substr += c;
+                            block.strStart = substr
+                        }
+                        break;
+                    case '*':
+                        if (str.charAt(strpos - 1) == '/') {
+                            var pos = str.indexOf('*/', strpos);
+                            if (pos != -1) {
+                                substr += str.substring(strpos, pos + 2) + '\n';
+                                strpos = pos + 1;
+                                block.strStart = substr
+                            } else {
+                                return false
+                            }
+                        } else {
+                            substr += c;
+                            block.strStart = substr
+                        }
+                        break
+                }
+            }
+            return true
+        }
+
+        function matchingParenthesisIndex(str, startChar, endChar, startPos) {
+            var c;
+            var strpos = startPos;
+            var subParLvl = 0;
+            while (strpos < str.length) {
+                strpos += 1;
+                c = str.charAt(strpos);
+                switch (c) {
+                    default:
+                        if (c == startChar) {
+                            subParLvl += 1
+                        } else if (c == endChar) {
+                            subParLvl -= 1;
+                            if (subParLvl == 0) {
+                                if (isInsideVoidFunction && startChar == '(') {
+                                    if (str.substring(strpos).replace(/[ \n\r]/g, "").indexOf(")()") == 0) {
+                                        return -1
+                                    } else {
+                                        return strpos
+                                    }
+                                } else {
+                                    return strpos
+                                }
+                            }
+                        }
+                        break;
+                    case '"':
+                    case '\'':
+                        var pos = endOfStringIndex(str, c, strpos, false);
+                        if (pos != -1) {
+                            strpos = pos
+                        } else {
+                            return -1
+                        }
+                        break;
+                    case '/':
+                        var cc = prevSignificantChar(str, strpos);
+                        if (cc == '(' || cc == '=') {
+                            var pos = endOfStringIndex(str, c, strpos, true);
+                            if (pos != -1) {
+                                strpos = pos
+                            } else {
+                                return -1
+                            }
+                            break
+                        } else if (str.charAt(strpos - 1) == '/') {
+                            var pos = endOfLineIndex(str, strpos);
+                            if (pos != -1) {
+                                strpos = pos
+                            } else {
+                                return -1
+                            }
+                        } else {}
+                        break;
+                    case '*':
+                        if (str.charAt(strpos - 1) == '/') {
+                            var pos = str.indexOf('*/', strpos);
+                            if (pos != -1) {
+                                strpos = pos + 1
+                            } else {
+                                return -1
+                            }
+                        } else {}
+                        break
+                }
+            }
+            return -1
+        }
+
+        function endOfStringIndex(str, chr, startPos, regStrExpr) {
+            var c;
+            var strpos = startPos;
+            while (strpos < str.length) {
+                strpos += 1;
+                c = str.charAt(strpos);
+                switch (c) {
+                    default:
+                        if (c == chr) {
+                            return strpos
+                        }
+                        break;
+                    case '\r':
+                    case '\n':
+                        addParseError("Unterminated string", startPos);
+                        return -1;
+                        break;
+                    case '\\':
+                        strpos += 1;
+                        break;
+                    case '[':
+                        if (regStrExpr) {
+                            var pos = endOfStringIndex(str, ']', strpos, true);
+                            if (pos != -1) {
+                                strpos = pos
+                            } else {
+                                addParseError("Unterminated regular expression - missing ]", startPos);
+                                return -1
+                            }
+                        }
+                        break
+                }
+            }
+            addParseError("Unterminated string", startPos);
+            return -1
+        }
+
+        function endOfLineIndex(str, startPos) {
+            var c;
+            var strpos = startPos;
+            while (strpos < str.length) {
+                strpos += 1;
+                c = str.charAt(strpos);
+                switch (c) {
+                    default:
+                        if (c == '\n') {
+                            return strpos
+                        }
+                        break;
+                    case '\\':
+                        strpos += 1;
+                        break
+                }
+            }
+            addParseError("Unterminated comment(?)", startPos);
+            return -1
+        }
+
+        function getStatementType(str) {
+            if (findSubstatement(str, "if")) {
+                return BLOCK_IF
+            }
+            if (findSubstatement(str, "for")) {
+                return BLOCK_FOR
+            }
+            if (findSubstatement(str, "while")) {
+                return BLOCK_WHILE
+            }
+            if (findSubstatement(str, "with")) {
+                return BLOCK_WITH
+            }
+            if (findSubstatement(str, "switch")) {
+                return BLOCK_SWITCH
+            }
+            return BLOCK_GENERIC
+        }
+
+        function findSubstatement(str, substr) {
+            var stmt = str.toLowerCase();
+            stmt = trimLeadingSpaces(stmt);
+            substr = substr.toLowerCase();
+            if (stmt.indexOf(substr) == 0) {
+                if (nextSignificantChar(stmt, substr.length) == '(') {
+                    return true
+                }
+            }
+            return false
+        }
+
+        function getChar(str, strpos) {
+            var s = str.charAt(0);
+            if (s != undefined) {
+                return s
+            }
+            return ''
+        }
+
+        function nextSignificantChar(str, strpos) {
+            var s = str.substring(strpos);
+            s = trimLeadingSpaces(s);
+            if (s.length > 0) {
+                return s.charAt(0)
+            }
+            return ''
+        }
+
+        function prevSignificantChar(str, strpos) {
+            var s = str.substring(0, strpos);
+            while (s.length > 0 && s.charAt(s.length - 1) == ' ') {
+                s = s.substring(0, s.length - 1)
+            }
+            if (s.length > 0) {
+                return s.charAt(s.length - 1)
+            }
+            return ''
+        }
+
+        /* 
+         * Format
+         */
+        function getFormattedText() {
+            var s = doGetFormattedText(rootBlock);
+            s = s.replace(/\t/g, indent(1));
+            return s
+        }
+
+        function doGetFormattedText(block) {
+            var s = "";
+            if (block.strStart != "") {
+                if (trimLeadingSpacesAndTabs(block.strStart) != "") {
+                    s = indent(block.level) + trimLeadingSpacesAndTabs(block.strStart) + "\r\n"
+                }
+            }
+            for (var i = 0; i <= block.children.length - 1; i += 1) {
+                s += doGetFormattedText(block.children[i])
+            }
+            if (block.strEnd != "") {
+                s += indent(block.level) + block.strEnd + "\r\n"
+            }
+            return s
+        }
+
+        function getCompressedText() {
+            var s = doGetCompressedText(rootBlock);
+            s = s.replace(/\t/g, "");
+            s = replaceOutsideStrings(s, " ", "");
+            s = s.replace(/else \{/g, "else{");
+            s = s.replace(/void \(/g, "void(");
+            return s
+        }
+
+        function doGetCompressedText(block) {
+            var s = "";
+            if (block.type == BLOCK_ELSE_SPACE) {
+                block.strStart += " "
+            }
+            if (block.strStart != "") {
+                if (trimLeadingSpacesAndTabs(block.strStart) != "") {
+                    s = trimLeadingSpacesAndTabs(block.strStart) + "\r\n"
+                }
+            }
+            for (var i = 0; i <= block.children.length - 1; i += 1) {
+                s += doGetCompressedText(block.children[i])
+            }
+            if (block.strEnd != "") {
+                s += block.strEnd + "\r\n"
+            }
+            return s
+        }
+
+        function indent(lvl) {
+            var INDENTLEVEL = 2;
+            var s = "";
+            for (var i = 0; i < lvl * INDENTLEVEL; i += 1) {
+                s += " "
+            }
+            return s
+        }
+
+        function trimLeadingSpaces(str) {
+            var s = str;
+            while (s.match(/^ /)) {
+                s = s.replace(/^ /, '')
+            }
+            return s
+        }
+
+        function trimLeadingSpacesAndTabs(str) {
+            var s = trimLeadingSpaces(str);
+            while (s.match(/^\t/)) {
+                s = s.replace(/^\t/, '');
+                s = trimLeadingSpaces(s)
+            }
+            return s
+        }
+
+        function getErrorText(str) {
+            var s = "";
+            if (parseErrors.length > 0) {
+                var pe = parseErrors[0];
+                s += "Pos. " + pe.pos + ": " + pe.str;
+                s += "\n \n" + str.substring(0, pe.pos + 1);
+                s += "  <---"
+            }
+            return s
+        }
+
+        function replaceOutsideStrings(str, searchStr, replaceStr) {
+            var c;
+            var strpos = -1;
+            var lastpos = 0;
+            var outstr = "";
+
+            function reservedWordFound() {
+                var reserved = [
+                    "var ",
+                    "new ",
+                    "function ",
+                    "return ",
+                    "throw ",
+                    "typeof ",
+                    "do ",
+                    "else ",
+                    "void ",
+                    " in "
+                ];
+                for (var i = 0; i < reserved.length; i += 1) {
+                    if (str.substring(strpos).indexOf(reserved[i]) == 0) {
+                        strpos += reserved[i].length - 1;
+                        outstr += reserved[i];
+                        return true
+                    }
+                }
+                return false
+            }
+            while (strpos < str.length) {
+                strpos += 1;
+                c = str.charAt(strpos);
+                switch (c) {
+                    default:
+                        if (reservedWordFound()) {} else if (c == searchStr.charAt(0)) {
+                            if (str.substring(strpos).indexOf(searchStr) == 0) {
+                                strpos += searchStr.length - 1;
+                                outstr += replaceStr
+                            } else {
+                                outstr += c;
+                            }
+                        } else {
+                            outstr += c;
+                        }
+                        break;
+                    case '"':
+                    case '\'':
+                        var pos = endOfStringIndex(str, c, strpos);
+                        if (pos != -1) {
+                            outstr += str.substring(strpos, pos + 1);
+                            strpos = pos
+                        } else {
+                            return ""
+                        }
+                        break;
+                    case '\\':
+                        outstr += c;
+                        strpos += 1;
+                        outstr += str.charAt(strpos);
+                        break;
+                    case '/':
+                        var cc = prevSignificantChar(str, strpos);
+                        if (cc == '(' || cc == '=') {
+                            var pos = endOfStringIndex(str, c, strpos, true);
+                            if (pos != -1) {
+                                outstr += str.substring(strpos, pos + 1);
+                                strpos = pos
+                            } else {
+                                return ""
+                            }
+                        } else {
+                            outstr += c
+                        }
+                        break;
+                    case '*':
+                        if (str.charAt(strpos - 1) == '/') {
+                            var pos = str.indexOf('*/', strpos);
+                            if (pos != -1) {
+                                outstr += str.substring(strpos, pos + 2);
+                                strpos = pos + 1
+                            } else {
+                                return ""
+                            }
+                        } else {
+                            outstr += c
+                        }
+                        break
+                }
+            }
+            return outstr
+        }
+
+        /*
+         * props
+         */
+        var isIE = document.all && document.execCommand ?
+            true :
+            false;
+        var isNS = !document.all ?
+            true :
+            false;
+        var isOP = document.all && !document.execCommand ?
+            true :
+            false;
+        var objName = '';
+        var objs = [];
+        var lvls = [];
+        var exprHistory = [];
+        var exprHistoryIndex = -1;
+
+        function evalExpr() {
+            objName = document.forms[0].elements['txtExpr'].value;
+            var x = objName.split('[');
+            lvls.length = 0;
+            for (var i = 0; i < x.length; i += 1) {
+                lvls = lvls.concat(x[i].split('.'))
+            }
+            for (var i = 0; i < lvls.length; i += 1) {
+                if (lvls[i].indexOf(']') == lvls[i].length - 1) {
+                    lvls[i] = lvls[i].substring(0, lvls[i].length - 1)
+                }
+            }
+        }
+
+        function getPropsString(obj) {
+            var objAttr = [];
+            for (var elem in obj) {
+                objAttr.push(elem)
+            }
+            objAttr = objAttr.sort();
+            var s = '';
+            for (var i = 0; i < objAttr.length; i += 1) {
+                try {
+                    if (typeof (obj[objAttr[i]]) == "function") {
+                        s += objAttr[i] + ' = [function]\n'
+                    } else {
+                        s += objAttr[i] + ' = ' + obj[objAttr[i]] + '\n'
+                    }
+                } catch (e) {
+                    s += objs[i] + ' = [' + e.description + ']\n'
+                }
+            }
+            var test = function () {
+                this.var0 = "variable 0";
+                this.var1 = 3.14159;
+                this.getProp = function (x) {
+                    var i = 0;
+                    for (k in this) {
+                        if (x == i++) {
+                            return (k)
+                        }
+                    }
+                }
+            };
+            return s
+        }
+
+        function getProps(keepForwardHistory) {
+            if (window.opener.closed) {
+                alert('The referring window has been closed.');
+                return
+            }
+            var obj = null;
+            evalExpr();
+            try {
+                obj = eval('window.opener.' + objName)
+            } catch (e) {
+                alert('Could not evaluate object.')
+            }
+            var slct = document.forms[0].elements['evalresult'];
+            slct.length = 0;
+            objs.length = 0;
+            if (isIE) {
+                getElementsIE(slct, obj)
+            } else if (isNS || isOP) {
+                getElementsNS(slct, obj)
+            }
+            updateHistory(keepForwardHistory)
+        }
+
+        function updateHistory(keepForwardHistory) {
+            if (!keepForwardHistory && exprHistory[exprHistoryIndex] != document.forms[0].elements['txtExpr'].value) {
+                exprHistoryIndex += 1;
+                exprHistory.length = exprHistoryIndex;
+                exprHistory.push(document.forms[0].elements['txtExpr'].value)
+            }
+            var btnBack = document.forms[0].elements['btnBack'];
+            var btnForward = document.forms[0].elements['btnForward'];
+            if (exprHistoryIndex <= 0) {
+                btnBack.disabled = true;
+                btnBack.title = '';
+                if (isOP) {
+                    btnBack.style.color = 'gray'
+                }
+            } else {
+                btnBack.disabled = false;
+                btnBack.title = exprHistory[exprHistoryIndex - 1];
+                if (isOP) {
+                    btnBack.style.color = ''
+                }
+            }
+            if (exprHistoryIndex >= exprHistory.length - 1) {
+                btnForward.disabled = true;
+                btnForward.title = '';
+                if (isOP) {
+                    btnForward.style.color = 'gray'
+                }
+            } else {
+                btnForward.disabled = false;
+                btnForward.title = exprHistory[exprHistoryIndex + 1];
+                if (isOP) {
+                    btnForward.style.color = ''
+                }
+            }
+        }
+
+        function getElementsIE(slct, obj) {
+            try {
+                for (var elem in obj) {
+                    objs.push(elem);
+                    var newOpt = document.createElement('OPTION');
+                    slct.add(newOpt, 0);
+                }
+            } catch (e) {
+                alert('Could not evaluate object:\n' + e.description)
+            }
+            objs = objs.sort();
+            for (var i = 0; i < objs.length; i += 1) {
+                var opt = slct[i];
+                try {
+                    opt.name = objs[i];
+                    opt.innerText = objs[i] + ' = ' + obj[objs[i]]
+                } catch (e) {
+                    opt.innerText = objs[i] + ' = [' + e.description + ']'
+                }
+            }
+        }
+
+        function getElementsNS(slct, obj) {
+            var props = [];
+            var methods = [];
+            var indeterminate = [];
+            var protoLevels = 0;
+            for (var p = obj; p; p = p.__proto__) {
+                props[protoLevels] = [];
+                methods[protoLevels] = [];
+                indeterminate[protoLevels] = [];
+                protoLevels += 1
+            }
+            for (var elem in obj) {
+                var protoLevel = -1;
+                try {
+                    for (var p = obj; p && (elem in p); p = p.__proto__) {
+                        ++protoLevel
+                    }
+                } catch (e) {
+                    protoLevel = 0
+                }
+                try {
+                    if ((typeof (obj[elem])) == 'function') {
+                        methods[protoLevel].push(elem)
+                    } else {
+                        props[protoLevel].push(elem)
+                    }
+                } catch (e) {
+                    indeterminate[protoLevel].push(elem)
+                }
+            }
+            for (var i = 0; i < protoLevels; i += 1) {
+                var qual = '';
+                addArrayNS(props[i], qual + 'Properties', slct, obj);
+                addArrayNS(methods[i], qual + 'Methods', slct, obj);
+                addArrayNS(indeterminate[i], qual + 'Indeterminate', slct, obj)
+            }
+        }
+
+        function addArrayNS(arr, header, slct, obj) {
+            if (arr.length > 0) {
+                var newOpt = document.createElement('OPTION');
+                newOpt.name = '(category)';
+                newOpt.innerHTML = '-------------------- ' + header + ' --------------------';
+                slct.appendChild(newOpt);
+                arr = arr.sort();
+                for (var i = 0; i < arr.length; i += 1) {
+                    newOpt = document.createElement('OPTION');
+                    try {
+                        newOpt.name = arr[i];
+                        if (arr[i] == 'innerHTML') {
+                            newOpt.innerHTML = 'innerHTML = [Not shown]'
+                        } else {
+                            var tn;
+                            if (obj[arr[i]].toString().indexOf('function ') == 1) {
+                                var fv = obj[arr[i]].toString();
+                                fv = fv.substring(0, fv.indexOf('{') + 1) + ' [...] }';
+                                tn = document.createTextNode(arr[i] + ' = ' + fv)
+                            } else {
+                                tn = document.createTextNode(arr[i] + ' = ' + obj[arr[i]])
+                            }
+                            newOpt.appendChild(tn)
+                        }
+                    } catch (e) {
+                        newOpt.innerHTML = arr[i] + ' = [' + e + ']'
+                    }
+                    slct.appendChild(newOpt)
+                }
+            }
+        }
+
+        function selectProp(slct) {
+            if (slct.selectedIndex == -1) {
+                return
+            }
+            if (slct[slct.selectedIndex].name == '(category)') {
+                return
+            }
+            lvls.push(slct[slct.selectedIndex].name);
+            showProps()
+        }
+
+        function goUp() {
+            if (lvls.length > 1) {
+                lvls.length -= 1;
+                showProps()
+            }
+        }
+
+        function goBack() {
+            if (exprHistoryIndex > 0) {
+                exprHistoryIndex -= 1;
+                document.forms[0].elements['txtExpr'].value = exprHistory[exprHistoryIndex];
+                getProps(true)
+            }
+        }
+
+        function goForward() {
+            if (exprHistory.length > exprHistoryIndex - 1) {
+                exprHistoryIndex += 1;
+                document.forms[0].elements['txtExpr'].value = exprHistory[exprHistoryIndex];
+                getProps(true)
+            }
+        }
+
+        function showProps() {
+            var s = '';
+            for (var i = 0; i < lvls.length; i += 1) {
+                if (!isNaN(lvls[i])) {
+                    s += '[' + lvls[i] + ']'
+                } else {
+                    if (s != '') {
+                        s += '.'
+                    }
+                    s += lvls[i]
+                }
+            }
+            document.forms[0].elements['txtExpr'].value = s;
+            getProps()
+        }
+
+        function browseTo(expr) {
+            document.forms[0].elements['txtExpr'].value = expr;
+            document
+                .forms[0]
+                .elements['btnGet']
+                .click()
+        }
+
+        var NS4 = (document.layers) ?
+            true :
+            false;
+        var NS6 = (document.getElementById && !document.all) ?
+            true :
+            false;
+        var IE4 = (document.all && document.execCommand) ?
+            true :
+            false;
+        var INLINE_EDIT = true;
+        var isBmkLinkActive = false;
+
+        function displayHTML(id, str, prot) {
+            if (IE4) {
+                document.all[id].innerHTML = str
+            } else if (NS4) {} else {
+                document
+                    .getElementById(id)
+                    .innerHTML = str
+            }
+        }
+
+        function displayText(id, str) {
+            if (IE4) {
+                document.all[id].innerText = str
+            } else if (NS4) {} else {
+                document
+                    .getElementById(id)
+                    .innerHTML = str;
+            }
+        }
+
+        function updateLinks(form, compressedText) {
+            var bmkname = form.elements['bmkname'].value;
+            var linkcode = "<a href='' name='bmklink'>" + bmkname + "</a>";
+            displayHTML("bookmark", linkcode);
+            if (IE4) {
+                document.all.bmklink.href = compressedText;
+            } else {
+                document.links[1].href = compressedText;
+            }
+        }
+
+        function addToFavorites(form) {
+            if (!IE4) {
+                alert('Only supported in Internet Explorer');
+                return
+            }
+            var jscode = form.elements['jscode'].value;
+            if (scan(jscode)) {
+                var ct = getCompressedText();
+                updateLinks(form, ct);
+                var bmkname = form.elements['bmkname'].value;
+                try {
+                    self
+                        .external
+                        .addFavorite(document.all.bmklink.href, bmkname)
+                } catch (e) {
+                    self.alert('Could not add script to Favorites.')
+                }
+            } else {
+                displayError(getErrorText(jscode))
+            }
+        }
+
+        function presentCompressedSource(form) {
+            var jscode = form.elements['jscode'].value;
+            if (scan(jscode)) {
+                var ct = getCompressedText();
+                var ct2 = ct.replace(/\r/g, "");
+                ct2 = ct2.replace(/\n/g, "");
+                if (INLINE_EDIT) {
+                    form.elements['WrapChk'].checked = true;
+                    wrapText(form);
+                    form.elements['jscode'].value = ct2;
+                    displayText("formatsrc", ct2.length + " characters")
+                } else {
+                    displayText("formatsrc", ct2 + "\n \n" + ct2.length + " characters")
+                }
+                updateLinks(form, ct)
+            } else {
+                displayError(getErrorText(jscode))
+            }
+        }
+
+        function presentFormattedSource(form) {
+            var jscode = form.elements['jscode'].value;
+            if (scan(jscode)) {
+                var ft = getFormattedText();
+                var ct = getCompressedText();
+                var ct2 = ct.replace(/\r/g, "");
+                ct2 = ct2.replace(/\n/g, "");
+                if (INLINE_EDIT) {
+                    form.elements['WrapChk'].checked = false;
+                    wrapText(form);
+                    form.elements['jscode'].value = ft;
+                    displayText("formatsrc", ct2.length + " characters")
+                } else {
+                    displayText("formatsrc", ft + "\n \n" + ct2.length + " characters")
+                }
+                updateLinks(form, ct)
+            } else {
+                displayError(getErrorText(jscode))
+            }
+        }
+
+        function displayError(str) {
+            displayText("formatsrc", str);
+            displayHTML("bookmark", "<font color='red'>ERROR</font>");
+            if (!IE4) {
+                return
+            }
+            var errorpos = parseErrors[0].pos;
+            var pos = 0;
+            var lines = -1;
+            while (pos > -1 && pos < errorpos) {
+                pos = document
+                    .all('jscode')
+                    .value
+                    .indexOf('\n', pos + 1);
+                lines += 1
+            }
+            errorpos -= lines;
+            gotoCursorPos(errorpos)
+        }
+
+        function replaceEscape20(form) {
+            form.elements['jscode'].value = replaceOutsideStrings(form.elements['jscode'].value, "%20", " ")
+        }
+
+        function replaceAll(form) {
+            var srch = prompt('Replace...', '');
+            if (srch) {
+                var rplc = prompt('...with:', '');
+                if (rplc) {
+                    var re = new RegExp(srch, 'gi');
+                    form.elements['jscode'].value = form
+                        .elements['jscode']
+                        .value
+                        .replace(re, rplc)
+                }
+            }
+        }
+
+        function wrapText(form) {
+            if (form.elements['WrapChk'].checked) {
+                form.elements['jscode'].wrap = 'soft'
+            } else {
+                form.elements['jscode'].wrap = 'off';
+            }
+        }
+
+        function setEditorHeight(form) {
+            if (isNaN(form.elements['jscodeheight'].value) || parseInt(form.elements['jscodeheight'].value) < 5) {
+                form.elements['jscodeheight'].value = form.elements['jscode'].rows
+            } else {
+                form.elements['jscode'].rows = parseInt(form.elements['jscodeheight'].value)
+            }
+        }
+
+        function gotoCursorPos(pos) {
+            try {
+                var tr = document
+                    .forms[0]
+                    .elements['jscode']
+                    .createTextRange();
+                tr.move('character', pos);
+                tr.select()
+            } catch (e) {}
+        }
+
+        function promptCursorPos() {
+            var pos = prompt('Cursor position:', '');
+            if (pos != null && !isNaN(pos)) {
+                gotoCursorPos(pos)
+            }
+        }
+
+        function addBraces(form) {
+            var jscode = form.elements['jscode'];
+            var pos = jscode
+                .value
+                .indexOf('javascript:');
+            if (pos >= 0) {
+                var s = 'javascript:';
+                s += '(function(){' + jscode
+                    .value
+                    .substring(pos + 'javascript:'.length) + '})()';
+                jscode.value = s
+            }
+        }
+
+
+        if (!IE4) {
+            document.forms[0].elements['JumpBtn'].style.visibility = 'hidden';
+        } else {
+            try {
+                var pastedText = clipboardData.getData('Text');
+                if (pastedText.indexOf('javascript:') == 0) {
+                    document.forms[0].elements['jscode'].value = pastedText
+                }
+            } catch (e) {}
+        }
+        if (IE4) {
+            window.onerror = handleError
+        }
+
+        function handleError(errorMessage, url, line) {
+            if (document.activeElement.name == 'bmklink') {
+                var s = 'Runtime error.\n';
+                var pos = event['errorCharacter'];
+                var errstmt = gotoErrorPos(pos);
+                s += '\nError:\t' + errorMessage;
+                s += '\nLine:\t' + line;
+                s += '\nChar:\t' + pos;
+                s += '\nStmt.:\t' + errstmt + '...';
+                alert(s);
+                return true
+            }
+            return false
+        }
+
+        function gotoErrorPos(pos) {
+            var txt = unescape(document.forms[0].elements['jscode'].value);
+            var compressedText = getCompressedText();
+            var errorStartStr = unescape(compressedText)
+                .replace(/[\t\r\n]/g, "")
+                .substr(pos + 10);
+            var pos = 0;
+            var str = "";
+            var c;
+            do {
+                c = errorStartStr.charAt(pos);
+                if (c == ';' || c == ')' || c == '}' || pos >= errorStartStr.length - 1) {
+                    break
+                }
+                str += c;
+                pos += 1
+            } while (true);
+            var newPos = unescape(txt)
+                .replace(/[\t\r]/g, "")
+                .indexOf(str);
+            gotoCursorPos(newPos);
+            return str;
+        }
+
+        function handleBmkLinkBlur() {
+            isBmkLinkActive = false
+        }
+
+        function handleBmkLinkFocus() {
+            isBmkLinkActive = true
+        }
+    </script>
+
+
+
+</body>
+
+</html>
