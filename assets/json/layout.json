@@ -3,7 +3,7 @@
    "children":[ 
       { 
          "title":"Dynamic Viewport",
-         "uri":"javascript:(function(){})();",
+         "uri":"javascript:(function(meta){if(document.getElementById('metaview')){document.head.removeChild(document.getElementById('metaview'));}var io=prompt('Viewport Scale Between 0 and 1');meta.id='metaview';meta.name='viewport';meta.content='width=device-width, initial-scale='+io+', minimum-scale='+io+', maximum-scale='+io+', user-scalable=no';window.document.head.appendChild(meta);})(document.createElement('meta'));",
          "description":"Prompts you for a number, the view port scale will be set with it." 
       },
       {
