@@ -48,7 +48,7 @@ function populate(json){
 	json.children.forEach(function(object){
 		new Tmp(object);		
 	});
-	document.getElementById('tablebody').appendChild(buffer);
+	this.target.appendChild(buffer);
 }
 
 
