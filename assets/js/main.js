@@ -1,5 +1,4 @@
 
-
 function Model(text){
 	this.text = text;
 }
@@ -41,8 +40,6 @@ function xhr(url){
 	}
 	request.send();
 }
-
-// xhr('https://assets.codepen.io/1674766/developer.json');
 
 function populate(json){
 	json.children.forEach(function(object){
