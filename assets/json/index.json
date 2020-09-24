@@ -1,8 +1,20 @@
 {
-    "title":"bookmarklets",
-    "children":[
-        {"title":"developer","uri":"assets/html/developer.html"},
-        {"title":"layout","uri":"assets/html/layout.html"},
-        {"title":"media","uri":"assets/html/media.html"}
+    "title": "bookmarklets",
+    "children": [
+        {
+            "title": "developer",
+            "uri": "assets/html/developer.html",
+            "description":"Bookmarks for debugging and testing code of webpages"
+        },
+        {
+            "title": "layout",
+            "uri": "assets/html/layout.html",
+            "description":"Bookmarks changing various layout propeties"
+        },
+        {
+            "title": "media",
+            "uri": "assets/html/media.html",
+            "description":"Audio, Video, and Image oriented snippets"
+        }
     ]
 }
