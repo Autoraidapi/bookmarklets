@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Bookmarklets</title>
+    <title>Layout</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1674766/favicon.ico" type="image/x-icon">
     <link rel="apple-touch-icon" href="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1674766/apple-touch-icon.png">
@@ -24,12 +24,18 @@
         </header>
         
 	    <article class="jumbotron p-3">
-
-            <section id="layout">
-                <p>Change The Scale of the window for mobile browser.</p>
-                <a title="Dynamic Viewport" href="javascript:(function(){ if(document.getElementById('metaview')){ document.head.removeChild(document.getElementById('metaview')); } var io = prompt('Viewport Scale Between 0 and 1'), meta = document.createElement('meta'); meta.id = 'metaview'; meta.name = 'viewport'; meta.content = 'width=device-width, initial-scale=' + io + ', minimum-scale='+io+', maximum-scale='+io+', user-scalable=no'; window.top.document.head.appendChild(meta); })();">Scale Viewport</a>
-            </section>
-
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <td>Bookmarklets</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </thead>
+                <tbody id="tablebody">
+                    
+                </tbody>
+            </table>
         </article>
         
         <footer class="navbar fixed-bottom navbar-dark bg-dark"></footer>
@@ -37,6 +43,8 @@
     </main>
 
     <script src="assets/js/main.js"></script>
-
+    <script>
+        xhr('../json/layout.json');
+    </script>
 </body>
 </html>
