@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>IDB JSON Bookmarks</title>
+    <meta name="viewport" content="width=device-width, initial-scale=0.750">
+    <link rel='stylesheet' href='https://s3-us-west-2.amazonaws.com/s.cdpn.io/1674766/bootstrap.min.css'>
+    <style>
+        label,
+        #file {
+            position: fixed;
+            top: -100px;
+        }
+
+
+
+        .hidden {
+            width: 1px;
+            height: 1px;
+            opacity: 0;
+        }
+
+        .hide {
+            display: none;
+        }
+
+        details {
+            border: 1px solid #aaa;
+            border-radius: 4px;
+            padding: .5em .5em 0;
+            margin-top: 2px;
+        }
+
+        summary {
+            font-weight: bold;
+            margin: -.5em -.5em 0;
+            padding: .5em;
+        }
+
+        details[open] {
+            padding: .5em;
+        }
+
+        details[open] summary {
+            border-bottom: 1px solid #aaa;
+            margin-bottom: .5em;
+        }
+    </style>
+
+
+
+
+
+
+</head>
+
+<body translate="no">
+    <label id="label" for="file"><input type="file" id="file" class="hidden"></label>
+
+    <main>
+
+        <header class="navbar border-dark border-bottom p-0">
+            <nav class="btn-group">
+                <a class="btn btn-sm" id="exporter">Export</a>
+                <button class="btn btn-sm" disabled>Update</button>
+            </nav>
+            <nav class="btn-group">
+                <button class="btn btn-sm" data-target="#modalScroll" data-toggle="modal">Log</button>
+                <button class="btn btn-sm" onclick="label.click()">Open</button>
+            </nav>
+        </header>
+
+        <article class="jumbotron p-3">
+
+            <section class="new-note">
+                <form id="form">
+                    <div class="form-group">
+                        <label for="title">Title</label>
+                        <input id="title" type="text" class="form-control form-control-sm" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label for="url">URL</label>
+                        <input id="url" type="text" class="form-control form-control-sm" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea name="description" id="description" class="form-control form-control-sm"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-dark btn-sm">Submit</button>
+                </form>
+            </section>
+
+            <section class="note-display" id="n">
+                <pre class="jumbotron p-3">        <ul class="list-group" id="list"></ul>
+      </pre>
+            </section>
+
+        </article>
+
+
+    </main>
+
+    <div class="modal fade" id="modalScroll" tabindex="-1" role="dialog" aria-labelledby="modalScrollTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalScrollTitle">Scroll View</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="scrollView">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        (function () {
+
+            var parent, child;
+
+            function element(target, element, attrs, text) {
+                parent = document.createElement(element);
+                child = document.createTextNode(text);
+                for (var attr in attrs) {
+                    parent.setAttribute(attr, attrs[attr])
+                }
+                if (text) {
+                    parent.appendChild(child);
+                }
+                return target.insertBefore(parent, target.childNodes[0])
+            }
+
+            var myAlert, myBtn, mySpan, time;
+
+            function flash(str, type, target) {
+                time = Date.now();
+                myAlert = element(target, 'div', {
+                    class: 'alert alert-dismissible fade show',
+                    role: 'alert',
+                    'data-time': time
+                }, str);
+                myBtn = element(myAlert, 'button', {
+                    class: 'close',
+                    'data-dismiss': 'alert',
+                    'aria-label': 'Close'
+                });
+                mySpan = element(myBtn, 'span', {
+                    'aria-hidden': 'true'
+                }, 'x');
+                if (type === 'primary') {
+                    myAlert.classList.add("alert-primary")
+                }
+                if (type === 'secondary') {
+                    myAlert.classList.add("alert-secondary")
+                }
+                if (type === 'success') {
+                    myAlert.classList.add("alert-success")
+                }
+                if (type === 'danger') {
+                    myAlert.classList.add("alert-danger")
+                }
+                if (type === 'warning') {
+                    myAlert.classList.add("alert-warning")
+                }
+                if (type === 'info') {
+                    myAlert.classList.add("alert-info")
+                }
+                if (type === 'light') {
+                    myAlert.classList.add("alert-light")
+                }
+                if (type === 'dark') {
+                    myAlert.classList.add("alert-dark")
+                }
+            }
+
+            if (typeof window !== 'undefined') {
+                window.flash = flash;
+            }
+
+        })();
+
+        function S4() {
+            return ((1 + Math.random()) * 65536 | 0).toString(16).substring(1);
+        }
+
+        function guid() {
+            return S4() + S4() + '-' + S4() + '-' + S4() + '-' + S4() + '-' + S4() + S4() + S4();
+        }
+    </script>
+
+    <script src="../js/modal.js"></script>
+
+    <script id="rendered-js">
+        ['form', 'title', 'description', 'url', 'body', 'list', 'exporter', 'file', 'scrollView'].forEach(function (
+        id) {
+            window[id] = document.getElementById(id);
+        });
+
+        var db;
+        var request = window.indexedDB.open("notes", 1);
+
+        request.onerror = function () {
+            flash('error opening the database', 'danger', scrollView);
+        };
+
+        request.onsuccess = function () {
+            db = request.result;
+            flash('loading all datbase entries', 'success', scrollView);
+            display();
+        };
+
+        request.onupgradeneeded = function (e) {
+            var db = e.target.result;
+            db.onerror = function (e) {
+                flash('error loading the database', 'danger', scrollView);
+            };
+            var objectStore = db.createObjectStore("notes", {
+                keyPath: "id",
+                autoIncrement: true
+            });
+            objectStore.createIndex("title", "title", {
+                unique: false
+            });
+        };
+
+        function addData(e) {
+            e.preventDefault();
+            var transaction = db.transaction(["notes"], "readwrite");
+            var objectStore = transaction.objectStore("notes");
+
+            var object = {
+                title: title.value,
+                uri: url.value,
+                description: description.value,
+                date: Date.now()
+            }
+
+            var request = objectStore.add(object);
+
+            request.onsuccess = function () {
+                form.reset();
+            };
+
+            transaction.oncomplete = function () {
+                flash('added : ' + object.uid, 'info', scrollView);
+                display();
+            };
+            transaction.onerror = function () {
+                flash('error adding item', 'danger', scrollView);
+            };
+        }
+
+
+
+        function display() {
+            while (list.firstChild) {
+                list.removeChild(list.firstChild);
+            }
+            var objectStore = db.transaction("notes").objectStore("notes");
+            objectStore.openCursor().onsuccess = function (e) {
+                var cursor = e.target.result;
+                if (cursor) {
+
+                    var listItem = document.createElement("li");
+                    listItem.className = 'list-group-item';
+
+                    var pre = document.createElement("span");
+                    pre.textContent = cursor.value.title;
+
+
+                    var viewBtn = document.createElement("button");
+                    viewBtn.className = "btn btn-primary btn-sm float-right";
+                    viewBtn.setAttribute("data-note-id", cursor.value.id);
+                    viewBtn.textContent = "View";
+                    viewBtn.onclick = viewItem;
+
+                    var updateBtn = document.createElement("button");
+                    updateBtn.className = "btn btn-warning btn-sm float-right";
+                    updateBtn.id = cursor.value.uid;
+                    updateBtn.setAttribute("data-note-id", cursor.value.id);
+                    updateBtn.textContent = "update";
+                    updateBtn.onclick = updateItem;
+
+                    var deleteBtn = document.createElement("button");
+                    deleteBtn.className = "btn btn-danger btn-sm float-right";
+                    deleteBtn.id = cursor.value.uid;
+                    deleteBtn.setAttribute("data-note-id", cursor.value.id);
+                    deleteBtn.textContent = "Delete";
+                    deleteBtn.onclick = deleteItem;
+
+                    listItem.appendChild(pre);
+                    listItem.appendChild(viewBtn);
+                    listItem.appendChild(updateBtn);
+                    listItem.appendChild(deleteBtn);
+
+
+                    list.appendChild(listItem);
+                    listItem.setAttribute("data-note-id", cursor.value.id);
+
+                    cursor.continue();
+
+                } else {
+
+                    if (!list.firstChild) {
+                        var listItem = document.createElement("li");
+                        listItem.textContent = "No tasks stored.";
+                        list.appendChild(listItem);
+                    }
+
+                }
+            };
+        }
+
+        function updateItem(e) {
+            var uid = event.target.id;
+            var noteId = Number(e.target.getAttribute("data-note-id"));
+            var transaction = db.transaction(["notes"], "readwrite");
+            var objectStore = transaction.objectStore("notes");
+
+            var request = objectStore.put(noteId);
+
+            transaction.oncomplete = function (e) {
+                console.log(Object.values(request.result));
+                flash('viewed : ' + noteId, 'primary', scrollView);
+            };
+        }
+
+        function viewItem(e) {
+            var uid = event.target.id;
+            var noteId = Number(e.target.getAttribute("data-note-id"));
+            var transaction = db.transaction(["notes"], "readwrite");
+            var objectStore = transaction.objectStore("notes");
+            var request = objectStore.get(noteId);
+
+            transaction.oncomplete = function (e) {
+                console.log(Object.values(request.result));
+                flash('viewed : ' + noteId, 'primary', scrollView);
+            };
+        }
+
+        function deleteItem(e) {
+            var uid = event.target.id;
+            var noteId = Number(e.target.getAttribute("data-note-id"));
+            var transaction = db.transaction(["notes"], "readwrite");
+            var objectStore = transaction.objectStore("notes");
+            var request = objectStore.delete(noteId);
+            transaction.oncomplete = function () {
+                e.target.parentNode.parentNode.removeChild(e.target.parentNode);
+                if (!list.firstChild) {
+                    var listItem = document.createElement("li");
+                    listItem.textContent = "No tasks stored.";
+                    list.appendChild(listItem);
+                }
+                flash('deleted : ' + uid, 'warning', scrollView);
+            };
+        }
+
+        /* File Input */
+        function uploadData(event) {
+            var files = event.target.files[0];
+            var reader = new FileReader();
+            reader.onload = function (event) {
+                var data = JSON.parse(event.target.result);
+                var transaction = db.transaction(["notes"], "readwrite");
+                var objectStore = transaction.objectStore("notes");
+                data.forEach(function (object) {
+                    objectStore.add(object);
+                });
+                transaction.oncomplete = function () {
+                    flash('upload successful.. ', 'success', scrollView);
+                    // maybe have a restore function.. display here I think fucks up
+                    display();
+                };
+                transaction.onerror = function () {
+                    flash('upload failed', 'error', scrollView);
+                };
+            }
+            reader.readAsText(files);
+        }
+
+        function exportData() {
+            var exportArr = [];
+            var objectStore = db.transaction("notes", "readwrite").objectStore("notes");
+            var objCursor = objectStore.openCursor();
+            objCursor.onerror = function (e) {
+                flash('database export failed', 'danger', scrollView);
+            }
+            objCursor.onsuccess = function (e) {
+                var cursor = e.target.result;
+                if (cursor) {
+                    exportArr.push(cursor.value);
+                    cursor.continue();
+                } else {
+                    var jsonStr = JSON.stringify(exportArr, null, 2);
+                    var jsonBlob = new Blob([jsonStr], {
+                        type: "application/octet-stream"
+                    });
+                    var textURL = window.URL.createObjectURL(jsonBlob);
+                    var fileSave = 'notes-' + Date.now() + "-export.json";
+                    var downloadLink = document.createElement("a");
+                    downloadLink.download = fileSave;
+                    downloadLink.href = textURL;
+                    downloadLink.onclick = clean;
+                    downloadLink.style.display = "none";
+                    document.body.appendChild(downloadLink);
+                    downloadLink.click();
+
+                    function clean(event) {
+                        document.body.removeChild(event.target);
+                    }
+                }
+                flash('database export complete', 'success', scrollView);
+            }
+        }
+
+
+        function onHashChange(event) {
+            var hash = location.href.match(/#(.*)$/);
+
+            switch (hash ? hash[1] : '') {
+                case 'edit':
+                    (function () {})();
+                    break;
+            }
+
+        }
+
+        /* DB Events */
+        file.addEventListener('change', uploadData, false);
+        exporter.addEventListener('click', exportData, false);
+        form.addEventListener('submit', addData, false);
+
+        /* Routing */
+        window.addEventListener('hashchange', onHashChange, false);
+        window.addEventListener('load', onHashChange, false);
+    </script>
+
+
+
+</body>
+
+</html>
