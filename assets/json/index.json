@@ -1,0 +1,8 @@
+{
+    "title":"bookmarklets",
+    "children":[
+        {"title":"developer","uri":"assets/html/developer.html"},
+        {"title":"layout","uri":"assets/html/layout.html"},
+        {"title":"media","uri":"assets/html/media.html"}
+    ]
+}
