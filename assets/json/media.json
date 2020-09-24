@@ -1,4 +1,11 @@
-{
+{ 
     "title":"bookmarklets",
-    "children":[]
-}
+    "children":[ 
+       { 
+          "title":"Open Media",
+          "uri":"",
+          "description":"Open video in a new window so it can play minimized." 
+       }
+    ]
+ }
+ 

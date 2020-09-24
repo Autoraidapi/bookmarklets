@@ -98,7 +98,7 @@ function Tmp(options){
 	this.title = options.title;
 	this.uri = options.uri;
 	this.template = _.template(
-		'<td><a href="<%= this.uri %>"><%= this.title %></a><div class="container-fluid">lorem</div></td>'+
+		'<td><a href="<%= this.uri %>"><%= this.title %></a><div class="container-fluid"><%= this.description %></div></td>'+
 		'<td></td>'+
 		'<td></td>'
 	);
@@ -125,7 +125,7 @@ function xhr(url){
 	request.onload = function(){
 		populate(JSON.parse(request.response))
 	}
-	request.send();
+	request.send(null);
 }
 
 function populate(json){

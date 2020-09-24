@@ -67,43 +67,21 @@ function display() {
     objectStore.openCursor().onsuccess = function (e) {
         var cursor = e.target.result;
         if (cursor) {
-
             var listItem = document.createElement("li");
             listItem.className = 'list-group-item';
-
             var pre = document.createElement("span");
             pre.textContent = cursor.value.title;
-
-
-            var viewBtn = document.createElement("button");
-            viewBtn.className = "btn btn-primary btn-sm float-right";
-            viewBtn.setAttribute("data-note-id", cursor.value.id);
-            viewBtn.textContent = "View";
-            viewBtn.onclick = viewItem;
-
-            var updateBtn = document.createElement("button");
-            updateBtn.className = "btn btn-warning btn-sm float-right";
-            updateBtn.id = cursor.value.uid;
-            updateBtn.setAttribute("data-note-id", cursor.value.id);
-            updateBtn.textContent = "update";
-            updateBtn.onclick = updateItem;
-
             var deleteBtn = document.createElement("button");
             deleteBtn.className = "btn btn-danger btn-sm float-right";
             deleteBtn.id = cursor.value.uid;
             deleteBtn.setAttribute("data-note-id", cursor.value.id);
             deleteBtn.textContent = "Delete";
             deleteBtn.onclick = deleteItem;
-
             listItem.appendChild(pre);
-            listItem.appendChild(viewBtn);
-            listItem.appendChild(updateBtn);
             listItem.appendChild(deleteBtn);
-
-
             list.appendChild(listItem);
             listItem.setAttribute("data-note-id", cursor.value.id);
-
+            
             cursor.continue();
 
         } else {
