@@ -97,6 +97,7 @@ function Tmp(options){
 	options = (options || {});
 	this.title = options.title;
 	this.uri = options.uri;
+	this.description = options.description;
 	this.template = _.template(
 		'<td><a href="<%= this.uri %>"><%= this.title %></a><div class="container-fluid"><%= this.description %></div></td>'+
 		'<td></td>'+
