@@ -46,9 +46,9 @@ function xhr(url){
 
 function populate(json){
 	json.children.forEach(function(object){
-		new Tmp(object);
-		document.getElementById('tablebody').appendChild(buffer);
+		new Tmp(object);		
 	});
+	document.getElementById('tablebody').appendChild(buffer);
 }
 
 
