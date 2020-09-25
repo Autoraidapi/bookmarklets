@@ -1,10 +1,11 @@
-['form', 'title', 'description', 'url', 'body', 'list', 'exporter', 'file', 'scrollView'].forEach(function (
-    id) {
+['form', 'title', 'description', 'url', 'body', 'list', 'exporter', 'file', 'scrollView'].forEach(function (id){
     window[id] = document.getElementById(id);
 });
 
 var db;
 var request = window.indexedDB.open("bookmarks", 1);
+
+const bufferFragment = new DocumentFragment();
 
 request.onerror = function () {
     flash('error opening the database', 'danger', scrollView);
@@ -164,8 +165,8 @@ function uploadData(event) {
         });
         transaction.oncomplete = function () {
             flash('upload successful.. ', 'success', scrollView);
-            // maybe have a restore function.. display here I think fucks up
-            display();
+            // restore instead
+            //display();
         };
         transaction.onerror = function () {
             flash('upload failed', 'error', scrollView);
@@ -194,15 +195,15 @@ function exportData() {
             var textURL = window.URL.createObjectURL(jsonBlob);
             var fileSave = 'bookmarks-' + Date.now() + "-export.json";
             var downloadLink = document.createElement("a");
+            var fragment = document.createDocumentFragment();
             downloadLink.download = fileSave;
             downloadLink.href = textURL;
             downloadLink.onclick = clean;
             downloadLink.style.display = "none";
-            document.body.appendChild(downloadLink);
+            fragment.appendChild(downloadLink);
             downloadLink.click();
-
             function clean(event) {
-                document.body.removeChild(event.target);
+                fragment.removeChild(event.target);
             }
         }
         flash('database export complete', 'success', scrollView);

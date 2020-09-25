@@ -1,3 +1,4 @@
+
 const buffer = new DocumentFragment();
 
 var _ = (function(_){
@@ -90,10 +91,13 @@ function Tmp(options){
 	this.title = options.title;
 	this.uri = options.uri;
 	this.description = options.description;
-	this.template = _.template(
-		'<td><a href="<%= this.uri %>"><%= this.title %></a><div class="container-fluid"><%= this.description %></div></td>'+
-		'<td></td>'+
-		'<td></td>'
+	this.template = _.template('\
+		<td>\
+			<a href="<%= this.uri %>"><%= this.title %></a>\
+			<div class="container-fluid"><%= this.description %></div>\
+		</td>\
+		<td></td>\
+		<td></td>'
 	);
 	this.fragment = document.createDocumentFragment();
 	this.node = document.createElement('tr');
@@ -112,7 +116,8 @@ Tmp.prototype = {
 }
 
 function xhr(url){	
-	var request = new XMLHttpRequest();
+	const target = document.getElementById('tablebody');
+	const request = new XMLHttpRequest();
 	request.open('GET', url, true);
 	request.responseType = 'text';
 	request.onload = function(){
@@ -122,7 +127,7 @@ function xhr(url){
 		JSON.parse(json).children.forEach(function(object){
 			new Tmp(object);		
 		});
-		document.getElementById('tablebody').appendChild(buffer);
+		target.appendChild(buffer);
 	}
 	request.send(null);
 }

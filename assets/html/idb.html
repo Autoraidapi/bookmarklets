@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="../css/idb.css">
 
 </head>
-<body translate="no">
+<body>
 
     <label id="label" for="file"><input type="file" id="file" class="hidden"></label>
 
@@ -19,18 +19,17 @@
         <header class="navbar border-dark border-bottom p-0">
             <nav class="btn-group">
                 <a href="../../" class="btn btn-sm">Back</a>
-                <button class="btn btn-sm" onclick="label.click()">Open</button>                
-
+                <button class="btn btn-sm" onclick="label.click()" title="Restore Not Enabled Yet" disabled>Upload</button>
             </nav>
             <nav class="btn-group">
+                <button class="btn btn-sm" id="exporter" title="Export JSON Backup">Export Backup</button>
                 <button class="btn btn-sm" data-target="#modalScroll" data-toggle="modal">Log</button>
-                <a class="btn btn-sm" id="exporter">Export</a>
             </nav>
         </header>
 
         <article class="jumbotron p-3">
 
-            <section class="new-note">
+            <section>
                 <form id="form">
                     <div class="form-group">
                         <label for="title">Title</label>
@@ -48,7 +47,7 @@
                 </form>
             </section>
 
-            <section class="note-display" id="n">
+            <section id="n">
                 <pre class="jumbotron p-3">        
                     <ul class="list-group" id="list"></ul>
                 </pre>
@@ -56,11 +55,9 @@
 
         </article>
 
-
     </main>
 
-    <div class="modal fade" id="modalScroll" tabindex="-1" role="dialog" aria-labelledby="modalScrollTitle"
-        aria-hidden="true">
+    <div class="modal fade" id="modalScroll" tabindex="-1" role="dialog" aria-labelledby="modalScrollTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-scrollable" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -79,10 +76,8 @@
         </div>
     </div>
 
-
     <script src="../js/modal.js"></script>
     <script src="../js/idb.js"></script>
 
 </body>
-
 </html>

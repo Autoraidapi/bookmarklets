@@ -1,5 +1,4 @@
-label,
-#file {
+#label,#file {
     position: fixed;
     top: -100px;
 }

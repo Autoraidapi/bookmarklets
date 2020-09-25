@@ -3,7 +3,7 @@
    "children":[ 
       { 
          "title":"Sync",
-         "uri":"javascript:",
+         "uri":"javascript:(function(cache){ var io = prompt('exit to quit'); while(io !== 'exit'){ if(io === 'help'){ alert('under construction'); } io = prompt('exit to quit'); } })([])",
          "description":"" 
       }
    ]
