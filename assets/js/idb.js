@@ -4,7 +4,7 @@
 });
 
 var db;
-var request = window.indexedDB.open("notes", 1);
+var request = window.indexedDB.open("bookmarks", 1);
 
 request.onerror = function () {
     flash('error opening the database', 'danger', scrollView);
@@ -21,7 +21,7 @@ request.onupgradeneeded = function (e) {
     db.onerror = function (e) {
         flash('error loading the database', 'danger', scrollView);
     };
-    var objectStore = db.createObjectStore("notes", {
+    var objectStore = db.createObjectStore("bookmarks", {
         keyPath: "id",
         autoIncrement: true
     });
@@ -30,16 +30,27 @@ request.onupgradeneeded = function (e) {
     });
 };
 
+function S4() {
+    return ((1 + Math.random()) * 65536 | 0).toString(16).substring(1);
+}
+
+function guid() {
+    return S4() + S4() + '-' + S4() + '-' + S4() + '-' + S4() + '-' + S4() + S4() + S4();
+}
+
 function addData(e) {
+    
     e.preventDefault();
-    var transaction = db.transaction(["notes"], "readwrite");
-    var objectStore = transaction.objectStore("notes");
+
+    var transaction = db.transaction(["bookmarks"], "readwrite");
+    var objectStore = transaction.objectStore("bookmarks");
 
     var object = {
         title: title.value,
         uri: url.value,
         description: description.value,
-        date: Date.now()
+        date: Date.now(),
+        uid : guid()
     }
 
     var request = objectStore.add(object);
@@ -63,7 +74,7 @@ function display() {
     while (list.firstChild) {
         list.removeChild(list.firstChild);
     }
-    var objectStore = db.transaction("notes").objectStore("notes");
+    var objectStore = db.transaction("bookmarks").objectStore("bookmarks");
     objectStore.openCursor().onsuccess = function (e) {
         var cursor = e.target.result;
         if (cursor) {
@@ -99,8 +110,8 @@ function display() {
 function updateItem(e) {
     var uid = event.target.id;
     var noteId = Number(e.target.getAttribute("data-note-id"));
-    var transaction = db.transaction(["notes"], "readwrite");
-    var objectStore = transaction.objectStore("notes");
+    var transaction = db.transaction(["bookmarks"], "readwrite");
+    var objectStore = transaction.objectStore("bookmarks");
 
     var request = objectStore.put(noteId);
 
@@ -113,8 +124,8 @@ function updateItem(e) {
 function viewItem(e) {
     var uid = event.target.id;
     var noteId = Number(e.target.getAttribute("data-note-id"));
-    var transaction = db.transaction(["notes"], "readwrite");
-    var objectStore = transaction.objectStore("notes");
+    var transaction = db.transaction(["bookmarks"], "readwrite");
+    var objectStore = transaction.objectStore("bookmarks");
     var request = objectStore.get(noteId);
 
     transaction.oncomplete = function (e) {
@@ -126,8 +137,8 @@ function viewItem(e) {
 function deleteItem(e) {
     var uid = event.target.id;
     var noteId = Number(e.target.getAttribute("data-note-id"));
-    var transaction = db.transaction(["notes"], "readwrite");
-    var objectStore = transaction.objectStore("notes");
+    var transaction = db.transaction(["bookmarks"], "readwrite");
+    var objectStore = transaction.objectStore("bookmarks");
     var request = objectStore.delete(noteId);
     transaction.oncomplete = function () {
         e.target.parentNode.parentNode.removeChild(e.target.parentNode);
@@ -146,8 +157,8 @@ function uploadData(event) {
     var reader = new FileReader();
     reader.onload = function (event) {
         var data = JSON.parse(event.target.result);
-        var transaction = db.transaction(["notes"], "readwrite");
-        var objectStore = transaction.objectStore("notes");
+        var transaction = db.transaction(["bookmarks"], "readwrite");
+        var objectStore = transaction.objectStore("bookmarks");
         data.forEach(function (object) {
             objectStore.add(object);
         });
@@ -165,7 +176,7 @@ function uploadData(event) {
 
 function exportData() {
     var exportArr = [];
-    var objectStore = db.transaction("notes", "readwrite").objectStore("notes");
+    var objectStore = db.transaction("bookmarks", "readwrite").objectStore("bookmarks");
     var objCursor = objectStore.openCursor();
     objCursor.onerror = function (e) {
         flash('database export failed', 'danger', scrollView);
@@ -181,7 +192,7 @@ function exportData() {
                 type: "application/octet-stream"
             });
             var textURL = window.URL.createObjectURL(jsonBlob);
-            var fileSave = 'notes-' + Date.now() + "-export.json";
+            var fileSave = 'bookmarks-' + Date.now() + "-export.json";
             var downloadLink = document.createElement("a");
             downloadLink.download = fileSave;
             downloadLink.href = textURL;

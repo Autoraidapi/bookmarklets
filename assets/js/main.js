@@ -1,6 +1,6 @@
+const buffer = new DocumentFragment();
 
 var _ = (function(_){
-	
 	_.defaults = function (object) {  
 		if (!object) { return object }    
 		for (var argsIndex = 1, argsLength = arguments.length; argsIndex < argsLength; argsIndex += 1) {    
@@ -15,15 +15,12 @@ var _ = (function(_){
 		}    
 		return object    
 	};
-  
 	_.templateSettings = {  
 		evaluate: /<%([\s\S]+?)%>/g,    
 		interpolate: /<%=([\s\S]+?)%>/g,    
 		escape: /<%-([\s\S]+?)%>/g    
 	};
-  
 	var noMatch = /(.)^/;
-  
 	var escapes = {  
 		"'": "'",    
 		'\\': '\\',    
@@ -33,9 +30,7 @@ var _ = (function(_){
 		'\u2028': 'u2028',    
 		'\u2029': 'u2029'    
 	};
-    
 	var escaper = /\\|'|\r|\n|\t|\u2028|\u2029/g;
-  
 	_.template = function (text, data, settings) {  
 		var render;    
 		settings = _.defaults({}, settings, _.templateSettings);    
@@ -86,12 +81,9 @@ var _ = (function(_){
 	return _
 })({});
 
-
 function Model(text){
 	this.text = text;
 }
-
-const buffer = new DocumentFragment();
 
 function Tmp(options){
 	options = (options || {});
@@ -119,21 +111,19 @@ Tmp.prototype = {
 	}
 }
 
-function xhr(url){
+function xhr(url){	
 	var request = new XMLHttpRequest();
 	request.open('GET', url, true);
 	request.responseType = 'text';
 	request.onload = function(){
-		populate(JSON.parse(request.response))
+		populate(request.response);
+	}	
+	function populate(json){
+		JSON.parse(json).children.forEach(function(object){
+			new Tmp(object);		
+		});
+		document.getElementById('tablebody').appendChild(buffer);
 	}
 	request.send(null);
 }
-
-function populate(json){
-	json.children.forEach(function(object){
-		new Tmp(object);		
-	});
-	document.getElementById('tablebody').appendChild(buffer);
-}
-
 

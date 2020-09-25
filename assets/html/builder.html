@@ -6,75 +6,74 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1674766/favicon.ico" type="image/x-icon">
     <link rel="apple-touch-icon" href="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1674766/apple-touch-icon.png">    
+    <link rel="stylesheet" href="https://assets.codepen.io/1674766/bootstrap.min.css">
+
     <link rel="stylesheet" href="../css/builder.css">
 
 </head>
-<body translate="no">
+<body>
 
-    <form onSubmit='return false' style='margin-top:0px; margin-bottom:0px'>
+<main>
+        <header class="navbar border-dark border-bottom p-0">
+                <nav class="btn-group">
+                        <a href="../../" class="btn btn-sm">Back</a>
+                </nav>
+                <nav class="btn-group"></nav>
+        </header>
+        <article class="jumbotron p-3">
+                <form onSubmit='return false' action="idb.html">
 
-        <table cellpadding='0' cellspacing='0' border='0'>
-            <tr>
-                <td width='260'>Bookmarklet name:</td>
-                <td width='100'>&nbsp;&nbsp;Rows:</td>
-                <td width='100'><br></td>
-                <td width='*'><br></td>
-            </tr>
-            <tr>
-                <td><input type='text' name='bmkname' value='Name' size='35'></td>
-                <td nowrap>&nbsp;&nbsp;<input type='text' name='jscodeheight' value='24' size='3'
-                        onKeyPress='javascript: if(event.keyCode==13){setEditorHeight(this.form);return false}'>&nbsp;<input
-                        type='button' value='Set' onClick='javascript: setEditorHeight(this.form)'></td>
-                <td valign='middle' nowrap>&nbsp;&nbsp;<span id='cursorpos'></span></td>
-            </tr>
-            <!--
-  <tr>
-    <td colspan='2'>Javascript code:<br><textarea name='jscode' rows='24' cols='80' wrap='soft'>javascript:
-    </textarea></td>
-  </tr>
--->
-        </table>
+                        <div class="form-group">
+                                <input type='text' name='bmkname' value='Name'>
+                        </div>   
+                        
+                        <div class="form-group" hidden>
+                                <input type='text' name='jscodeheight' value='' onKeyPress='javascript: if(event.keyCode==13){setEditorHeight(this.form);return false}'>
+                                <button>Set</button>
+                                <span id="cursorpos"></span>  
+                        </div>
+                        
+                        <div class="form-group">
+                                <p>JavaScript Code:</p>
+                        </div>
+                
+                        <div class="form-group">
+                                <textarea class="form-control text-monospace" id="jscode" name='jscode' rows='6'>javascript:</textarea>
+                        </div>
+                
+                        <div class="form-group">
+                                <td nowrap valign='middle'><input type='checkbox' name='WrapChk' onClick='javascript: wrapText(this.form)' checked>Wrap&nbsp;text&nbsp;</td>
+                        </div>
 
-        Javascript code:<br>
-        <textarea name='jscode' rows='24' cols='80' wrap='soft' style='width:100%'>javascript:
-</textarea>
-        <br>
+                        <div class="form-group">
+                                <input type='button' title="Format code" class='button' value='  Format  ' onClick='javascript: presentFormattedSource(this.form)'>
+                                <input type='button' title="Compress code to 1 line" class='button' value=' Compress ' onClick='javascript: presentCompressedSource(this.form)'>        
+                                <input type='button' title="Wrap code in anonymous function" class='button' name='FuncBtn' value='(function...)' onClick='javascript: addBraces(this.form)'>                                
+                        </div>
+                        
+                        <div class="form-group">
+                                <input type='button' title="" class='button' value='Replace...' onClick='javascript: replaceAll(this.form)'>
+                                <input type='button' title="" class='button' value='Replace %20' onClick='javascript: replaceEscape20(this.form)'>
+                                <input type='button' title="" class='button' name='JumpBtn' value='Go to...' onClick='javascript: promptCursorPos()'>
+                        </div>
 
-        <table cellpadding='2' cellspacing='0' border='0'>
-            <tr valign='baseline'>
-                <td nowrap><input type='button' class='button' value='  Format  '
-                        onClick='javascript: presentFormattedSource(this.form)'></td>
-                <td nowrap><input type='button' class='button' value=' Compress '
-                        onClick='javascript: presentCompressedSource(this.form)'></td>
-                <td nowrap valign='middle'><input type='checkbox' name='WrapChk'
-                        onClick='javascript: wrapText(this.form)' checked>Wrap&nbsp;text&nbsp;</td>
-                <td nowrap><input type='button' class='button' value='Replace...'
-                        onClick='javascript: replaceAll(this.form)'></td>
-                <td nowrap><input type='button' class='button' value='Replace %20'
-                        onClick='javascript: replaceEscape20(this.form)'></td>
-                <td nowrap><input type='button' class='button' value='DOM Browser'
-                        onClick='javascript: open("dombrowser.htm", "", "width=500,height=550,resizable,status");'></td>
-                <td nowrap><input type='button' class='button' name='JumpBtn' value='Go to...'
-                        onClick='javascript: promptCursorPos()'></td>
-                <td nowrap><input type='button' class='button' name='FuncBtn' value='(function...)'
-                        onClick='javascript: addBraces(this.form)'></td>
-                <!--
-    <td nowrap><input type='button' class='button' name='FavBtn' value='Add to Fav.' onClick='javascript: addToFavorites(this.form)'></td>
--->
-            </tr>
-        </table>
+                        <span id='bookmark'><u>(Bookmarklet)</u></span>
+                        <br>
+                        <pre><span id='formatsrc'></span></pre>
+       
+                        <hr>
 
-        <br>
-        <span id='bookmark'><u>(Bookmarklet)</u></span>
-        <br>
+                        <div class="form-group">
+                                <button class="btn btn-sm btn-outline-dark" type="submit" disabled>Submit</button>
+                        </div>
+                        
+                    </form>
+        
+        </article>
 
-        <font face='courier new'>
+        <footer class="navbar fixed-bottom navbar-dark bg-dark"></footer>
 
-            <pre><span id='formatsrc'></span></pre>
-
-        </font>
-    </form>
-
+</main>
 
 
     <script src="../js/builder.js"></script>
