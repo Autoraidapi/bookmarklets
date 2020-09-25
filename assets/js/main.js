@@ -82,10 +82,6 @@ var _ = (function(_){
 	return _
 })({});
 
-function Model(text){
-	this.text = text;
-}
-
 function Tmp(options){
 	options = (options || {});
 	this.title = options.title;
@@ -115,34 +111,6 @@ Tmp.prototype = {
 		buffer.appendChild(this.fragment);
 		return this;
 	}
-}
-
-function Xhr(){
-	this.request = new XMLHttpRequest();
-	this.request.addEventListener('load', this.onRequestLoad.bind(this, true), false);
-	this.request.addEventListener('readystatechange', this.onReadyStateChange.bind(this, true), false);		
-}
-
-Xhr.prototype = {
-	get : function(options){
-		options = (options || {});
-		this.request.open('GET', options.url, true);
-		this.request.responseType = options.type;
-		this.request.send(null);			
-	},
-	onRequestLoad : function(event){
-		const target = document.getElementById('tablebody');	
-		JSON.parse(json).children.forEach(function(object){
-			new Tmp(object);		
-		});
-		target.appendChild(buffer);
-	},
-	onReadyStateChange : function(event){}	
-}
-
-function init(object){
-	const ctor = new Xhr();
-	ctor.get(object);
 }
 
 function xhr(url){	
