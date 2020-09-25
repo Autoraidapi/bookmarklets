@@ -91,12 +91,13 @@ function Tmp(options){
 	this.title = options.title;
 	this.uri = options.uri;
 	this.description = options.description;
+	this.uid = options.uid;
 	this.template = _.template('\
 		<td>\
 			<a href="<%= this.uri %>"><%= this.title %></a>\
 			<div class="container-fluid"><%= this.description %></div>\
 		</td>\
-		<td></td>\
+		<td><a href="#<%= this.uid %>">#</a></td>\
 		<td></td>'
 	);
 	this.fragment = document.createDocumentFragment();
@@ -112,7 +113,36 @@ Tmp.prototype = {
 	},
 	render : function(){
 		buffer.appendChild(this.fragment);
+		return this;
 	}
+}
+
+function Xhr(){
+	this.request = new XMLHttpRequest();
+	this.request.addEventListener('load', this.onRequestLoad.bind(this, true), false);
+	this.request.addEventListener('readystatechange', this.onReadyStateChange.bind(this, true), false);		
+}
+
+Xhr.prototype = {
+	get : function(options){
+		options = (options || {});
+		this.request.open('GET', options.url, true);
+		this.request.responseType = options.type;
+		this.request.send(null);			
+	},
+	onRequestLoad : function(event){
+		const target = document.getElementById('tablebody');	
+		JSON.parse(json).children.forEach(function(object){
+			new Tmp(object);		
+		});
+		target.appendChild(buffer);
+	},
+	onReadyStateChange : function(event){}	
+}
+
+function init(object){
+	const ctor = new Xhr();
+	ctor.get(object);
 }
 
 function xhr(url){	

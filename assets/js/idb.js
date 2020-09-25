@@ -1,4 +1,4 @@
-['form', 'title', 'description', 'url', 'body', 'list', 'exporter', 'file', 'scrollView'].forEach(function (id){
+['form', 'title', 'description', 'url', 'body', 'list', 'exporter', 'file', 'scrollView'].forEach(function (id) {
     window[id] = document.getElementById(id);
 });
 
@@ -31,6 +31,15 @@ request.onupgradeneeded = function (e) {
     });
 };
 
+function time() {
+    var now = new Date();
+    var time = /(\d+:\d+:\d+)/.exec(now)[0] + ':';
+    for (var ms = String(now.getMilliseconds()), i = ms.length - 3; i < 0; ++i) {
+        time += '0';
+    }
+    return time + ms;
+}
+
 function S4() {
     return ((1 + Math.random()) * 65536 | 0).toString(16).substring(1);
 }
@@ -40,7 +49,7 @@ function guid() {
 }
 
 function addData(e) {
-    
+
     e.preventDefault();
 
     var transaction = db.transaction(["bookmarks"], "readwrite");
@@ -51,7 +60,8 @@ function addData(e) {
         uri: url.value,
         description: description.value,
         date: Date.now(),
-        uid : guid()
+        time : time(),
+        uid: guid()
     }
 
     var request = objectStore.add(object);
@@ -93,7 +103,7 @@ function display() {
             listItem.appendChild(deleteBtn);
             list.appendChild(listItem);
             listItem.setAttribute("data-note-id", cursor.value.id);
-            
+
             cursor.continue();
 
         } else {
@@ -202,6 +212,7 @@ function exportData() {
             downloadLink.style.display = "none";
             fragment.appendChild(downloadLink);
             downloadLink.click();
+
             function clean(event) {
                 fragment.removeChild(event.target);
             }

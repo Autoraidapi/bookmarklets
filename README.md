@@ -33,3 +33,11 @@ Image, Video, and Audio oriented bookmarklets.
 Injects a script into the page pointed at the source of the Bookmarklet Panel.
 
 A button should appear in the screen corner that reveals a side panel containing a list of other bookmarklets.
+
+---
+
+### Build and Export
+
+This repo includes a tool to build javascript bookmarklets and store them into indexedDB with additional meta data. 
+
+Once they are in the database you can export the database to a file in JSON format.
