@@ -59,6 +59,7 @@ function addData(e) {
         title: title.value,
         uri: url.value,
         description: description.value,
+        icon : '',
         date: Date.now(),
         time : time(),
         uid: guid()
@@ -96,13 +97,13 @@ function display() {
             var deleteBtn = document.createElement("button");
             deleteBtn.className = "btn btn-danger btn-sm float-right";
             deleteBtn.id = cursor.value.uid;
-            deleteBtn.setAttribute("data-note-id", cursor.value.id);
+            deleteBtn.setAttribute("data-bookmark-id", cursor.value.id);
             deleteBtn.textContent = "Delete";
             deleteBtn.onclick = deleteItem;
             listItem.appendChild(pre);
             listItem.appendChild(deleteBtn);
             list.appendChild(listItem);
-            listItem.setAttribute("data-note-id", cursor.value.id);
+            listItem.setAttribute("data-bookmark-id", cursor.value.id);
 
             cursor.continue();
 
@@ -120,7 +121,7 @@ function display() {
 
 function updateItem(e) {
     var uid = event.target.id;
-    var noteId = Number(e.target.getAttribute("data-note-id"));
+    var noteId = Number(e.target.getAttribute("data-bookmark-id"));
     var transaction = db.transaction(["bookmarks"], "readwrite");
     var objectStore = transaction.objectStore("bookmarks");
 
@@ -134,7 +135,7 @@ function updateItem(e) {
 
 function viewItem(e) {
     var uid = event.target.id;
-    var noteId = Number(e.target.getAttribute("data-note-id"));
+    var noteId = Number(e.target.getAttribute("data-bookmark-id"));
     var transaction = db.transaction(["bookmarks"], "readwrite");
     var objectStore = transaction.objectStore("bookmarks");
     var request = objectStore.get(noteId);
@@ -147,7 +148,7 @@ function viewItem(e) {
 
 function deleteItem(e) {
     var uid = event.target.id;
-    var noteId = Number(e.target.getAttribute("data-note-id"));
+    var noteId = Number(e.target.getAttribute("data-bookmark-id"));
     var transaction = db.transaction(["bookmarks"], "readwrite");
     var objectStore = transaction.objectStore("bookmarks");
     var request = objectStore.delete(noteId);
