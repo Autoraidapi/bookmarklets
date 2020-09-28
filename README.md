@@ -10,6 +10,7 @@ For the BlackBerry 10 webkit browser, one should be able to save them into their
 
 ### [Bookmarklet Wiki](https://github.com/Autoraidapi/bookmarklets/wiki)
 
+---
 
 ### [Template](https://github.com/Autoraidapi/bookmarklets/wiki/Template)
 
