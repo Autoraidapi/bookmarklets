@@ -25,3 +25,5 @@ A button should appear in the screen corner that reveals a side panel containing
 This repo includes a tool to build javascript bookmarklets and store them into indexedDB with additional meta data. 
 
 Once they are in the database you can export the database to a file in JSON format.
+
+### [Todos](https://github.com/Autoraidapi/bookmarklets/projects)
