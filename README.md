@@ -10,8 +10,9 @@ For the BlackBerry 10 webkit browser, one should be able to save them into their
 
 ### [Bookmarklet Wiki](https://github.com/Autoraidapi/bookmarklets/wiki)
 
+---
 
-[Template](https://github.com/Autoraidapi/bookmarklets/wiki/Template)
+### [Template](https://github.com/Autoraidapi/bookmarklets/wiki/Template)
 
 Injects a script into the page pointed at the source of the Bookmarklet Panel.
 
@@ -19,7 +20,7 @@ A button should appear in the screen corner that reveals a side panel containing
 
 ---
 
-### Build and Export
+### [Build](https://autoraidapi.github.io/bookmarklets/assets/html/builder.html) | [Export](https://autoraidapi.github.io/bookmarklets/assets/html/idb.html)
 
 This repo includes a tool to build javascript bookmarklets and store them into indexedDB with additional meta data. 
 
