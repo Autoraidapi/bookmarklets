@@ -1,56 +1,7 @@
-[
-    {
-      "title": "Search Links",
-      "uri": "javascript:(function(){var x,n,nD,z,i; function htmlEscape(s){s=s.replace(/&/g,'&amp;');s=s.replace(/>/g,'&gt;');s=s.replace(/</g,'&lt;');return s;} function attrQuoteEscape(s){s=s.replace(/&/g,'&amp;'); s=s.replace(/\"/g, '&quot;');return s;} x=prompt(\"show links with this word/phrase in link text or target url (leave blank to list all links):\", \"\"); n=0; if(x!=null) { x=x.toLowerCase(); nD = window.open().document; nD.writeln('<html><head><title>Links containing \"'+htmlEscape(x)+'\"</title><base target=\"_blank\"></head><body>'); nD.writeln('Links on <a href=\"'+attrQuoteEscape(location.href)+'\">'+htmlEscape(location.href)+'</a><br> with link text or target url containing &quot;' + htmlEscape(x) + '&quot;<br><hr>'); z = document.links; for (i = 0; i < z.length; ++i) { if ((z[i].innerHTML && z[i].innerHTML.toLowerCase().indexOf(x) != -1) || z[i].href.toLowerCase().indexOf(x) != -1 ) { nD.writeln(++n + '. <a href=\"' + attrQuoteEscape(z[i].href) + '\">' + (z[i].innerHTML || htmlEscape(z[i].href)) + '</a><br>'); } } nD.writeln('<hr></body></html>'); nD.close(); } })();",
-      "description": "Lists all links on the page containing the specified text.\nPrompts for a string (word or phrase), and then lists links on the page that contain that string in a new window. The string may appear in the link's target url or in its anchor text. If you leave the prompt blank, all links on the page will be listed.",
-      "date": 1601100197744,
-      "time": "23:03:17:744",
-      "uid": "e4b98b27-2c20-9280-9162-db3c32021271",
-      "id": 4
-    },
-    {
-      "title": "Linked Images",
-      "uri": "javascript:(function(){function I(u){var t=u.split('.'),e=t[t.length-1].toLowerCase();return {gif:1,jpg:1,jpeg:1,png:1,mng:1}[e]}function hE(s){return s.replace(/&/g,'&amp;').replace(/>/g,'&gt;').replace(/</g,'&lt;').replace(/\"/g,'&quot;');}var q,h,i,z=open().document;z.write('<p>Images linked to by '+hE(location.href)+':</p><hr>');for(i=0;q=document.links[i];++i){h=q.href;if(h&&I(h))z.write('<p>'+q.innerHTML+' ('+hE(h)+')<br><img src=\"'+hE(h)+'\">');}z.close();})()",
-      "description": "Opens a window showing all images linked to from the current page.",
-      "date": 1601100224904,
-      "time": "23:03:44:904",
-      "uid": "9655b281-3774-81a5-ec1d-d149f7a29921",
-      "id": 5
-    },
-    {
-      "title": "Linked Pages",
-      "uri": "javascript:(function(){var dims,dimarray,wid,hei,dimstring,x,i,z,url; function linkIsSafe(u) { if (u.substr(0,7)=='mailto:') return false; if (u.substr(0,11)=='javascript:') return false; return true; } function htmlEscape(s){s=s.replace(/&/g,'&amp;');s=s.replace(/>/g,'&gt;');s=s.replace(/</g,'&lt;');return s;} dims = prompt('width, height for each frame', '760, 500'); if (dims!=null) { dimarray = dims.split(','); wid = parseInt(dimarray[0]); hei = parseInt(dimarray[1]); dimstring = 'width='+wid+' height='+hei; x = document.links; z = window.open().document; for (i = 0; i < x.length; ++i) { url = x[i].href; if(linkIsSafe(url)) { z.writeln('<p>' + x[i].innerHTML + ' (' + htmlEscape(url) + ')<br><iframe ' + dimstring + ' src=\"' + url.replace(/\"/g, '&quot;') + '\">[broken iframe]</iframe></p>'); } } z.close(); } })();",
-      "description": "Opens a window showing all pages linked to from the current page.",
-      "date": 1601100252872,
-      "time": "23:04:12:872",
-      "uid": "c700bbe3-5a0b-c530-c859-50db6c63a718",
-      "id": 6
-    },
-    {
-      "title": "Hide Visited",
-      "uri": "javascript:(function(){var newSS, styles=':visited {display: none}'; if(document.createStyleSheet) { document.createStyleSheet(\"javascript:'\"+styles+\"'\"); } else { newSS=document.createElement('link'); newSS.rel='stylesheet'; newSS.href='data:text/css,'+escape(styles); document.getElementsByTagName(\"head\")[0].appendChild(newSS); } })();",
-      "description": "Hides visited links.",
-      "date": 1601100283143,
-      "time": "23:04:43:143",
-      "uid": "a0328f2d-b8dc-baca-e43f-a0e51230204e",
-      "id": 7
-    },
-    {
-      "title": "Internal / External Links",
-      "uri": "javascript:(function(){var i,x; for (i=0;x=document.links[i];++i)x.style.color=[\"blue\",\"red\",\"orange\"][sim(x,location)]; function sim(a,b) { if (a.hostname!=b.hostname) return 0; if (fixPath(a.pathname)!=fixPath(b.pathname) || a.search!=b.search) return 1; return 2; } function fixPath(p){ p = (p.charAt(0)==\"/\" ? \"\" : \"/\") + p;/*many browsers*/ p=p.split(\"?\")[0];/*opera*/ return p; } })()",
-      "description": "Colors internal links red, external links blue, and in-page links orange.",
-      "date": 1601100329591,
-      "time": "23:05:29:591",
-      "uid": "a9a171d6-2bc3-9515-1657-22c3d0f8a31b",
-      "id": 8
-    },
-    {
-      "title": "Open All Links",
-      "uri": "javascript:(function(){var n_to_open,dl,dll,i; function linkIsSafe(u) { if (u.substr(0,7)=='mailto:') return false; if (u.substr(0,11)=='javascript:') return false; return true; } n_to_open = 0; dl = document.links; dll = dl.length; for(i = 0; i < dll; ++i) { if (linkIsSafe(dl[i].href)) ++n_to_open; } if (!n_to_open) alert ('no links'); else { if (confirm('Open ' + n_to_open + ' links in new windows?')) for (i = 0; i < dll; ++i) if (linkIsSafe(dl[i].href)) window.open(dl[i].href); } })();",
-      "description": "Opens each link on the page in a new window.",
-      "date": 1601100374767,
-      "time": "23:06:14:767",
-      "uid": "175779a2-7414-7389-9831-31389852a560",
-      "id": 9
-    }
+{ 
+  "title":"bookmarklets",
+  "children":[ 
+  
+    
   ]
+}
