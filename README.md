@@ -27,3 +27,9 @@ This repo includes a tool to build javascript bookmarklets and store them into i
 Once they are in the database you can export the database to a file in JSON format.
 
 ### [Todos](https://github.com/Autoraidapi/bookmarklets/projects)
+
+---
+
+### [Reader Demo](https://codepen.io/RJLeyra/debug/GRqJRVX)
+
+Read set lengths of binary string to UTF-8. Helps with very large files, just a demo not a solution. 
