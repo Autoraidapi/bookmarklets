@@ -4,8 +4,9 @@
 
     while(io !== 'exit'){
         if(io === 'ls'){ return cache; }
-        else if(io === 'add'){ add; }
-        else if(io === 'remove'){ remove; }
+        else if(io === 'add'){ add(); }
+        else if(io === 'remove'){ remove(); }
+        io = prompt('exit to quit');
     }
 
     function add(){
