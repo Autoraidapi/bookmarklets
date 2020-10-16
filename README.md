@@ -30,6 +30,3 @@ Once they are in the database you can export the database to a file in JSON form
 
 ---
 
-### [Reader Demo](https://codepen.io/RJLeyra/debug/GRqJRVX)
-
-Read set lengths of binary string to UTF-8. Helps with very large files, just a demo not a solution. 
