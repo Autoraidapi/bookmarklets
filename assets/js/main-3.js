@@ -33,5 +33,8 @@ const Collection = Backbone.Collection.extend({
 });
 
 const Sync = Backbone.Collection.extend({
-	initialize : function(){ this.fetch(); return this; }
+	initialize : function(){ 
+		this.fetch(); 
+		return this; 
+	}
 });
