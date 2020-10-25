@@ -1,5 +1,6 @@
 /*
  * Media Source
+ * function (){ return window.open([selector][index].currentSrc); }
  */
 (function(xs){
     for(var i = 0;i < xs.length;++i){
