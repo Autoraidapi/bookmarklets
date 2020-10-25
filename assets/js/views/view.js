@@ -6,5 +6,11 @@ const View = Backbone.View.extend({
         '<%= obj.title %>' +
         '<%= obj.uri %>'
     ),
-    preinitialize : function(){}
+    intialize : function(){
+        this.render();
+    },
+    render : function(){
+        this.$el.html(this.template());
+        return this;
+    }
 });
