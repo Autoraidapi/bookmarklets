@@ -1,0 +1,12 @@
+[
+  {
+    "title": "Mailto",
+    "uri": "javascript:(function(){location='mailto:?BODY='+document.title+'%20-%20'+location.href;})()",
+    "description": "",
+    "icon": "",
+    "date": 1603751895849,
+    "time": "15:38:15:849",
+    "uid": "cd278aa1-b2b0-0172-03a8-e84772a2a883",
+    "id": 30
+  }
+]
