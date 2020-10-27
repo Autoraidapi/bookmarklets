@@ -1,16 +1,51 @@
 [{
-      "title": "Dynamic Viewport",
-      "uri": "javascript:(function(meta){if(document.getElementById('metaview')){document.head.removeChild(document.getElementById('metaview'));}var io=prompt('Viewport Scale Between 0 and 1');meta.id='metaview';meta.name='viewport';meta.content='width=device-width, initial-scale='+io+', minimum-scale='+io+', maximum-scale='+io+', user-scalable=no';window.document.head.appendChild(meta);})(document.createElement('meta'));",
-      "description": "Prompts you for a number and appends the meta tag to the document head with the set number. Requires a mobile device or the mobile view emulation in the devtools."
-   },
-   {
-      "title": "Zoom In",
-      "uri": "javascript:function%20zoomImage(image,%20amt)%20%7B%20if(image.initialHeight%20==%20null)%20%7Bimage.initialHeight%20=%20image.height;%20image.initialWidth%20=%20image.width;%20image.scalingFactor%20=%201;%20%7D%20image.scalingFactor%20*=%20amt;%20image.width%20=%20image.scalingFactor%20*%20image.initialWidth;%20image.height%20=%20image.scalingFactor%20*%20image.initialHeight;%20%7Dfunction%20rZoomFont(n,%20node)%20%7Bfor%20(%20var%20i%20=%200;%20i%20<%20node.childNodes.length;%20i++%20)%20%7Bif%20(node.childNodes%5Bi%5D.nodeType%20==%201)%20rZoomFont(n,%20node.childNodes%5Bi%5D);%7DstartSize%20=%20getComputedStyle(node,'').getPropertyValue('font-size');startSize%20=%20Number(startSize.substr(0,startSize.length-2));lh%20=%20getComputedStyle(node,'').getPropertyValue('line-height');if%20(lh%20!=%20'normal')%20%7Blh%20=%20Number(lh.substr(0,lh.length-2))%20*%20n%20+%20'px';node.style.lineHeight%20=%20lh;%7DnewSize%20=%20(startSize%20*%20n)%20+%20'px';node.style.fontSize%20=%20newSize;%7DrZoomFont(1.5,document.getElementsByTagName('body')%5B0%5D);%20for%20(i=0;%20i<document.images.length;%20++i)%20zoomImage(document.images%5Bi%5D,%201.5);",
-      "description": "Continuous Zoom In"
-   },
-   {
-      "title": "Zoom Out",
-      "uri": "javascript:function%20zoomImage(image,%20amt)%20%7B%20if(image.initialHeight%20==%20null)%20%7Bimage.initialHeight%20=%20image.height;%20image.initialWidth%20=%20image.width;%20image.scalingFactor%20=%201;%20%7D%20image.scalingFactor%20*=%20amt;%20image.width%20=%20image.scalingFactor%20*%20image.initialWidth;%20image.height%20=%20image.scalingFactor%20*%20image.initialHeight;%20%7Dfunction%20rZoomFont(n,%20node)%20%7Bfor%20(%20var%20i%20=%200;%20i%20<%20node.childNodes.length;%20i++%20)%20%7Bif%20(node.childNodes%5Bi%5D.nodeType%20==%201)%20rZoomFont(n,%20node.childNodes%5Bi%5D);%7DstartSize%20=%20getComputedStyle(node,'').getPropertyValue('font-size');startSize%20=%20Number(startSize.substr(0,startSize.length-2));lh%20=%20getComputedStyle(node,'').getPropertyValue('line-height');if%20(lh%20!=%20'normal')%20%7Blh%20=%20Number(lh.substr(0,lh.length-2))%20*%20n%20+%20'px';node.style.lineHeight%20=%20lh;%7DnewSize%20=%20(startSize%20*%20n)%20+%20'px';node.style.fontSize%20=%20newSize;%7DrZoomFont(0.66,document.getElementsByTagName('body')%5B0%5D);%20for%20(i=0;%20i<document.images.length;%20++i)%20zoomImage(document.images%5Bi%5D,%200.66);",
-      "description": "Continuous Zoom Out"
-   }
+    "title": "Dynamic Viewport",
+    "uri": "javascript:(function(meta){if(document.getElementById('metaview')){document.head.removeChild(document.getElementById('metaview'));}var io=prompt('Viewport Scale Between 0 and 1');meta.id='metaview';meta.name='viewport';meta.content='width=device-width, initial-scale='+io+', minimum-scale='+io+', maximum-scale='+io+', user-scalable=no';window.document.head.appendChild(meta);})(document.createElement('meta'));",
+    "description": "Prompts you for a number and appends the meta tag to the document head with the set number. Requires a mobile device or the mobile view emulation in the devtools.",
+    "icon": "",
+    "date": 1603752669344,
+    "time": "15:51:09:344",
+    "uid": "2c04f9ec-24ab-3cad-ed23-a83fa391c6f4",
+    "id": 34
+  },
+  {
+    "title": "Zoom In",
+    "uri": "javascript:function%20zoomImage(image,%20amt)%20%7B%20if(image.initialHeight%20==%20null)%20%7Bimage.initialHeight%20=%20image.height;%20image.initialWidth%20=%20image.width;%20image.scalingFactor%20=%201;%20%7D%20image.scalingFactor%20*=%20amt;%20image.width%20=%20image.scalingFactor%20*%20image.initialWidth;%20image.height%20=%20image.scalingFactor%20*%20image.initialHeight;%20%7Dfunction%20rZoomFont(n,%20node)%20%7Bfor%20(%20var%20i%20=%200;%20i%20<%20node.childNodes.length;%20i++%20)%20%7Bif%20(node.childNodes%5Bi%5D.nodeType%20==%201)%20rZoomFont(n,%20node.childNodes%5Bi%5D);%7DstartSize%20=%20getComputedStyle(node,'').getPropertyValue('font-size');startSize%20=%20Number(startSize.substr(0,startSize.length-2));lh%20=%20getComputedStyle(node,'').getPropertyValue('line-height');if%20(lh%20!=%20'normal')%20%7Blh%20=%20Number(lh.substr(0,lh.length-2))%20*%20n%20+%20'px';node.style.lineHeight%20=%20lh;%7DnewSize%20=%20(startSize%20*%20n)%20+%20'px';node.style.fontSize%20=%20newSize;%7DrZoomFont(1.5,document.getElementsByTagName('body')%5B0%5D);%20for%20(i=0;%20i<document.images.length;%20++i)%20zoomImage(document.images%5Bi%5D,%201.5);",
+    "description": "Continuous Zoom In",
+    "icon": "",
+    "date": 1603752669647,
+    "time": "15:51:09:647",
+    "uid": "9e6efa0b-fcde-9e9e-9b38-8cfe9ca28a9d",
+    "id": 35
+  },
+  {
+    "title": "Zoom Out",
+    "uri": "javascript:function%20zoomImage(image,%20amt)%20%7B%20if(image.initialHeight%20==%20null)%20%7Bimage.initialHeight%20=%20image.height;%20image.initialWidth%20=%20image.width;%20image.scalingFactor%20=%201;%20%7D%20image.scalingFactor%20*=%20amt;%20image.width%20=%20image.scalingFactor%20*%20image.initialWidth;%20image.height%20=%20image.scalingFactor%20*%20image.initialHeight;%20%7Dfunction%20rZoomFont(n,%20node)%20%7Bfor%20(%20var%20i%20=%200;%20i%20<%20node.childNodes.length;%20i++%20)%20%7Bif%20(node.childNodes%5Bi%5D.nodeType%20==%201)%20rZoomFont(n,%20node.childNodes%5Bi%5D);%7DstartSize%20=%20getComputedStyle(node,'').getPropertyValue('font-size');startSize%20=%20Number(startSize.substr(0,startSize.length-2));lh%20=%20getComputedStyle(node,'').getPropertyValue('line-height');if%20(lh%20!=%20'normal')%20%7Blh%20=%20Number(lh.substr(0,lh.length-2))%20*%20n%20+%20'px';node.style.lineHeight%20=%20lh;%7DnewSize%20=%20(startSize%20*%20n)%20+%20'px';node.style.fontSize%20=%20newSize;%7DrZoomFont(0.66,document.getElementsByTagName('body')%5B0%5D);%20for%20(i=0;%20i<document.images.length;%20++i)%20zoomImage(document.images%5Bi%5D,%200.66);",
+    "description": "Continuous Zoom Out",
+    "icon": "",
+    "date": 1603752669967,
+    "time": "15:51:09:967",
+    "uid": "4259a174-ebac-ce3e-2a19-ee53dee3c5fc",
+    "id": 36
+  },
+  {
+    "title": "Horizontal Split",
+    "uri": "javascript:document.write('<HTML><HEAD></HEAD><FRAMESET ROWS=\\'50%,*\\'><FRAME SRC=' + location.href + '><FRAME SRC=' + location.href + '></FRAMESET></HTML>')",
+    "description": "Split window view into horizontal framesets.",
+    "icon": "",
+    "date": 1603752482731,
+    "time": "15:48:02:731",
+    "uid": "589c5ed5-dfba-52d8-44d3-ef4277e826e7",
+    "id": 32
+  },
+  {
+    "title": "Vertical Split",
+    "uri": "javascript:document.write('<HTML><HEAD></HEAD><FRAMESET COLS=\\'50%,*\\'><FRAME SRC=' + location.href + '><FRAME SRC=' + location.href + '></FRAMESET></HTML>')",
+    "description": "Split window into vertical framesets.",
+    "icon": "",
+    "date": 1603752542890,
+    "time": "15:49:02:890",
+    "uid": "c3b0e685-08c2-0dc0-997f-058b06d18e5c",
+    "id": 33
+  }
 ]
