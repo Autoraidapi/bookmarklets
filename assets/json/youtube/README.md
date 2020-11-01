@@ -1,11 +1,13 @@
+```
 Request URL:https://m.youtube.com/youtubei/v1/log_event?alt=json&key=AIzaSyAO_FJ2SlqU8Q4STEHLGCilw_Y9_11qcW8
 Request Method:POST
 Status Code:200 OK200 OK
+```
 
 --------------------------
 Request Headers : [source]
 --------------------------
-
+```
 Accept-Language:en-US,en;q=0.8
 Content-Type:application/json
 Cookie:VISITOR_INFO1_LIVE=ceUevLbiocE; YSC=lB7uNOUakfk; GPS=1
@@ -21,18 +23,20 @@ X-YouTube-Page-CL:338239199
 X-YouTube-Page-Label:youtube.mobile.web.client_20201021_02_RC00
 X-YouTube-Utc-Offset:-420
 X-YouTube-Variants-Checksum:fed2364c62a91d12d078aff1dfed6fba
+```
 
 ------------------------------------------------
 Query String Parameters : [source | URL encoded]
 ------------------------------------------------
-
+```
 alt:json
 key:AIzaSyAO_FJ2SlqU8Q4STEHLGCilw_Y9_11qcW8
+```
 
 --------------------------
 Request Payload : [source]
 --------------------------
-
+```
 context : {
 	client : {
 		browserName: "Safari Mobile"
@@ -49,11 +53,16 @@ context : {
 		screenDensityFloat: "1.84375"
 	}
 }
+```
 
+```
 Events : [
 	context : {lastActivityMs: "66009"}
 	eventTimeMs: 1603539008356
 ]
+```
+
+```
 ht5PlayerHealthEvent
 hasDrm: false
 isAd: false
@@ -73,11 +82,13 @@ requestTimeMs: "1603539018430"
 
 clientCounter: "9454"
 serializedEventId: "8w-UX6TIHYmkkwbrspSYDQ"
+```
 
 ---------------------------
 Response Headers : [source]
 ---------------------------
 
+```
 Alt-Svc:h3-Q050=":443"; ma=2592000,h3-29=":443"; ma=2592000,h3-T051=":443"; ma=2592000,h3-T050=":443"; ma=2592000,h3-Q046=":443"; ma=2592000,h3-Q043=":443"; ma=2592000,quic=":443"; ma=2592000; v="46,43"
 Cache-Control:private
 Content-Encoding:gzip
@@ -89,6 +100,7 @@ Vary:Origin, X-Origin, Referer
 X-Content-Type-Options:nosniff
 X-Frame-Options:SAMEORIGIN
 X-XSS-Protection:0
+```
 
 --------------------------
 URL From Device : [parsed]
