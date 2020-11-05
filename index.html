@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta http-equiv="refresh" content="0;url=https://autoraidapi.github.io/bookmarklets/old"/>
+
     <meta charset="UTF-8">
     <title>Bookmarklets</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,12 +11,15 @@
 </head>
 <body>
 
-    <script>window.location.href = 'old/';</script>
+
     <main id="main">
         
         <header class="navbar border-dark border-bottom p-0">
 		    <nav class="btn-group">		
-                <a class="btn btn-sm" href="https://github.com/Autoraidapi/bookmarklets" title="Github">Github</button>                
+                <a class="btn btn-sm" href="https://github.com/Autoraidapi/bookmarklets" title="Github">Github</button> 
+                <a href="#dev" class="btn btn-sm">Dev</a>
+                <a href="#misc" class="btn btn-sm">Misc</a>
+                <a href="#ui" class="btn btn-sm">UI</a>
             </nav>
             <nav class="btn-group">
                 <a class="btn btn-sm" href="assets/html/builder.html" title="Bookmark builder">Builder</a>			                
@@ -24,27 +27,27 @@
             </nav>
         </header>        
         
-        <article class="jumbotron p-3"></article>        
+        <article class="jumbotron p-3">
+           
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <td>Bookmarklets</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody"></tbody>
+                </table>
+           
+        </article>        
         
         <footer class="navbar fixed-bottom navbar-dark bg-dark"></footer>
         
     </main>
 
-    <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1674766/lib.min.js"></script>
-    
-    <script src="assets/js/models/model.js"></script>
+    <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1674766/lib.min.js"></script>    
+    <script src="assets/js/main.js"></script>
 
-    <script src="assets/js/models/developer.js"></script>
-    <script src="assets/js/models/layout.js"></script>
-    <script src="assets/js/models/media.js"></script>
-    
-    <script src="assets/js/views/view.js"></script>
-
-    <script src="assets/js/views/developer.js"></script>
-    <script src="assets/js/views/layout.js"></script>
-    <script src="assets/js/views/media.js"></script>
-
-    <script src="assets/js/views/container.js"></script>
-    <script src="assets/js/routes/router.js"></script>
 </body>
 </html>

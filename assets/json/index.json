@@ -1,21 +1,42 @@
-[{
-        "title": "developer",
-        "uri": "assets/html/developer.html",
-        "description": "Bookmarks for debugging and testing code of webpages"
+[
+    {
+      "title": "developer",
+      "uri": "assets/json/developer.json",
+      "description": "Bookmarks for debugging and testing code of webpages",
+      "icon": "",
+      "date": 1604516847077,
+      "time": "11:07:27:077",
+      "uid": "a120cf16-57fc-b4e6-802a-e19b8fc504f2",
+      "id": 1
     },
     {
-        "title": "layout",
-        "uri": "assets/html/layout.html",
-        "description": "Bookmarks changing various layout propeties"
+      "title": "layout",
+      "uri": "assets/json/layout.json",
+      "description": "Bookmarks changing various layout propeties",
+      "icon": "",
+      "date": 1604516868820,
+      "time": "11:07:48:820",
+      "uid": "17ff606f-a6fe-36f5-9a11-52a3a77837dd",
+      "id": 2
     },
     {
-        "title": "links",
-        "uri": "assets/html/links.html",
-        "description": ""
+      "title": "links",
+      "uri": "assets/json/links.json",
+      "description": "",
+      "icon": "",
+      "date": 1604516868989,
+      "time": "11:07:48:989",
+      "uid": "105dfd79-a0c5-c4d8-f012-76e683129d55",
+      "id": 3
     },
     {
-        "title": "media",
-        "uri": "assets/html/media.html",
-        "description": "Audio, Video, and Image oriented snippets"
+      "title": "media",
+      "uri": "assets/json/media.json",
+      "description": "Audio, Video, and Image oriented snippets",
+      "icon": "",
+      "date": 1604516869157,
+      "time": "11:07:49:157",
+      "uid": "797c52dd-a375-3b25-e68e-c5e253e16181",
+      "id": 4
     }
-]
+  ]
