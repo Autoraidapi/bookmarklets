@@ -5,6 +5,7 @@ define(['jquery','underscore','backbone'],function($,_,Backbone){
             title: '',
             uri: '',
             description: '',
+            source : ''
         }
     });
 
