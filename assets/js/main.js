@@ -1,39 +1,14 @@
-
-function Data(){
-    this.initialize.apply(this, arguments);
-}
-
-Data.prototype = {
-    constructor : Data,
-    initialize : function(collections){
-        this.collections = (collections || {});
-    }
-};
-
-function Main(){
-
-    this.initialize.apply(this, arguments);
-
-    this.data = new Data({
-        developer : new DeveloperBookmarks()
-    });
-    
-    this.router = new Router();
-    Backbone.history.start();
-
-}
-
-_.extend(Main.prototype, Backbone.Events, {
-    constructor : Main,
-    initialize : function(){
-        this.on('message', function(message){
-            return message;
-        });
-        return this;
+requirejs.config({
+    baseUrl: 'assets',
+    paths: {
+        jquery : 'https://assets.codepen.io/1674766/jquery.min',
+        underscore : 'https://assets.codepen.io/1674766/underscore.min',
+        backbone : 'https://assets.codepen.io/1674766/backbone.min' 
     }
 });
 
-if(typeof window !== 'undefined'){
-    window.app = new Main();
-    app.trigger('message', console.log('ready'));
-}
+requirejs(['js/routes/router' ], function(Router){
+    if(typeof window !== 'undefined'){
+        window.app = new Router();        
+    }
+});

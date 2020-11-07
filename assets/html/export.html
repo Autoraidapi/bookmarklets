@@ -25,25 +25,22 @@
             </nav>
 
             <nav class="btn-group">
-                <button class="btn btn-sm" href="build.html" title="Bookmark builder" disabled>Build</button>
-                <a class="btn btn-sm" href="export.html" title="JSON Export">Export</a>			
+                <a class="btn btn-sm" href="build.html" title="Bookmark builder">Build</a>			                
+                <button class="btn btn-sm" href="#" disabled>Export</button>			
             </nav>
 
         </header>        
         
-        <article class="jumbotron p-3">
-            <form action="export.html">
-                <input type="text" name="title">
-                <input type="text" name="uri">
-                <button type="submit">Submit</button>
-            </form>
-        </article>        
+        <article class="jumbotron p-3"></article>        
         
         <footer class="navbar fixed-bottom navbar-dark bg-dark"></footer>
         
     </main>
 
-
-
+    <script>
+        document.addEventListener('DOMContentLoaded', function(event){
+            console.log(window.location.search);
+        });
+    </script>
 </body>
 </html>
