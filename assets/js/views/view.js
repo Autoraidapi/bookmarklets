@@ -1,3 +1,4 @@
+/* View to extend  */
 const View = Backbone.View.extend({
     initialize : function(options){
         this.options = _.extend({
@@ -11,8 +12,12 @@ const View = Backbone.View.extend({
     }
 });
 
-const BookmarkView = Backbone.View.extend({
-    template : _.template(
-        ''
-    )
-})
+/* 
+
+function : init data shall loop and popultate routers registry with new Views, 
+
+hash event triggers the render 
+
+*/
+
+

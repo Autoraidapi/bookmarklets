@@ -1,3 +1,5 @@
+/* main view cached from hardcode html skeleton, renders nested views */
+
 const Container = Backbone.View.extend({
     el: $("#main"),
     child: null,
