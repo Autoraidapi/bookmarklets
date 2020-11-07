@@ -20,7 +20,7 @@ A button will be fixed to the screen corner that reveals a side panel containing
 
 ---
 
-### [Build](https://autoraidapi.github.io/bookmarklets/assets/html/builder.html) | [Export](https://autoraidapi.github.io/bookmarklets/assets/html/idb.html)
+### [Build](https://autoraidapi.github.io/bookmarklets/old/assets/html/builder.html) | [Export](https://autoraidapi.github.io/bookmarklets/old/assets/html/idb.html)
 
 This repo includes a tool to build javascript bookmarklets and store them into indexedDB with additional meta data. 
 
