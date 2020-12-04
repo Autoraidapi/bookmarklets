@@ -1,13 +1,9 @@
-define(['jquery', 'underscore', 'backbone'], function ($, _, Backbone) {
+define(['backbone','models/bookmark'], function (Backbone, Bookmark) {
 
     const Bookmarks = Backbone.Collection.extend({
-        model: Bookmark,
-        initialize: function () {
-            this.fetch();
-        },
-        serialize: function () {
-            return JSON.stringify(this.toJSON());
-        }
+
+        model : Bookmark
+
     });
 
     return Bookmarks;

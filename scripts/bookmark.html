@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="">
+    <script type="text/js-worker">var _ = (function (_) { _.defaults = function (object) { if (!object) { return object } for (var argsIndex = 1, argsLength = arguments.length; argsIndex < argsLength; argsIndex += 1) { var iterable = arguments[argsIndex]; if (iterable) { for (var key in iterable) { if (object[key] == null) { object[key] = iterable[key] } } } } return object }; _.templateSettings = { evaluate: /<%([\s\S]+?)%>/g, interpolate: /<%=([\s\S]+?)%>/g, escape: /<%-([\s\S]+?)%>/g }; var noMatch = /(.)^/; var escapes = { "'": "'", '\\': '\\', '\r': 'r', '\n': 'n', '\t': 't', '\u2028': 'u2028', '\u2029': 'u2029' }; var escaper = /\\|'|\r|\n|\t|\u2028|\u2029/g; _.template = function (text, data, settings) { var render; settings = _.defaults({}, settings, _.templateSettings); var matcher = new RegExp([ (settings.escape || noMatch).source, (settings.interpolate || noMatch).source, (settings.evaluate || noMatch).source ].join('|') + '|$', 'g'); var index = 0; var source = "__p+='"; text.replace(matcher, function (match, escape, interpolate, evaluate, offset) { source += text .slice(index, offset) .replace(escaper, function (match) { return '\\' + escapes[match] }); if (escape) { source += "'+\n((__t=(" + escape + "))==null?'':_.escape(__t))+\n'" } if (interpolate) { source += "'+\n((__t=(" + interpolate + "))==null?'':__t)+\n'" } if (evaluate) { source += "';\n" + evaluate + "\n__p+='" } index = offset + match.length; return match }); source += "';\n"; if (!settings.variable) { source = 'with(obj||{}){\n' + source + '}\n' } source = "var __t,__p='',__j=Array.prototype.join,print=function(){__p+=__j.call(arguments" + ",'');};\n" + source + "return __p;\n"; try { render = new Function(settings.variable || 'obj', '_', source) } catch (e) { e.source = source; throw e } if (data) { return render(data, _) } var template = function (data) { return render.call(this, data, _) }; template.source = 'function(' + (settings.variable || 'obj') + '){\n' + source + '}'; return template }; return _ })({}); 
+        self.postMessage = self.webkitPostMessage || self.postMessage;
+        self.onmessage = function(event){
+            //postMessage([_.template('<a href="<%= obj.href %>"><%= obj.text %></a>')(JSON.parse(atob(event.data)))]);
+            postMessage([_.template('<a href="<%= obj.href %>"><%= obj.text %></a>')(JSON.parse(atob(event.data)))]);
+        };
+    </script>
+
+</head>
+<body>
+    
+    <main id="main">
+
+        <header class="navbar border-bottom border-dark"></header>
+
+        <article class="jumbotron p-3">
+            <pre></pre>
+        </article>
+
+        <footer class="navbar fixed-bottom bg-dark navbar-dark"></footer>
+
+    </main>
+
+    <script>
+        const main = document.getElementById("main");
+
+        const blob = new Blob(
+            [].map.call(
+                document.querySelectorAll("script[type='text/js-worker']"),
+                function (script) {
+                    return script.textContent;
+                }
+            ), {
+                type: "text/javascript;charset=UTF-8"
+            }
+        );
+
+        function render(template) {
+            const fragment = document.createDocumentFragment();
+            const section = document.createElement("section");
+            var i, length = template.length;
+            for (i = length - 1; i >= 0; i--) {
+                section.innerHTML += template[i];
+            }
+            fragment.appendChild(section);
+            main.querySelector("article pre").appendChild(fragment);
+        }
+
+        document.worker = new Worker(window.URL.createObjectURL(blob));
+
+        document.worker.onmessage = function (event) {
+            render(event.data);
+        };
+        // 
+        document.worker.postMessage(
+            'eyJocmVmIjoiamF2YXNjcmlwdDooZnVuY3Rpb24oKXsgIHZhciBjaGVjayA9IGNvbmZpcm0oJ0VudGVyIFN5bmNocm9ub3VzIEludGVyZmFjZSwgdHlwZSBoZWxwIGZvciBpbmZvcm1hdGlvbi4nKTsgIGlmKGNoZWNrID09PSBmYWxzZSl7IHJldHVybiBmYWxzZTsgfSAgZWxzZSB7ICB2YXIgaW5wdXQgPSBwcm9tcHQoJ3J1bm5pbmcgUXVlcnksIGV4aXQgdG8gcXVpdFxuID4+Jyk7ICAgd2hpbGUoaW5wdXQgIT09ICdleGl0Jyl7IGlmKGlucHV0ID09PSAnc2NyaXB0JykgeyBsb2FkU2NyaXB0KCk7IH0gZWxzZSBpZihpbnB1dCA9PT0gJ2lmcmFtZScpIHsgbG9hZElmcmFtZSgpOyB9IGVsc2UgaWYoaW5wdXQgPT09ICdyZXBsJyl7IHJ1blJlcGwoKTsgfSBlbHNlIGlmKGlucHV0ID09PSAnaGVscCcpeyBhbGVydCggJ0NvbW1hbmRzIDogXFxuJysgJy0tLS0tLS0tLS0tXFxuJysgJ2lmcmFtZSA6IHJlbmRlciBhbiBpZnJhbWUgaW50byB0aGUgRG9jdW1lbnQgQm9keSBcXG4nICsgJ3NjcmlwdCA6IGluamVjdCBhIHNjcmlwdCBpbnRvIHRoZSBEb2N1bWVudCBCb2R5XFxuJyArICAncmVwbCAgIDogcnVuIGphdmFzY3JpcHQgZXZhbHVhdGlvbiBtb2RlJyApIH0gIHZhciBpbnB1dCA9IHByb21wdCgncnVubmluZyBRdWVyeSwgZXhpdCB0byBxdWl0XG4gPj4nKTsgICAgfSAgZnVuY3Rpb24gbG9hZFNjcmlwdCgpeyB2YXIgc3JjID0gcHJvbXB0KCdmaWxlIG5hbWUgPycpOyB2YXIgc2NyaXB0ID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgnc2NyaXB0Jyk7IHNjcmlwdC5zcmMgPSAnaHR0cHM6Ly9zMy11cy13ZXN0LTIuYW1hem9uYXdzLmNvbS9zLmNkcG4uaW8vMTY3NDc2Ni8nICsgc3JjICsgJy5qcyc7IHNjcmlwdC50eXBlID0gJ3RleHQvamF2YXNjcmlwdCc7IHJldHVybiBkb2N1bWVudC5ib2R5LmFwcGVuZENoaWxkKHNjcmlwdCk7IH0gIGZ1bmN0aW9uIGxvYWRJZnJhbWUoKXsgdmFyIHNyYyA9IHByb21wdCgncGF0aCA/Jyk7IHZhciBpZnJhbWUgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KCdpZnJhbWUnKTsgaWZyYW1lLnNyYyA9IHNyYztpZnJhbWUuc3R5bGUuY3NzVGV4dD0nd2lkdGg6MTAwJTtoZWlnaHQ6MjUwcHg7JzsgcmV0dXJuIGRvY3VtZW50LmJvZHkuYXBwZW5kQ2hpbGQoaWZyYW1lKTsgfSAgZnVuY3Rpb24gcnVuUmVwbCgpeyB2YXIgaW8gPSBwcm9tcHQoJ3J1bm5pbmcgSlMgU2hlbGwsIGV4aXQgdG8gcXVpdCBcbiA+Jyk7IHdoaWxlKGlvICE9PSAnZXhpdCcpeyB2YXIgcmVzdWx0OyB0cnkgeyByZXN1bHQgPSBldmFsKGlvKTsgfSAgY2F0Y2goZXIpeyByZXN1bHQgPSBlci5zdGFjazsgfSBmaW5hbGx5IHsgYWxlcnQocmVzdWx0KTsgfSBpbyA9IHByb21wdCgncnVubmluZyBKUyBTaGVsbCwgZXhpdCB0byBxdWl0IFxuID4nKTsgfSB9IH0gICB9KSgpOyIsInRleHQiOiJTeW5jaHJvbm91cyBRdWVyeSJ9'
+            );
+    </script>
+</body>
+
+</html>

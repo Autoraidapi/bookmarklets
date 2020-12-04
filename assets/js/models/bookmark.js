@@ -1,13 +1,16 @@
-define(['jquery','underscore','backbone'],function($,_,Backbone){
+define(['backbone'],function(Backbone){
 
-    const Bookmark = Backbone.Model.extend({    
+    const Bookmark = Backbone.Model.extend({        
+        
         defaults: {
             title: '',
             uri: '',
-            description: '',
-            source : ''
+            source : '',            
+            description: ''
         }
+
     });
 
-    return Bookmark;  
-})
+    return Bookmark;
+
+});

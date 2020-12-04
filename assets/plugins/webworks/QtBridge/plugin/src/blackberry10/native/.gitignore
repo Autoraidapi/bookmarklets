@@ -1,0 +1,7 @@
+platforms
+plugins
+arm
+x86
+.settings
+.device
+.externalToolBuilders
