@@ -1,0 +1,11 @@
+{
+    "name": "Tabbar",
+    "version": "1.0.0",
+    "manifest_version": 2,
+    "description": "Provides UI and logic to switch between and create new tabs and invoke Bookmarks and History views",
+    "permissions": [
+        "tabs",
+        "bookmarks",
+        "history"
+    ],
+}
