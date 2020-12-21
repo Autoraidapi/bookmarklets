@@ -1,65 +1,71 @@
 <qnx>
-    <id>com.flashbrowser</id>
+	
+    <id>com.browser</id>
+	
     <name>
-        <text xml:lang="en">Flash Browser</text>
-        <text xml:lang="af">Flash Blaaier</text>
-        <text xml:lang="ar">Flash المستعرض</text>
-        <text xml:lang="ca">Flash Navegador</text>
-        <text xml:lang="cs">Flash Prohlížeč</text>
-        <text xml:lang="da">Flash Browser</text>
-        <text xml:lang="de">Flash Browser</text>
-        <text xml:lang="el">Flash Περιήγηση</text>
-        <text xml:lang="en-GB">Flash Browser</text>
-        <text xml:lang="es">Flash Navegador</text>
-        <text xml:lang="eu">Flash Arakatzaileak</text>
-        <text xml:lang="fi">Flash Selain</text>
-        <text xml:lang="fr">Flash Navigateur</text>
-        <text xml:lang="gl">Flash Explorador</text>
-        <text xml:lang="he">Flash דפדפן</text>
-        <text xml:lang="hi">बFlash ्राउज़र</text>
-        <text xml:lang="hr">Flash Preglednik</text>
-        <text xml:lang="hu">Flash Böngésző</text>
-        <text xml:lang="id">Flash Browser</text>
-        <text xml:lang="it">Flash Browser</text>
-        <text xml:lang="ja">Flash ブラウザー</text>
+        <text xml:lang="en"> Browser</text>
+        <text xml:lang="af"> Blaaier</text>
+        <text xml:lang="ar"> المستعرض</text>
+        <text xml:lang="ca"> Navegador</text>
+        <text xml:lang="cs"> Prohlížeč</text>
+        <text xml:lang="da"> Browser</text>
+        <text xml:lang="de"> Browser</text>
+        <text xml:lang="el"> Περιήγηση</text>
+        <text xml:lang="en-GB"> Browser</text>
+        <text xml:lang="es"> Navegador</text>
+        <text xml:lang="eu"> Arakatzaileak</text>
+        <text xml:lang="fi"> Selain</text>
+        <text xml:lang="fr"> Navigateur</text>
+        <text xml:lang="gl"> Explorador</text>
+        <text xml:lang="he"> דפדפן</text>
+        <text xml:lang="hi">ब ्राउज़र</text>
+        <text xml:lang="hr"> Preglednik</text>
+        <text xml:lang="hu"> Böngésző</text>
+        <text xml:lang="id"> Browser</text>
+        <text xml:lang="it"> Browser</text>
+        <text xml:lang="ja"> ブラウザー</text>
         <!-- start pseudo locale -->
-        <text xml:lang="kl">Flash klполн</text>
+        <text xml:lang="kl"> klполн</text>
         <!-- end pseudo locale -->
-        <text xml:lang="ko">Flash 브라우저</text>
-        <text xml:lang="ms">Flash Pelayar</text>
-        <text xml:lang="nb">Flash Nettleser</text>
-        <text xml:lang="nl">Flash Browser</text>
-        <text xml:lang="pl">Flash Przeglądarka</text>
-        <text xml:lang="pt">Flash Browser</text>
-        <text xml:lang="pt-BR">Flash Navegador</text>
-        <text xml:lang="ro">Flash Browser</text>
-        <text xml:lang="ru">Flash Браузер</text>
-        <text xml:lang="sv">Flash Webbläsare</text>
-        <text xml:lang="th">Flash เบราเซอร์</text>
-        <text xml:lang="tr">Flash Tarayıcı</text>
-        <text xml:lang="vi">Flash Trình duyệt</text>
-        <text xml:lang="zh-CN">Flash 浏览器</text>
-        <text xml:lang="zh-TW">Flash 瀏覽器</text>
+        <text xml:lang="ko"> 브라우저</text>
+        <text xml:lang="ms"> Pelayar</text>
+        <text xml:lang="nb"> Nettleser</text>
+        <text xml:lang="nl"> Browser</text>
+        <text xml:lang="pl"> Przeglądarka</text>
+        <text xml:lang="pt"> Browser</text>
+        <text xml:lang="pt-BR"> Navegador</text>
+        <text xml:lang="ro"> Browser</text>
+        <text xml:lang="ru"> Браузер</text>
+        <text xml:lang="sv"> Webbläsare</text>
+        <text xml:lang="th"> เบราเซอร์</text>
+        <text xml:lang="tr"> Tarayıcı</text>
+        <text xml:lang="vi"> Trình duyệt</text>
+        <text xml:lang="zh-CN"> 浏览器</text>
+        <text xml:lang="zh-TW"> 瀏覽器</text>
     </name>
     <icon>
         <image>app_icon_browser.png</image>
     </icon>
     <versionNumber>1.0.0</versionNumber>
     <buildId>0</buildId>
-    <packageId>gYAAgOEFW9rI767zADAmIzwVo-A</packageId>
-    <description>Flash Browser</description>
-    <author>FileArchiveHaven</author>
+    <packageId></packageId>
+    <description> Browser</description>
+    <author></author>
     <asset type="Qnx/Elf" entry="true">browser</asset>
     <asset public="true">bing.png</asset>
     <asset public="true">google.png</asset>
     <asset public="true">yahoo.png</asset>
+	
     <entryPointType>Qnx/WebKit</entryPointType>
+	
     <initialWindow>
         <autoOrients>true</autoOrients>
         <systemChrome>none</systemChrome>
         <transparent>true</transparent>
     </initialWindow>
+	
     <env var="WK_ENABLE_CLIENT_CERTS" value="1" />
+	
     <permission>run_when_backgrounded</permission>
     <permission>access_location_services</permission>
     <permission>use_camera</permission>
@@ -78,6 +84,7 @@
     <permission>access_wifi_limited</permission>
     <permission>access_managed_credentials</permission>
     <permission>read_multimedia_settings</permission>
+	
     <splashScreens>
         <image>splash_1280x768.png</image>
         <image>splash_768x1280.png</image>
@@ -88,7 +95,8 @@
         <image>splash_1920x1080.png</image>
         <image>splash_1440x1440.png</image>
     </splashScreens>
-    <invoke-target id="com.flashbrowser">
+	
+    <invoke-target id="com.browser">
         <invoke-target-type>application</invoke-target-type>
         <icon>
             <image>ca_browser.png</image>
@@ -103,64 +111,69 @@
             <mime-type>text/html</mime-type>
             <mime-type>application/xhtml+xml</mime-type>
             <mime-type>image/svg+xml</mime-type>
-            <mime-type>application/x-shockwave-flash</mime-type>
+            <mime-type>application/x-shockwave-</mime-type>
 			<mime-type>video/x-flv</mime-type>
             <property var="uris" value="file://,asset://"/>
             <property var="exts" value="htm,html,xhtml,svg,swf,flv"/>
         </filter>
     </invoke-target>
-    <invoke-target id="com.flashbrowser.personal">
+	
+    <invoke-target id="com.browser.personal">
         <invoke-target-type>application</invoke-target-type>
         <invoke-target-name>
-            <text xml:lang="en">Flash Personal Browser</text>
-            <text xml:lang="ar">Flash المستعرض الشخصي</text>
-            <text xml:lang="ca">Flash Navegador personal</text>
-            <text xml:lang="cs">Flash Osobní prohlížeč</text>
-            <text xml:lang="da">Flash Personlig Browser</text>
-            <text xml:lang="de">Flash Privat-Browser</text>
-            <text xml:lang="el">Flash Προσωπικός Περιηγητής</text>
-            <text xml:lang="en-GB">Flash Personal Browser</text>
-            <text xml:lang="es">Flash Navegador personal</text>
-            <text xml:lang="eu">Flash Arakatzaile pertsonala</text>
-            <text xml:lang="fi">Flash Hlökohtainen selain</text>
-            <text xml:lang="fr">Flash Navigateur personnel</text>
-            <text xml:lang="gl">Flash Explorador persoal</text>
-            <text xml:lang="he">Flash דפדפן אישי</text>
-            <text xml:lang="hi">Flash व्यक्तिगत ब्राउज़र</text>
-            <text xml:lang="hr">Flash Lični Preglednik</text>
-            <text xml:lang="hu">Flash Személyes Böngésző</text>
-            <text xml:lang="id">Flash Penjelajah Pribadi</text>
-            <text xml:lang="it">Flash Browser personale</text>
-            <text xml:lang="ja">Flash 個人的なブラウザー</text>
+            <text xml:lang="en"> Personal Browser</text>
+            <text xml:lang="ar"> المستعرض الشخصي</text>
+            <text xml:lang="ca"> Navegador personal</text>
+            <text xml:lang="cs"> Osobní prohlížeč</text>
+            <text xml:lang="da"> Personlig Browser</text>
+            <text xml:lang="de"> Privat-Browser</text>
+            <text xml:lang="el"> Προσωπικός Περιηγητής</text>
+            <text xml:lang="en-GB"> Personal Browser</text>
+            <text xml:lang="es"> Navegador personal</text>
+            <text xml:lang="eu"> Arakatzaile pertsonala</text>
+            <text xml:lang="fi"> Hlökohtainen selain</text>
+            <text xml:lang="fr"> Navigateur personnel</text>
+            <text xml:lang="gl"> Explorador persoal</text>
+            <text xml:lang="he"> דפדפן אישי</text>
+            <text xml:lang="hi"> व्यक्तिगत ब्राउज़र</text>
+            <text xml:lang="hr"> Lični Preglednik</text>
+            <text xml:lang="hu"> Személyes Böngésző</text>
+            <text xml:lang="id"> Penjelajah Pribadi</text>
+            <text xml:lang="it"> Browser personale</text>
+            <text xml:lang="ja"> 個人的なブラウザー</text>
             <!-- start pseudo locale -->
-            <text xml:lang="kl">Flash Personal klполнr</text>
+            <text xml:lang="kl"> Personal klполнr</text>
             <!-- end pseudo locale -->
-            <text xml:lang="ko">Flash 개인용 브라우저</text>
-            <text xml:lang="nb">Flash Personlig Nettleser</text>
-            <text xml:lang="nl">Flash Persoonlijke browser</text>
-            <text xml:lang="pl">Flash Przeglądarka osobista</text>
-            <text xml:lang="pt">Flash Navegador Pessoal</text>
-            <text xml:lang="pt-BR">Flash Navegador Pessoal</text>
-            <text xml:lang="ro">Flash Browser personal</text>
-            <text xml:lang="ru">Flash Личный Браузер</text>
-            <text xml:lang="sv">Flash Personlig Webbläsare</text>
-            <text xml:lang="th">Flash เบราเซอร์ ส่วนตัว</text>
-            <text xml:lang="tr">Flash Kişisel Tarayıcı</text>
-            <text xml:lang="vi">Flash Trình duyệt cá nhân </text>
-            <text xml:lang="zh-CN">Flash 个人浏览器</text>
-            <text xml:lang="zh-TW">Flash 個人瀏覽器</text>
+            <text xml:lang="ko"> 개인용 브라우저</text>
+            <text xml:lang="nb"> Personlig Nettleser</text>
+            <text xml:lang="nl"> Persoonlijke browser</text>
+            <text xml:lang="pl"> Przeglądarka osobista</text>
+            <text xml:lang="pt"> Navegador Pessoal</text>
+            <text xml:lang="pt-BR"> Navegador Pessoal</text>
+            <text xml:lang="ro"> Browser personal</text>
+            <text xml:lang="ru"> Личный Браузер</text>
+            <text xml:lang="sv"> Personlig Webbläsare</text>
+            <text xml:lang="th"> เบราเซอร์ ส่วนตัว</text>
+            <text xml:lang="tr"> Kişisel Tarayıcı</text>
+            <text xml:lang="vi"> Trình duyệt cá nhân </text>
+            <text xml:lang="zh-CN"> 个人浏览器</text>
+            <text xml:lang="zh-TW"> 個人瀏覽器</text>
         </invoke-target-name>
+	    
         <icon>
             <image>ca_browser.png</image>
         </icon>
+	    
         <filter>
             <action>bb.action.OPEN</action>
             <mime-type>*</mime-type>
             <property var="uris" value="http:,https:,ftp:,rtsp:"/>
             <property var="perimeter" value="enterprise"/>
-        </filter>		
+        </filter>	
+	    
     </invoke-target>
 	<feature id="blackberry.io" required="true"/>
 	<feature id="blackberry.io.home" required="true"/>
 	<feature id="blackberry.io.file" required="true"/>
+	
 </qnx>
