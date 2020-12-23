@@ -1,3 +1,5 @@
+Oddity here is when the `video.currentSrc` proxy is opened from a bookmark and decoded into the new window on the users device. The activity *looks* like `sed`.
+
 ```
 Request URL:https://m.youtube.com/youtubei/v1/log_event?alt=json&key=AIzaSyAO_FJ2SlqU8Q4STEHLGCilw_Y9_11qcW8
 Request Method:POST
