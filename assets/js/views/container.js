@@ -1,21 +1,25 @@
-/* main view cached from hardcoded html skeleton, renders nested views */
 define(['backbone', 'views/view'], function (Backbone) {
 
-	const Container = Backbone.View.extend({
+	var Container = Backbone.View.extend({
 		
 		el: $("#main"),
 		
-		child: null,
-		
 		initialize: function () {
-			this.$header = this.$("header");
-			this.$article = this.$("article");
-			this.$footer = this.$("footer");
+			this.$developer = new DeveloperView();
+			this.$links = new LinksView();
+			this.$media = new MediaView();
+			this.$layout = new LayoutView();
+			this.listenTo(Bookmarklets, 'reset', this.refresh);
+			this.listenTo(Bookmarklets, 'all', _.debounce(this.render, 0));
 		},
-
-		render: function () {
-			this.$article.html(this.child.$el);
-			return this;
+		
+		// render lists from the wrapping instance of this constructor
+		render : function(){
+		
+		},
+		
+		refresh : function(){
+		
 		}
 
 	});
