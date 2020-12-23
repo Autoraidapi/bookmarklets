@@ -1,8 +1,13 @@
 define(['backbone'], function (Backbone) {
 
-    const View = Backbone.View.extend({
+    var View = Backbone.View.extend({
         
-        template : _.template('<%- title %>'),
+        tagName : 'li',
+        className : 'list-group-item',
+        // todo : targeting system for scope of the javascript uri
+        template : _.template('\
+            <a href="javascript:<%= obj.uri %>" title="<%= obj.title %>"><%= obj.title %></a>\
+        '),
         
         initialize: function () {
             this.listenTo(this.model, 'change', this.render);
@@ -14,6 +19,7 @@ define(['backbone'], function (Backbone) {
             this.$el.html(this.template(this.model.toJSON()));
             return this;
         }
+        
     });
 
     return View;
