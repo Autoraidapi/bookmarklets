@@ -1,16 +1,9 @@
-define(['backbone','collections/bookmarks', 'views/container'], function(Backbone, Bookmarks, Container) {
-    
-    const Router = Backbone.Router.extend({      
-        
+define(['backbone'], function(Backbone) {
+    var Router = Backbone.Router.extend({      
+        preintialize : function(){},
         initialize : function(){
-
-            this.bookmarks = new Bookmarks();
-
             Backbone.history.start();
         }
-
     });
-
     return Router;
-
 });
