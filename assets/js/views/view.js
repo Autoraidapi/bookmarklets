@@ -4,15 +4,17 @@ define(['backbone'], function (Backbone) {
         
         tagName : 'li',
         className : 'list-group-item',
-        // todo : targeting system for scope of the javascript uri
+        
         template : _.template('\
-            <a href="javascript:<%= obj.uri %>" title="<%= obj.title %>"><%= obj.title %></a>\
+            <% _.each(obj, function(x,index,obj){ %>\
+                <a href="javascript:<%= x.uri %>" title="<%= x.title %>"><%= x.title %></a>\
+            <% }); %>\
         '),
         
         initialize: function () {
             this.listenTo(this.model, 'change', this.render);
             this.listenTo(this.model, 'destroy', this.remove);
-            this.render()
+            this.render();
         },
 
         render: function () {
