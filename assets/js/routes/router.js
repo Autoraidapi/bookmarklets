@@ -1,15 +1,20 @@
 define(['backbone'], function(Backbone) {
-
-    var Router = Backbone.Router.extend({      
-
-        preintialize : function(){
-            
-        },
+    
+    var Router = Backbone.Router.extend({ 
         
-        initialize : function(){
-            Backbone.history.start();
+        preinitialize : function(){},
+    		
+        routes : {        
+            'find(/:group)(/:id)' : 'find'          
+        },
+		
+        initialize : function(){}, 
+        
+        find : function(group, id){
+        
         }
-
+	 		
     });
+    
     return Router;
 });
