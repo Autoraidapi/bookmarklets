@@ -5,7 +5,7 @@ define(['backbone'],function(Backbone){
             return {
                 title: '',
                 uri: '',
-                order : Bookmarklets.next(),
+                order : app.collection.nextOrder(),
                 permalink : '',
                 description: ''   
             }            

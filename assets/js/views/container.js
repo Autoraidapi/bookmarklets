@@ -1,37 +1,26 @@
 define(['backbone', 'views/view'], function (Backbone, View) {
-	
-	var Header = Backbone.View.extend({
-		events : {
-			'click .btn' : 'handle'
-		},
-		handle : function(event){
-			
-		}
-	});
-	
+		
 	var Container = Backbone.View.extend({
 		
 		el: $(document.documentElement),
 		
 		initialize: function () {
-			
-			this.Header = new Header();
-			
-			this.Developer = new View({ });
-			this.Links = new View();
-			this.Media = new View();
-			this.Layout = new View();
-			
-			this.listenTo(Bookmarklets, 'reset', this.refresh);
-			this.listenTo(Bookmarklets, 'all', _.debounce(this.render, 0));
+
+			this.listenTo(this.collection, 'add', this.addOne);
+			this.listenTo(this.collection, 'reset', this.addAll);
+			this.listenTo(this.collection, 'all', _.debounce(this.render, 0));
 		},
 		
 		render : function(){
 			return this;
 		},
-		
-		refresh : function(){
-			
+		addOne : function(model){
+			var view = new View({model:model});
+			// render single item
+		},
+		addAll : function(){
+			// render all items 
+			this.collection.each(this.addOne, this);
 		}
 
 	});

@@ -6,7 +6,7 @@ define([
     'use strict';
     function Main(){
         this.collection = new Collection();
-        this.container = new Container();
+        this.container = new Container({ collection : this.collection });
         this.router = new Router();
     };
     return Main;
