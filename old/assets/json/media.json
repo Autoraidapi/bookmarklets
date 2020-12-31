@@ -1,5 +1,22 @@
-[{
-   "title": "Open Media",
-   "uri": "javascript:(function(xs){for(var i=0;i<xs.length;++i){if(xs[i].currentSrc){return window.open(xs[i].currentSrc);}}})(document.querySelectorAll('audio,video'));",
-   "description": "Open video in a new window so it can play minimized."
-}]
+[
+   {
+     "title": "Open Media",
+     "uri": "javascript:(function(xs){for(var i=0;i<xs.length;++i){if(xs[i].currentSrc){return window.open(xs[i].currentSrc);}}})(document.querySelectorAll('audio,video'));",
+     "description": "Open video in a new window so it can play minimized.",
+     "source": "https://github.com/Autoraidapi/bookmarklets/blob/cf14667ed61e3c2da0ccf76ae3b3ead4b179fbd9/scripts/media/open-media.js#L1",
+     "date": 1604807099286,
+     "time": "19:44:59:286",
+     "uid": "784e77ed-5112-2d80-f763-89e0dfc76122",
+     "id": 1
+   },
+   {
+     "title": "Linked Images",
+     "uri": "javascript:(function%20()%7Bfunction%20I(u)%7Bvar%20t%3Du.split('.')%2Ce%3Dt%5Bt.length-1%5D.toLowerCase()%3Breturn%20%7Bgif%3A1%2Cjpg%3A1%2Cjpeg%3A1%2Cpng%3A1%2Cmng%3A1%2Csvg%3A1%7D%5Be%5D%7Dfunction%20hE(s)%7Breturn%20s.replace(%2F%26%2Fg%2C'%26').replace(%2F%3E%2Fg%2C'%3E').replace(%2F%3C%2Fg%2C'%3C').replace(%2F%22%2Fg%2C'%5C%22')%3B%7Dvar%20q%2Ch%2Ci%2Cz%3Dopen().document%3Bz.write('%3Cp%3EImages%20linked%20to%20by%20'%2BhE(location.href)%2B'%3A%3C%2Fp%3E%3Chr%3E')%3Bfor(i%3D0%3Bq%3Ddocument.links%5Bi%5D%3B%2B%2Bi)%7Bh%3Dq.href%3Bif(h%26%26I(h))z.write('%3Cp%3E'%2Bq.innerHTML%2B'%20('%2BhE(h)%2B')%3Cbr%3E%3Cimg%20src%3D%22'%2BhE(h)%2B'%22%3E')%3B%7Dz.close()%3B%7D)()",
+     "description": "Lookup images on the current page. Open a new tab, write new image elements with sources from page this code ran on.",
+     "source": "https://github.com/Autoraidapi/bookmarklets/blob/cf14667ed61e3c2da0ccf76ae3b3ead4b179fbd9/scripts/media/linked-images.js#L1",
+     "date": 1604807109358,
+     "time": "19:45:09:358",
+     "uid": "009067a5-fcab-0bdb-4d80-cba27e1d24ee",
+     "id": 2
+   }
+ ]

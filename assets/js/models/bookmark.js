@@ -1,15 +1,14 @@
 define(['backbone'],function(Backbone){
-
+    
     var Bookmark = Backbone.Model.extend({                
         defaults: function(){
             return {
-                order : Bookmarklets.next(),
                 title: '',
                 uri: '',
+                order : Bookmarklets.next(),
                 permalink : '',
-                description: ''                
-            }
-            
+                description: ''   
+            }            
         }
     });
 

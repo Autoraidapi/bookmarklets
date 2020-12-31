@@ -1,16 +1,14 @@
-define(['backbone', 'views/view'], function (Backbone) {
+define(['backbone', 'views/view'], function (Backbone, Bookmark) {
 
 	var Container = Backbone.View.extend({
 		
-		el: $("#main"),
-		
+		el: $(document.documentElement),
+
 		initialize: function () {
-			this.$developer = new DeveloperView();
-			this.$links = new LinksView();
-			this.$media = new MediaView();
-			this.$layout = new LayoutView();
-			this.listenTo(Bookmarklets, 'reset', this.refresh);
-			this.listenTo(Bookmarklets, 'all', _.debounce(this.render, 0));
+			this.$article = this.$('article');
+			this.listenTo(this.collection, 'add', this.addOne);
+			this.listenTo(this.collection, 'reset', this.addAll);
+			this.listenTo(this.collection, 'all', _.debounce(this.render, 0));
 		},
 		
 		// render lists from the wrapping instance of this constructor
@@ -20,7 +18,25 @@ define(['backbone', 'views/view'], function (Backbone) {
 		
 		refresh : function(){
 		
-		}
+		},
+
+		addOne : function(model){
+			var view = new Bookmark({model:model});
+			this.$article.append(view.render().el);
+		},
+
+		addAll : function(){
+			this.$article.html('');
+			this.collection.each(this.addOne, this);
+		},
+		passAttributes : function(){
+			return {
+				order : this.collection.nextOrder()
+			}
+		},
+		create: function () {
+			this.collection.create(this.passAttributes());
+		}		
 
 	});
 

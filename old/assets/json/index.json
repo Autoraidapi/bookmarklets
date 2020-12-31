@@ -1,4 +1,5 @@
-[{
+[
+    {
         "title": "developer",
         "uri": "assets/html/developer.html",
         "description": "Bookmarks for debugging and testing code of webpages"
@@ -13,6 +14,11 @@
         "uri": "assets/html/links.html",
         "description": ""
     },
+    {
+        "title": "bibsonomy",
+        "uri": "assets/html/bibsonomy.html",
+        "description": "Bibsonomy"
+    },    
     {
         "title": "media",
         "uri": "assets/html/media.html",
