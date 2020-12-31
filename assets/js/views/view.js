@@ -14,7 +14,8 @@ define(['backbone'], function (Backbone) {
         initialize: function () {
             this.listenTo(this.model, 'change', this.render);
             this.listenTo(this.model, 'destroy', this.remove);
-            this.render();
+            // the render is called from container
+            // this.render();
         },
 
         render: function () {
