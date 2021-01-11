@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+	<a href="https://autoraidapi.github.io/Bookmarklets/">Main Page</a>
+	<h1>Bookmarklets</h1>
+
+<div id="index">
+	<h3>Site search</h3>
+	<form method="get" action="/tutorials/">
+		<p>
+			<input type="text" name="searchstring" value="" class="searchbybut">
+			<input type="submit" value="Search" class="searchbut">
+			<input type="hidden" name="searchIn[jslibs]" value="1">
+		</p>
+	</form>
+</div>
+
+<div id="content">
+
+
+<h2>Bookmarklets</h2>
+<p>These mini-JavaScripts are intended to be designers' tools only, and would serve little purpose as part of a page.
+Each one is custom written for friends or readers.</p>
+<p>Drag these bookmarklets to your bookmarks bar (or add the links to your bookmarks) and click them to use them.</p>
+<h2>Images</h2>
+<ul>
+<li>
+<a href="javascript:for(var imCt=0;document.images[imCt];imCt++){void(document.images[imCt].onclick=function () {if(typeof(window.brbanta=prompt('Image HTML:\n(You can also change the HTML here and click OK to replace the original)',this.outerHTML))==typeof('boo')){this.outerHTML=brbanta;}});}">Image HTML</a>:
+Shows the HTML for images and allows you to edit it (IE and Opera only) - [Instructions: open the page, click the bookmarklet, click on an image to see its HTML. To edit an image again after you have edited it once, click the bookmarklet again]
+<li>
+<a href="javascript:for(var imCt=0;document.images[imCt];imCt++){void(document.images[imCt].onclick=function () {if(this.alt){if((window.brbanta=prompt('Image ALT text:\n(Click OK to insert this text before the image)',this.alt))&amp;&amp;this.parentNode){this.parentNode.insertBefore(document.createTextNode(' '+brbanta),this);}}else{alert('There is no ALT text for this image');}});}">Image ALT</a>:
+Shows the ALT text for images (all browsers <a href="#lyr">*</a>) - [Instructions: open the page, click the bookmarklet, click on an image to see its ALT text]
+<li>
+<a href="javascript:for(var imCt=0;document.images[imCt];imCt++){void(document.images[imCt].onclick=function () {var inStr=this.src.replace(/.*\/([^\/]*)/g,'$1').replace(/\.[^\.\/]*$/g,'').replace(/[^a-z0-9]/gi,' ');for(var lastChr=' ',outStr='',oI=0,theChr;theChr=inStr.charAt(oI);oI++){outStr+=lastChr.match(/\s/)?theChr.toUpperCase():theChr.toLowerCase();lastChr=theChr;}if((window.brbanta=prompt('Human format SRC:\n(Click OK to insert this text before the image)',outStr))&amp;&amp;this.parentNode){this.parentNode.insertBefore(document.createTextNode(' '+brbanta),this);}});}">Human SRC</a>:
+Shows the SRC for images, formatted in title case (all browsers <a href="#lyr">*</a>) - [Instructions: open the page, click the bookmarklet, click on an image to see its formatted SRC]
+<li>
+<a href="javascript:for(var imCt=0;document.images[imCt];imCt++){if(document.images[imCt].alt){void(document.images[imCt].title=document.images[imCt].alt);}}">ALT title</a>:
+converts all available image alt attibutes into titles (all browsers <a href="#lyr">*</a>)
+<li>
+<a href="javascript:void(window.imageCacheMWJ=[]);for(var x=0,y=0;y=document.images[x];x++){void(imageCacheMWJ[x]=new Image());void(imageCacheMWJ[x].src=y.src);}">Resume images</a>:
+If the images on a page stop loading (for example, because you clicked a link) this can usually cause image loading to resume (Opera)
+<li>
+<a href="javascript:var frRlImg=function (oFrame) {if(!oFrame){oFrame=window;}for(var x=0,y,z=(new Date()).getTime();y=oFrame.document.images[x];x++){y.src=y.src+((y.src.indexOf('?')+1)?'&amp;':'?')+z;}for(var x=0,y=oFrame.frames;y[x];x++){frRlImg(y[x]);}};frRlImg();">Reload imgs</a>:
+Attempts to reload all images on the page (all browsers <a href="#lyr">*</a>) - [Note: reloading the page may revert to the original images!]
+<li>
+<a href="javascript:var frRlImg=function (oFrame) {if(!oFrame){oFrame=window;}for(var x=0,y;y=oFrame.document.images[x];x++){y.onclick=function () {var x = document.createElement('iframe');x.setAttribute('height',1);x.setAttribute('width',1);x.style.position='absolute';x.style.top='0px';x.style.left='0px';x.style.visibility='hidden';document.body.appendChild(x);x.setAttribute('src',this.src);window.frames[window.frames.length-1].window.location.reload();};}for(var x=0,y=oFrame.frames;y[x];x++){frRlImg(y[x]);}};frRlImg();">Reload img</a>:
+Attempts to reload single images on the page (Opera) - [Instructions: open the page, click the bookmarklet, click on an image to reload it - Note: you may need to focus another page then return to the current page for the changes to show]
+</ul>
+<h2>Links</h2>
+<ul>
+<li>
+<a href="javascript:for(var imCt=0;document.links[imCt];imCt++){void(document.links[imCt].onclick=function () {return(typeof(prompt('Link HTML:\n(Click OK to follow the link)',this.outerHTML))==typeof('boo'));});}">Link HTML</a>:
+Shows the HTML for links (IE and Opera only) - [Instructions: open the page, click the bookmarklet, click on a link to see its HTML]
+<li>
+<a href="javascript:for(var imCt=0;document.links[imCt];imCt++){void(document.links[imCt].onclick=function () {var inStr=this.href.replace(/.*\/([^\/]*)/g,'$1').replace(/\.[^\.\/]*$/g,'').replace(/[^a-z0-9]/gi,' ');for(var lastChr=' ',outStr='',oI=0,theChr;theChr=inStr.charAt(oI);oI++){outStr+=lastChr.match(/\s/)?theChr.toUpperCase():theChr.toLowerCase();lastChr=theChr;}return(typeof(prompt('Human format HREF:\n(Click OK to follow the link)',outStr))==typeof('boo'));});}">Human HREF</a>:
+Shows the HREF for links, formatted in title case (all browsers <a href="#lyr">*</a>) - [Instructions: open the page, click the bookmarklet, click on a link to see its formatted HREF]
+<li>
+<a href="javascript:var frStopLnk=function (oFrame) {if(!oFrame){oFrame=window;}for(var i=0,y=[oFrame.document.links,oFrame.document.forms,oFrame.document.getElementsByTagName('base')];y[i];i++){for(var x=0;y[i][x];x++){if(y[i][x].target&amp;&amp;y[i][x].target.match(/^_?(blank|new)$/)){y[i][x].target='_self';}}}for(var x=0,y=oFrame.frames;y[x];x++){frStopLnk(y[x]);}};frStopLnk();">No blank</a>:
+Prevents links and forms from using target=&quot;_blank&quot; (all browsers <a href="#lyr">*</a>) - [Instructions: open the page, click the bookmarklet, no links or forms will use target=&quot;_blank&quot;]
+</ul>
+<h2>Forms</h2>
+<ul>
+<li>
+<a href="javascript:for(var x=0,y=0;y=document.forms[x];x++){for(var i=0;y.elements[i];i++){if(y.elements[i].type=='checkbox'){void(y.elements[i].checked=true);}}}">Tick all</a>:
+Ticks all checkboxes on the page (all browsers <a href="#lyr">*</a>)
+<li>
+<a href="javascript:for(var x=0,y=0;y=document.forms[x];x++){for(var i=0;y.elements[i];i++){if(y.elements[i].type=='checkbox'){void(y.elements[i].checked=false);}}}">Untick all</a>:
+Unticks all checkboxes on the page (all browsers <a href="#lyr">*</a>)
+<li>
+<a href="javascript:void(window.isAlTicked=!window.isAlTicked);for(var x=0,y=0;y=document.forms[x];x++){for(var i=0;y.elements[i];i++){if(y.elements[i].type=='checkbox'){void(y.elements[i].checked=window.isAlTicked);}}}">(Un)Tick all</a>:
+Alternates between tick-all and untick-all (all browsers <a href="#lyr">*</a>)
+<li>
+<a href="javascript:for(var f=0,formRef;formRef=document.forms[f];f++){for(var x=0,oStr='',y=false,t;formRef.elements[x];x++){if(formRef.elements[x].type){var oE=formRef.elements[x];var oT=oE.type.toLowerCase();if(oT=='text'||oT=='textarea'||oT=='password'){void(oStr+=(y?',':'')+oE.value.replace(/%/g,'%p').replace(/,/g,'%c'));void(y=true);}else if(oT=='radio'||oT=='checkbox'){void(oStr+=(y?',':'')+(oE.checked?'1':''));void(y=true);}else if(oT=='select-one'){void(oStr+=(y?',':'')+oE.selectedIndex);void(y=true);}else if(oT=='select-multiple'){for(var oO=oE.options,i=0;oO[i];i++){void(oStr+=(y?',':'')+(oO[i].selected?'1':''));void(y=true);}}}}if(t=prompt('Save form '+(formRef.name?formRef.name:f)+' as: ',formRef.name?formRef.name:(formRef.action?(f+'_'+formRef.action):('form'+f)))){void(document.cookie=escape(t)+'='+escape(oStr)+';expires='+(new Date((new Date()).getTime()+31536000000)).toGMTString()+';path='+location.pathname);}}">Save forms</a>
+and
+<a href="javascript:var cookieJar=document.cookie.split('; ');for(var x=0,cookies=[],nmStr='';x<cookieJar.length;x++){var oneCookie=cookieJar[x].split('=');void(cookies[unescape(oneCookie[0])]=unescape(oneCookie[1]));void(nmStr+=(nmStr?', ':' ')+unescape(oneCookie[0]));}for(var f=0,formRef,oStr;formRef=document.forms[f];f++){while((oStr=prompt('Please enter the name you used to save form '+(formRef.name?formRef.name:f)+';\nAvailable names are:'+nmStr,formRef.name?formRef.name:(formRef.action?(f+'_'+formRef.action):('form'+f))))&amp;&amp;typeof(oStr=cookies[oStr])=='undefined'){}if(oStr){void(oStr=oStr.split(','));for(var x=0,y=0;formRef.elements[x];x++){if(formRef.elements[x].type){var oE=formRef.elements[x];var oT=oE.type.toLowerCase();if(oT=='text'||oT=='textarea'||oT=='password'){void(oE.value=oStr[y].replace(/%c/g,',').replace(/%p/g,'%'));void(y++);}else if(oT=='radio'||oT=='checkbox'){void(oE.checked=oStr[y]?true:false);void(y++);}else if(oT=='select-one'){void(oE.selectedIndex=parseInt(oStr[y]));void(y++);}else if(oT=='select-multiple'){for(var oO=oE.options,i=0;oO[i];i++){void(oO[i].selected=oStr[y]?true:false);void(y++);}}}}}}">Recover forms</a>:
+Saves and recovers the contents of forms (max ~3KB) using cookies (all browsers <a href="#lyr">*</a>)
+<li>
+<a href="javascript:var oOut,frameSearch=function (oFrame) {if(!oFrame){oFrame=window;}for(var oPass='',i=0,j=oFrame.document.forms;j[i];i++){for(var x=0,y;y=j[i].elements[x];x++){if(y.type=='password'&amp;&amp;y.value){oPass+='\n'+y.value;}}}for(var i=0;oFrame.frames[i];i++){try{oPass+=frameSearch(oFrame.frames[i]);}catch(e){}}return oPass;};void(oOut=frameSearch());if(oOut){alert('The following passwords were found:\n'+oOut);}else{alert('There are no passwords in forms on this page.');}">Passwords</a>:
+Displays a list of all passwords in forms on the current page - for use with recovering passwords (Opera 7+, IE 5+, Mozilla/Netscape 6+, Safari/Chrome) - [Instructions: Open the page. If needed, make your password manager fill in the form (with Opera, click the &quot;Log In&quot; button). You may need to click the 'stop' button immediately to stop the next page loading. Click the bookmarklet. The passwords should be displayed.]
+</ul>
+<h2 id="foo">Styles</h2>
+<ul>
+<li>
+<a href="javascript:var MTl=document.getElementsByTagName('link');for(var MTi=0,MTr,MTa=[];MTl[MTi];MTi++){if(MTr=MTl[MTi].getAttribute('rel')){if(MTr.toLowerCase().indexOf('stylesheet')+1){MTa[MTa.length]=MTl[MTi];}}}if(!MTa.length){alert('This page does not use any linked stylesheets');}else if(MTa.length==1){void(window.open(MTa[0].href));}else{var MTw=window.open('');MTw.document.open();MTw.document.write('&lt;html&gt;&lt;head&gt;&lt;title&gt;Stylesheets for '+document.title+'&lt;\/title&gt;&lt;\/head&gt;&lt;body&gt;&lt;h1&gt;Stylesheets for '+document.title+'&lt;\/h1&gt;&lt;p&gt;');for(MTi=0;MTa[MTi];MTi++){MTw.document.write('&lt;a href=\''+MTa[MTi].href+'\'&gt;'+(MTa[MTi].title?MTa[MTi].title:MTa[MTi].getAttribute('href').replace(/^data:.*$/i,'data:URI').replace(/\/$/,'').replace(/^.*\//,''))+'&lt;\/a&gt;&lt;br&gt;');}MTw.document.write('&lt;\/p&gt;&lt;\/body&gt;&lt;\/html&gt;');MTw.document.close();}">Stylesheets</a>:
+Opens a window with links to every stylesheet used on the page - if there is only one stylesheet, it will be opened immediately (Opera 7+, IE 5+, Mozilla/Netscape 6+, Safari/Chrome)
+<li>
+<a href="javascript:(function () {
+
+function describeSheet(oDoc,oSheet) {
+	var oLi = oDoc.createElement('li');
+	try { void(oSheet.href); } catch(e) {
+		oLi.appendChild(oDoc.createTextNode('Stylesheet with access forbidden'));
+		return oLi;
+	}
+	if( oSheet.href ) {
+		oLi.appendChild(oDoc.createTextNode('Stylesheet '));
+		var oHref = oDoc.createElement('a');
+		oHref.setAttribute('href',oSheet.href);
+		var oShortHref = oSheet.title ? oSheet.title : ( ( oSheet.href.indexOf('data:') == 0 ) ? oSheet.href : oSheet.href.replace(/^.*\//,'').replace(/\.[^\.]*$/,'') );
+		oShortHref = oShortHref ? oShortHref : 'untitled';
+		oShortHref = ( oShortHref.length &lt; 40 ) ? oShortHref : ( oShortHref.substring(0,18) + '...' + oShortHref.substring(oShortHref.length-19) );
+		oHref.appendChild(oDoc.createTextNode(oShortHref));
+		oLi.appendChild(oHref);
+	} else {
+		oLi.appendChild(oDoc.createTextNode('Inline stylesheet'));
+	}
+	oLi.appendChild(oDoc.createTextNode(' ('+( ( oSheet.ownerNode &amp;&amp; oSheet.ownerNode.hasAttribute('rel') &amp;&amp; oSheet.ownerNode.getAttribute('rel').indexOf('alternate') + 1 ) ? 'alternate - ' : '' )+(oSheet.disabled?'disabled':'enabled')+') '));
+	oLi.appendChild(getMediaList(oDoc,oSheet));
+	try { oLi.appendChild(getRulesInBlock(oDoc,oSheet,true)); } catch(f) {
+		oLi.appendChild(oDoc.createTextNode(' (access forbidden)'));
+	}
+	return oLi;
+}
+function locateURLs(oDoc,oBase1,oBase2,oStr) {
+	oBase1 = oBase1 ? oBase1 : oBase2;
+	try {
+		var oSp, oDF = oDoc.createDocumentFragment(), startQ, capURL, oLnk;
+		var oLn = document.createElementNS('http://www.w3.org/1999/xhtml','a');
+		oLn.setAttributeNS('http://www.w3.org/XML/1998/namespace','base',oBase1);
+		while( sP = oStr.match(/(url\(\s*)((\x22)([^\x22]*)\x22|(\')([^\']*)\'|([^\(\)\x22\']([^\(\)]*[^\(\)\s])?))(\s*\))/i) ) {
+			startQ = sP[3] ? sP[3] : ( sP[5] ? sP[5] : '' );
+			capURL = sP[4] ? sP[4] : ( sP[6] ? sP[6] : ( sP[7] ? sP[7] : '' ) );
+			oDF.appendChild(oDoc.createTextNode(RegExp.leftContext+sP[1]+startQ));
+			oLn.setAttribute('href',capURL);
+			oLnk = oDoc.createElement('a');
+			oLnk.setAttribute('href',oLn.href);
+			oLnk.appendChild(oDoc.createTextNode(capURL));
+			oDF.appendChild(oLnk);
+			oDF.appendChild(oDoc.createTextNode(startQ+sP[9]));
+			oStr = RegExp.rightContext;
+		}
+		if( oStr ) {
+			oDF.appendChild(oDoc.createTextNode(oStr));
+		}
+	} catch(rS) { return oDoc.createTextNode(oStr); }
+	return oDF;
+}
+var canHaveURL = '|background|background-image|content|list-style|list-style-image|cursor|src|cue|cue-before|cue-after|border-image|';
+function getStylesInRule(oDoc,oRule) {
+	var oDL = oDoc.createElement('dl');
+	for( var i = 0, j, k; i &lt; oRule.style.length; i++ ) {
+		j = oRule.style.item(i);
+		var oDt = oDoc.createElement('dt');
+		var oDd = oDoc.createElement('dd');
+		oDL.appendChild(oDt);
+		oDL.appendChild(oDd);
+		k = oRule.style.getPropertyPriority(j);
+		oDt.appendChild(oDoc.createTextNode(j+':'));
+		if( canHaveURL.indexOf('|'+j+'|') + 1 && oRule.style.getPropertyValue(j).match(/url\(/i) ) {
+			oDd.appendChild(locateURLs(oDoc,oRule.parentStyleSheet.href,location.href,oRule.style.getPropertyValue(j)));
+			oDd.appendChild(oDoc.createTextNode((k?(' !'+k):'')+';'));
+		} else {
+			oDd.appendChild(oDoc.createTextNode(oRule.style.getPropertyValue(j)+(k?(' !'+k):'')+';'));
+		}
+	}
+	return oDL;
+}
+function getMediaList(oDoc,oRule) {
+	if( !oRule.media.length ) { return oDoc.createTextNode(''); }
+	var oUL = oDoc.createElement('ul');
+	oUL.className = 'medlist';
+	for( var i = 0; i &lt; oRule.media.length; i++ ) {
+		var oLi = oDoc.createElement('li');
+		oUL.appendChild(oLi);
+		oLi.appendChild(oDoc.createTextNode(oRule.media.item(i)));
+	}
+	return oUL;
+}
+function getRulesInBlock(oDoc,oBlock,isRoot) {
+	var oUL = oDoc.createElement('ul');
+	if( isRoot ) { oUL.className = 'fileroot'; }
+	for( var n = 0, m; n &lt; oBlock.cssRules.length; n++ ) {
+		m = oBlock.cssRules.item(n);
+		var oLi = oDoc.createElement('li');
+		oUL.appendChild(oLi);
+		if( m.type == 1 || m.type == 5 || m.type == 6 ) {
+			oLi.appendChild(oDoc.createTextNode(m.selectorText+' { '));
+			oLi.appendChild(getStylesInRule(oDoc,m));
+			oLi.appendChild(oDoc.createTextNode('}'));
+		} else if( m.type == 2 ) {
+			oLi.appendChild(oDoc.createTextNode('@charset \''+m.encoding+'\';'));
+		} else if( m.type == 4 ) {
+			oLi.appendChild(oDoc.createTextNode('@media '));
+			oLi.appendChild(getMediaList(oDoc,m));
+			oLi.appendChild(oDoc.createTextNode(' { '));
+			oLi.appendChild(getRulesInBlock(oDoc,m));
+			oLi.appendChild(oDoc.createTextNode('}'));
+		} else if( m.type == 3 ) {
+			oLi.appendChild(oDoc.createTextNode('@import url('));
+			var oHref = oDoc.createElement('a');
+			oHref.setAttribute('href',m.styleSheet.href);
+			oHref.appendChild(document.createTextNode(m.href));
+			oLi.appendChild(oHref);
+			oLi.appendChild(oDoc.createTextNode(');'));
+			oLi.appendChild(getRulesInBlock(oDoc,m.styleSheet,true));
+		} else if( !m.type ) {
+			oLi.appendChild(oDoc.createTextNode(m.cssText?m.cssText:'@unknown rule;'));
+		}
+	}
+	return oUL;
+}
+function listSheets(oDoc,oDocument) {
+	var oUL = oDoc.createElement('ol');
+	oUL.className = 'sheetlist';
+	for( var i = 0, j; i &lt; oDocument.styleSheets.length; i++ ) {
+		oUL.appendChild(describeSheet(oDoc,oDocument.styleSheets.item(i)));
+	}
+	return oUL;
+}
+function getAllFrames(oWin,oDest,oPar) {
+	var oA, oH = oDest.createElement('h2'), li, ul = oDest.createElement('ol');
+	oH.appendChild(oDest.createTextNode('Frames'));
+	oPar.appendChild(oH);
+	oPar.appendChild(ul);
+	for( var i = 0, j; i &lt; oWin.frames.length; i++ ) {
+		li = oDest.createElement('li');
+		oH = oDest.createElement('h3');
+		li.appendChild(oH);
+		ul.appendChild(li);
+		try {
+			j = oWin.frames[i];
+			if( j.location ) {
+				oA = oDest.createElement('a');
+				oA.setAttribute('href',j.location.href);
+				oA.appendChild(oDest.createTextNode(j.document.title?j.document.title:j.location.href));
+				oH.appendChild(oA);
+			} else {
+				oH.appendChild(oDest.createTextNode('Page with no location object'));
+			}
+			if( j.document ) {
+				li.appendChild(listSheets(oDest,j.document));
+				if( j.frames.length ) {
+					getAllFrames(j,oDest,li);
+				}
+			}
+		} catch(e) {
+			oH.appendChild(oDest.createTextNode('Frame from denied domain'));
+		}
+	}
+}
+
+	var foo = window.open('','_blank');
+	foo.document.write('&lt;html id=\'css-dom-console\'&gt;&lt;title&gt;&lt;\/title&gt;&lt;style type=\'text\/css\'&gt;\n'+
+	'html, body { background: #ddd; color: #000; }\n'+
+	'a { color: #00f; }\n'+
+	'a:visited { color: #909; }\n'+
+	'ol, ul { background: #bbb; list-style-position: inside; padding: 1px; margin: 0.5em 2px; }\n'+
+	'ul, ol.sheetlist { background: #88a; }\n'+
+	'ul { background: #aae; display: block; list-style-type: none; }\n'+
+	'ul.fileroot { background: #797; }\n'+
+	'ul.medlist, ul.medlist li { background: transparent; display: inline; margin: 0; padding: 0; }\n'+
+	'ul.medlist li::before { content: \', \'; }\n'+
+	'ul.medlist li:first-child::before { content: \'\'; }\n'+
+	'li { background: #ddd; padding: 1px; margin: 2px 2px 2px 1em; }\n'+
+	'dl { padding: 0; margin: 0; }\n'+
+	( ( navigator.product != 'Gecko' ) ? 'dt, dd { display: inline; white-space: pre; margin: 0; padding: 0 0 0 1em; }\n' : '' )+
+	'dd { padding-left: 0.3em; }\n'+
+	'dd::after { display: block; height: 1px; content: \'\'; }\n'+
+	'\n&lt;\/style&gt;&lt;body&gt;&lt;\/body&gt;&lt;\/html&gt;');
+	foo.document.close();
+	var oH = foo.document.createElement('h1');
+	oA = foo.document.createElement('a');
+	oA.setAttribute('href',location.href);
+	oA.appendChild(foo.document.createTextNode(foo.document.title=('Stylesheets for: '+(document.title?document.title:location.href))));
+	oH.appendChild(oA);
+	foo.document.body.appendChild(oH);
+	foo.document.body.appendChild(listSheets(foo.document,document));
+	if( window.frames.length ) { getAllFrames(window,foo.document,foo.document.body); }
+})();">CSSDOM</a>:
+Searches the page and all frames for inline, linked, and imported stylesheets, and displays their contents in a list, with links to all relevant files (Opera 9+, Mozilla)
+<li>
+<a href="javascript:if(!window.doneZoomNow){void(window.doneZoomNow=true);void(document.attachEvent('onkeypress',function () {var affectedElement=(document.compatMode=='CSS1Compat')?document.documentElement:document.body;if(window.event&amp;&amp;!event.srcElement.tagName.match(/^(input|select|button|textarea|a|anchor)$/i)){var keyUsed=String.fromCharCode(event.keyCode);var curNum=affectedElement.style.zoom?parseFloat(affectedElement.style.zoom):1;if(keyUsed=='+'&amp;&amp;curNum&lt;10){curNum+=0.1;if(curNum>10){curNum=10;}affectedElement.style.zoom=curNum;window.defaultStatus='Page zoom set to: '+Math.round(curNum*100)+'%';}else if(keyUsed=='-'&amp;&amp;curNum&gt;0.2){curNum-=0.1;if(curNum&lt;0.2){curNum=0.2;}affectedElement.style.zoom=curNum;window.defaultStatus='Page zoom set to: '+Math.round(curNum*100)+'%';}else if(keyUsed=='*'){affectedElement.style.zoom=1;window.defaultStatus='Page zoom set to: 100%';}}}));void(window.defaultStatus='Page zoom set to: 100%');}" onclick="if(this.blur){this.blur();}">KeyZoom</a>:
+Allows page text and images to be zoomed using + - and * keys (IE only) - [Instructions: open the page, click the bookmarklet, then you can press + to zoom in, - to zoom out and * to reset to no zoom] - warning: IE's zoom algorithm is not perfect - parts of the page sometimes disappear or forms stop working.<br>
+Add this link to your page to make it more accessible - even zooms pixel sized fonts.
+</ul>
+<h2 id="bar">Misc</h2>
+<ul>
+<li>
+<a href="javascript:void(document.onmousemove=function (e) {if(!e){e=window.event;}if(e){e=e.target?e.target:e.srcElement;}if(!e){return;}for(var oStr='';e&amp;&amp;e.nodeName!='#document';e=e.parentNode){if(e.nodeName!='#text'){for(var oCount=0,oOb=e.previousSibling;oOb;oOb=oOb.previousSibling){if(oOb.nodeType ==1&amp;&amp;oOb.nodeName==e.nodeName){oCount++;}}oStr=e.nodeName+(oCount?('#'+(oCount+1)):'')+(oStr?('/'+oStr):'');}}window.status=oStr;});">DOM path</a>:
+Uses the status bar to display the DOM path to the element under the mouse (Opera 7+, IE 5+, Mozilla/Netscape 6+, Safari/Chrome) - [Instructions: open the page, click the bookmarklet, move the mouse over the page to see the DOM path in the status bar - Note: some browsers have the status bar hidden by default]
+<li>
+<a href="javascript:for(var x=0,y=document.body.firstChild.childNodes,oStr='';y[x];x++){oStr+=y[x].nodeValue;}if(window.opera){document.open();}document.write(oStr);document.close();">Force HTML</a>:
+When pages are incorrectly served as text/plain when they should be text/html, Opera and Mozilla/Netscape 6+ will correctly render them as text. Use this bookmarklet to render them as HTML (Opera 7.5-, Mozilla/Netscape 6+)
+<li>
+<a href="javascript:var MTl=document.getElementsByTagName('script');for(var MTi=0,MTr,MTa=[];MTl[MTi];MTi++){if(MTr=MTl[MTi].getAttribute('src')){MTa[MTa.length]=MTl[MTi];}}if(!MTa.length){alert('This page does not use any external scripts');}else if(MTa.length==1){void(window.open(MTa[0].getAttribute('src')));}else{var MTw=window.open('');MTw.document.open();MTw.document.write('&lt;html&gt;&lt;head&gt;&lt;title&gt;External scripts for '+document.title+'&lt;\/title&gt;&lt;\/head&gt;&lt;body&gt;&lt;h1&gt;External scripts for '+document.title+'&lt;\/h1&gt;&lt;p&gt;');for(MTi=0;MTa[MTi];MTi++){MTw.document.write('&lt;a href=\''+MTa[MTi].getAttribute('src')+'\'&gt;'+(MTa[MTi].id?MTa[MTi].id:MTa[MTi].getAttribute('src').replace(/\/$/,'').replace(/^.*\//,''))+'&lt;\/a&gt;&lt;br&gt;');}MTw.document.write('&lt;\/p&gt;&lt;\/body&gt;&lt;\/html&gt;');MTw.document.close();}">Scripts</a>:
+Opens a window with links to every external script used on the page - if there is only one script, it will be opened immediately (Opera 7+, IE 5+, Mozilla/Netscape 6+, Safari/Chrome)
+<li>
+<a href="javascript:(function (){function getAllScripts(oDoc,oDest){if(!oDoc.scripts.length){return oDest.createTextNode('');}var damer,ul=oDest.createElement('ol');for(var i=0,j;j=oDoc.scripts[i];i++){var tx=oDest.createElement('textarea'),li=oDest.createElement('li');li.appendChild(tx);ul.appendChild(li);var oH=oDest.createElement('h4');if(j.hasAttribute('src')){var oA=oDest.createElement('a');oH.appendChild(oA);oA.appendChild(oDest.createTextNode(j.getAttribute('src')));oA.setAttribute('href',j.getAttribute('src'));}else{oH.appendChild(oDest.createTextNode('Inline script'));}li.appendChild(oH);tx.setAttribute('wrap','off');tx.setAttribute('rows','10');tx.setAttribute('cols','50');li.appendChild(tx);if(!j.text&amp;&amp;j.hasAttribute('src')){tx.value='\/\/No source code found\n\/\/Probably a script from another domain, but could just be an empty script';}else if(!j.text){tx.value='\/\/Empty script';}else{try{eval('damer = function () {'+j.text.replace(/[\r\n][\t ]*-{2}&gt;|&lt;!-{2}.*/g,'\n')+'\n}');tx.value='  '+damer.toString().replace(/^\s*function\s*\(\s*\)\s*\{\s*|\s*\}\s*$/g,'').replace(/<\/(script)>/ig,'<\\\/$1>');}catch(e){tx.value='\/\/Parsing failed\n\n'+j.text;}}}return ul;}function getAllFrames(oWin,oDest,oPar){if(!oWin.frames.length){return;}var oA,oH=oDest.createElement('h2'),li,ul=oDest.createElement('ol');oH.appendChild(oDest.createTextNode('Frames'));oPar.appendChild(oH);ul.className='framl';oPar.appendChild(ul);for(var i=0,j;i&lt;oWin.frames.length;i++) {li=oDest.createElement('li');oH=oDest.createElement('h3');li.appendChild(oH);ul.appendChild(li);try{j=oWin.frames[i];if(j.location){oA=oDest.createElement('a');oA.setAttribute('href',j.location.href);oA.appendChild(oDest.createTextNode(j.document.title?j.document.title:j.location.href));oH.appendChild(oA);}else{oH.appendChild(oDest.createTextNode('Page with no location object'));}if(j.document){li.appendChild(getAllScripts(j.document,oDest));getAllFrames(j,oDest,li);}}catch(e){oH.appendChild(oDest.createTextNode('Frame from denied domain'));}}}var foo=window.open('','_blank');foo.document.write('&lt;html&gt;&lt;title&gt;&lt;\/title&gt;&lt;style type=\'text/css\'&gt;\ntextarea { height: 10em; width: 100'+String.fromCharCode(37)+'; }\nhtml, body { background: #ddd; color: #000; }\nbody { width: 90'+String.fromCharCode(37)+'; }\na { color: #00f; }\na:visited { color: #909; }\nol { background: #bbb; list-style-position: inside; padding: 1px; margin: 0.5em 2px; }\nol.framl { background: #aae; }\nli { background: #ddd; padding: 1px; margin: 2px 2px 2px 1em; }\nli h2, li h3, li h4 { margin-top: 0; }\n'+'\n&lt;\/style&gt;&lt;body&gt;&lt;\/body&gt;');foo.document.close();var oH=foo.document.createElement('h1');oA=foo.document.createElement('a');oA.setAttribute('href',location.href);oA.appendChild(foo.document.createTextNode(foo.document.title=('Scripts for: '+(document.title?document.title:location.href))));oH.appendChild(oA);foo.document.body.appendChild(oH);foo.document.body.appendChild(getAllScripts(document,foo.document));getAllFrames(window,foo.document,foo.document.body);})();">JSTidy</a>:
+Searches the page and all frames for scripts, tidies their contents, and displays them in a list, with links to all relevant files (Opera 8-9.2x [also works in 9.5+ without tidying])
+<li>
+<a href="javascript:var theFunct=RadMenu.prototype.PopulateGroup.toString();void(theFunct=theFunct.replace(/(\w+\.\w+)\s*=\s*innerItems\[i\].getAttribute\(&quot;(\w+)&quot;\);/g,'$1 = innerItems[i].getAttribute(&quot;$2&quot;);if(!$1){$1=null;}').replace(/!= null/g,''));eval('RadMenu.prototype.PopulateGroup='+theFunct);var headerMenu=new RadMenu('headerMenu',false,true,false);void(headerMenu.Opacity=80);void(headerMenu.ShadowWidth=2);void(headerMenu.ShadowColor='#666666');void(headerMenu.Browser='Gecko');for(var x=0,y=document.getElementsByTagName('iframe');y[x];x++){void(y[x].style.visibility='hidden');}">GreenButton</a>:
+Makes the menus work on thegreenbutton.com (Opera 7+) - does not appear to be necessary any more, as the site has removed the menus - [Instructions: open the page, click the bookmarklet, the menus should work with a couple of minor rendering bugs - the 'In The Media' menu may not appear until you hold your mouse over it]
+<li>
+<a href="javascript:var x=document.getElementById('listOfHeaders');if(x){x.parentNode.removeChild(x);}for(var x=0,y=document.getElementsByTagName('*'),oStr='';y[x];x++){if(y[x].id&amp;&amp;y[x].tagName.match(/^h.$/i)){var saneStr=y[x].id.replace(/&amp;/,'&amp;amp;').replace(/&lt;/,'&amp;lt;').replace(/&gt;/,'&amp;gt;').replace(/&quot;/,'&amp;quot;');void(oStr+='&lt;li style=&quot;color:#557;margin-left:14px;padding-left:0px;height:110%;&quot;&gt;&lt;a href=&quot;#'+saneStr+'&quot; style=&quot;color:#447;text-decoration:underline;&quot;&gt;'+y[x].tagName+': '+saneStr+'&lt;\/a&gt;&lt;\/li&gt;');}}var oEl=document.createElement('div');void(oEl.id='listOfHeaders');if(window.ActiveXObject&amp;&amp;window.attachEvent){void(oEl.style.position='absolute');}else{void(oEl.style.position='fixed');}void(oEl.style.padding='2px');void(oEl.style.zIndex='100');void(oEl.style.top='0px');void(oEl.style.left='0px');void(oEl.style.border='3px solid #447');void(oEl.style.background='#fff');void(oEl.innerHTML='&lt;h3 style=&quot;margin:0px;padding:0px;color:#557;&quot;&gt;IDs found:&lt;\/h3&gt;&lt;ul style=&quot;color:#557;margin:0px;padding:0px;&quot;&gt;'+oStr+'&lt;\/ul&gt;&lt;p style=&quot;margin:0px;padding:0px;&quot;&gt;&lt;a href=&quot;javascript:var x=document.getElementById(\'listOfHeaders\');void(x.parentNode.removeChild(x));&quot; style=&quot;color:#447;text-decoration:underline;&quot;&gt;Hide&lt;\/a&gt;');void(document.body.appendChild(oEl));">List IDs</a>:
+Displays a list of all header elements with ID attributes on the page (Opera 7+, IE 5+, Mozilla/Netscape 6+, Safari/Chrome)
+<li>
+<a href="javascript:var oSrcWin=window.open('');oSrcWin.document.write('<pre>'+document.documentElement.outerHTML.replace(/&lt;/g,'&amp;lt;')+'</pre>');oSrcWin.document.close();oSrcWin.focus();">Source</a>:
+Attempts to show the source code of pages, even if they were created dynamically - Note, the browser may choose to reformat or rewrite parts of the source, and the doctype tag will be missing, so this is not as perfect as a real source view (IE and Opera only)
+<li>
+<a href="javascript:var theLocation='';if(!theLocation){alert('Bookmarklet not installed correctly.\n\nPlease follow the instructions given on the page.');}else{var newScript=document.createElement('script');newScript.setAttribute('src',theLocation);void(document.body.appendChild(newScript));var oWindMeUp = window.open('','synWin','resizable=1,status=0,location=0,toolbar=0,scrollbars=1,top=0,left=0,height='+(screen.height-59)+',width='+(screen.width-12));}">Highlight</a>:
+Attempts to syntax highlight JavaScript code for JavaScript files that you open (Opera 7.5+, Mozilla/Netscape 6+) -
+[Instructions: this one is a bit complicated. Firstly, download this zip file =&gt;
+<a href="tutorials/jsexamples/syntax/bookmarkletSyntax.zip">bookmarkletSyntax.zip</a> &lt;= and open
+it. Copy the file it contains to somewhere on your computer. Then use this form to select it:
+<form method="get" action="" onsubmit="return false;" style="display:inline;"><div style="display:inline;"><input type="file" onchange="
+var theLink = this.parentNode.parentNode.parentNode.getElementsByTagName('a')[0];
+if( !theLink.originalCode ) { theLink.originalCode = theLink.href; }
+theLink.href = theLink.originalCode.replace(/var theLocation='[^']*';/,'var theLocation=\'file://localhost/'+this.value.replace(/\\/g,'\/')+'\';');
+alert('The bookmarklet link has been updated. You can now use the bookmarklet.');
+" id="thefileinput"><script type="text/javascript">
+if( window.opera && document.evaluate ) {
+	document.getElementById('thefileinput').setAttribute('type','text');
+	document.write(' (write the file path like this: c:\\bookmarkletSyntax.js)');
+}
+</script></div></form>
+Then use the link the same way as you would use any of the other bookmarklet links. - When you click it, it will open a window, but it may take a few seconds to highlight the code, please wait and allow it to do so]
+</ul>
+<p id="lyr">* Layers browsers (Netscape 4, Escape 4) will not work with elements that have been positioned using CSS 2.</p>
+
+<!--
+<a href="javascript:(function () {
+function getAllScripts(oDoc,oDest) {
+	if( !oDoc.scripts.length ) { return oDest.createTextNode(''); }
+	var damer, ul = oDest.createElement('ol');
+	for( var i = 0, j; j = oDoc.scripts[i]; i++ ) {
+		var tx = oDest.createElement('textarea'), li = oDest.createElement('li');
+		li.appendChild(tx);ul.appendChild(li);
+		var oH = oDest.createElement('h4');
+		if(j.hasAttribute('src')){
+			var oA = oDest.createElement('a');
+			oH.appendChild(oA);
+			oA.appendChild(oDest.createTextNode(j.getAttribute('src')));
+			oA.setAttribute('href',j.getAttribute('src'));
+		} else {
+			oH.appendChild(oDest.createTextNode('Inline script'));
+		}
+		li.appendChild(oH);
+		tx.setAttribute('wrap','off');
+		tx.setAttribute('rows','10');
+		tx.setAttribute('cols','50');
+		li.appendChild(tx);
+		if( !j.text &amp;&amp; j.hasAttribute('src') ) {
+		  tx.value = '\/\/No source code found\n\/\/Probably a script from another domain, but could just be an empty script';
+		} else if( !j.text ) {
+		  tx.value = '\/\/Empty script';
+		} else {
+			try {
+				eval( 'damer = function () {'+j.text.replace(/[\r\n][\t ]*-{2}&gt;|&lt;!-{2}.*/g,'\n')+'\n}' );
+			tx.value = '  '+damer.toString().replace(/^\s*function\s*\(\s*\)\s*\{\s*|\s*\}\s*$/g,'').replace(/<\/(script)>/ig,'<\\\/$1>');
+			} catch(e) {
+			  tx.value = '\/\/Parsing failed\n\n'+j.text;
+			}
+		}
+	}
+	return ul;
+}
+function getAllFrames(oWin,oDest,oPar) {
+	if( !oWin.frames.length ) { return; }
+	var oA, oH = oDest.createElement('h2'), li, ul = oDest.createElement('ol');
+	oH.appendChild(oDest.createTextNode('Frames'));
+	oPar.appendChild(oH);
+	ul.className = 'framl';
+	oPar.appendChild(ul);
+	for( var i = 0, j; i &lt; oWin.frames.length; i++ ) {
+		li = oDest.createElement('li');
+		oH = oDest.createElement('h3');
+		li.appendChild(oH);
+		ul.appendChild(li);
+		try {
+			j = oWin.frames[i];
+			if( j.location ) {
+				oA = oDest.createElement('a');
+				oA.setAttribute('href',j.location.href);
+				oA.appendChild(oDest.createTextNode(j.document.title?j.document.title:j.location.href));
+				oH.appendChild(oA);
+			} else {
+				oH.appendChild(oDest.createTextNode('Page with no location object'));
+			}
+			if( j.document ) {
+				li.appendChild(getAllScripts(j.document,oDest));
+				getAllFrames(j,oDest,li);
+			}
+		} catch(e) {
+			oH.appendChild(oDest.createTextNode('Frame from denied domain'));
+		}
+	}
+}
+var foo = window.open('','_blank');
+foo.document.write('&lt;html&gt;&lt;title&gt;&lt;\/title&gt;&lt;style type=\'text/css\'&gt;\n'+
+'textarea { height: 10em; width: 100'+String.fromCharCode(37)+'; }\n'+
+'html, body { background: #ddd; color: #000; }\n'+
+'body { width: 90'+String.fromCharCode(37)+'; }\n'+
+'a { color: #00f; }\n'+
+'a:visited { color: #909; }\n'+
+'ol { background: #bbb; list-style-position: inside; padding: 1px; margin: 0.5em 2px; }\n'+
+'ol.framl { background: #aae; }\n'+
+'li { background: #ddd; padding: 1px; margin: 2px 2px 2px 1em; }\n'+
+'li h2, li h3, li h4 { margin-top: 0; }\n'+
+'\n&lt;\/style&gt;&lt;body&gt;&lt;\/body&gt;');
+foo.document.close();
+var oH = foo.document.createElement('h1');
+oA = foo.document.createElement('a');
+oA.setAttribute('href',location.href);
+oA.appendChild(foo.document.createTextNode(foo.document.title=('Scripts for: '+(document.title?document.title:location.href))));
+oH.appendChild(oA);
+foo.document.body.appendChild(oH);
+foo.document.body.appendChild(getAllScripts(document,foo.document));
+getAllFrames(window,foo.document,foo.document.body);
+})();
+">JSTidy</a>
+-->
+
+</div>
+
+</body>
+</html>
