@@ -1,0 +1,15 @@
+<script type="text/template" id="section">
+	<section class="section m-auto">
+		<% if(obj.ext.match(/svg|png|ico|jpg|jpeg/)) { %>
+			<img src="https://assets.codepen.io/1674766/<%= obj.src %>.<%= obj.ext %>" alt="<%= obj.src %>">
+		<% } %>
+		<% if(obj.ext.match(/mp3/)) { %>
+			<a href="https://assets.codepen.io/1674766/<%= obj.src %>.<%= obj.ext %>"><%= obj.src %></a>
+			<audio controls src="https://assets.codepen.io/1674766/<%= obj.src %>.<%= obj.ext %>" alt="<%= obj.src %>"></audio>
+		<% } %>	
+		<% if(obj.ext.match(/mp3/)) { %>
+			<a href="https://assets.codepen.io/1674766/<%= obj.src %>.<%= obj.ext %>"><%= obj.src %></a>
+			<video controls src="https://assets.codepen.io/1674766/<%= obj.src %>.<%= obj.ext %>" alt="<%= obj.src %>"></video>
+		<% } %>			
+	</section>		
+</script>

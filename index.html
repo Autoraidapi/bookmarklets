@@ -1,32 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta http-equiv="refresh" content="0; url=old/">
+  <!---<meta http-equiv="refresh" content="0; url=old/">-->
   <meta charset="UTF-8" />
   <title>Bookmarklets</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
   <link rel="stylesheet" href="https://assets.codepen.io/1674766/stack.min.css" />
   <link rel="stylesheet" href="assets/css/main.css">
+  <script src="https://assets.codepen.io/1674766/require.min.js" data-main="assets"></script>
 </head>
-
 <body>
 
-
-  <header class="navbar border-bottom border-dark p-0">
-
+  <header class="navbar border-bottom border-dark p-0" style="background-color:RGBA(255,255,255,0);">
     <nav class="btn-group">
-      <button class="btn btn-sm">&#9776;</button>
-      <a href="#test/1" class="btn btn-sm">Test1</a>
-      <a href="#test/2" class="btn btn-sm">Test2</a>
+      <a class="btn btn-sm" href="">Github Repository/</a>
     </nav>
-
-    <nav class="btn-group"></nav>
-
     <nav class="btn-group">
-      <button class="btn btn-sm">#</button>
+      <a class="btn btn-sm" href="assets/html/create.html">Create Bookmark/</a>
     </nav>
-
   </header>
 
   <main role="main">
@@ -37,14 +28,10 @@
 
   <footer class="navbar fixed-bottom navbar-dark bg-dark"></footer>
 
-  <script type="text/template" id="bookmarklet">
-    <h3><%= obj.title %></h3>
-    <hr>
-
+  <script type="text/template" id="template">
+    <&= obj.title &>
+    <&= obj.uid &>
   </script>
-
-  <script src="https://assets.codepen.io/1674766/stack.min.js"></script>
-  <script src="assets/js/main.js"></script>
 
 </body>
 </html>
