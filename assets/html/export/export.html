@@ -2,32 +2,25 @@
 <html lang="en">
 
 <head>
-    <!--meta http-equiv="refresh" content="0; url=old/"-->
     <meta charset="UTF-8" />
     <title>Export</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
-    <link rel="shortcut icon" href="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1674766/favicon.ico"
-        type="image/x-icon" />
-    <link rel="apple-touch-icon" href="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1674766/apple-touch-icon.png" />
-    <link rel='stylesheet' href='https://s3-us-west-2.amazonaws.com/s.cdpn.io/1674766/bootstrap.min.css' />
-
+    <link rel="shortcut icon" href="https://assets.codepen.io/1674766/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="https://assets.codepen.io/1674766/apple-touch-icon.png">
+    <link rel="stylesheet" href="https://assets.codepen.io/1674766/bootstrap.min.css" />
 </head>
 
 <body>
 
-
-
     <header class="navbar border-dark border-bottom p-0">
 
         <nav class="btn-group">
-            <a class="btn btn-sm" href="../../">
-                &#9776;
-            </a>
+            <a class="btn btn-sm" href="https://autoraidapi.github.io/bookmarklets/">&#9776;</a>
         </nav>
 
         <nav class="btn-group">
-            <a class="btn btn-sm" href="build.html" title="Bookmark builder">Build</a>
-            <button class="btn btn-sm" href="#" disabled>Export</button>
+            <a class="btn btn-sm" role="button" href="https://autoraidapi.github.io/bookmarklets/assets/html/build/build.html" title="Bookmark builder">Build</a>
+            <button class="btn btn-sm" disabled>Export</button>
         </nav>
 
     </header>
@@ -40,13 +33,17 @@
             </section>
         </article>
     </main>
-    
+
     <footer class="navbar fixed-bottom navbar-dark bg-dark"></footer>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function (event) {
-            
-        });
+        (function(){
+            var title = document.getElementById('title');
+            var url = document.getElementById('url');
+            document.addEventListener('DOMContentLoaded', function (event) {
+
+            }, false);
+        })();
     </script>
 </body>
 

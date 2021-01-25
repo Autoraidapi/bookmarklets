@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!---<meta http-equiv="refresh" content="0; url=old/">-->
   <meta charset="UTF-8" />
   <title>Bookmarklets</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
@@ -10,12 +9,13 @@
 </head>
 <body>
 
-  <header class="navbar border-bottom border-dark p-0">
+  <header class="navbar border-bottom border-dark p-0" role="navigation">
     <nav class="btn-group">
       <a class="btn btn-sm" href="https://github.com/Autoraidapi/bookmarklets">Github Repository/</a>
     </nav>
     <nav class="btn-group">
-      <a class="btn btn-sm" href="assets/html/build/build.html">Create Bookmark/</a>
+      <a class="btn btn-sm" role="button" href="assets/html/build/build.html" title="Bookmark builder">Build</a>
+      <a class="btn btn-sm" role="button" href="assets/html/export/export.html" title="Bookmark export">Export</a>
     </nav>
   </header>
 
@@ -27,9 +27,7 @@
 
   <footer class="navbar fixed-bottom navbar-dark bg-dark"></footer>
 
-
   <script type="text/template" id="bookmarkTemplate">
-    <% if(obj.display){ %>
     <section class="card">
       <div class="card-header">
         <a href="<%= obj.href %>"><%= obj.title %></a>
@@ -38,10 +36,9 @@
         <p><%= obj.description %></p>
       </div>
       <div class="card-footer">
-        <span><%= obj.id %></span>
+        <span><%= obj.permalink %></span>
       </div>
     </section>
-    <% } %>
   </script>
 
   <script src="https://assets.codepen.io/1674766/stack.min.js"></script>
