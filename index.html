@@ -5,33 +5,47 @@
   <meta charset="UTF-8" />
   <title>Bookmarklets</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
-  <link rel="stylesheet" href="https://assets.codepen.io/1674766/stack.min.css" />
+  <link rel="stylesheet" href="https://assets.codepen.io/1674766/bootstrap.min.css" />
   <link rel="stylesheet" href="assets/css/main.css">
-  <script src="https://assets.codepen.io/1674766/require.min.js" data-main="assets"></script>
 </head>
 <body>
 
-  <header class="navbar border-bottom border-dark p-0" style="background-color:RGBA(255,255,255,0);">
+  <header class="navbar border-bottom border-dark p-0">
     <nav class="btn-group">
-      <a class="btn btn-sm" href="">Github Repository/</a>
+      <a class="btn btn-sm" href="https://github.com/Autoraidapi/bookmarklets">Github Repository/</a>
     </nav>
     <nav class="btn-group">
-      <a class="btn btn-sm" href="assets/html/create.html">Create Bookmark/</a>
+      <a class="btn btn-sm" href="assets/html/build/build.html">Create Bookmark/</a>
     </nav>
   </header>
 
   <main role="main">
-    <article class="" role="article">
+    <article class="jumbotron p-3" role="article">
 
     </article>
   </main>
 
   <footer class="navbar fixed-bottom navbar-dark bg-dark"></footer>
 
-  <script type="text/template" id="template">
-    <&= obj.title &>
-    <&= obj.uid &>
+
+  <script type="text/template" id="bookmarkTemplate">
+    <% if(obj.display){ %>
+    <section class="card">
+      <div class="card-header">
+        <a href="<%= obj.href %>"><%= obj.title %></a>
+      </div>
+      <div class="card-body">
+        <p><%= obj.description %></p>
+      </div>
+      <div class="card-footer">
+        <span><%= obj.id %></span>
+      </div>
+    </section>
+    <% } %>
   </script>
+
+  <script src="https://assets.codepen.io/1674766/stack.min.js"></script>
+  <script src="assets/js/main.js"></script>
 
 </body>
 </html>
