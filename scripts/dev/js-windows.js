@@ -146,7 +146,7 @@ function linkOpener(){
 }
 
 
-// TRY : Run Code in both windows with a chain of promises
+// TRY : Run Code in both windows with a composition of promises
 // Multithreaded
 // Asynchronous
 
