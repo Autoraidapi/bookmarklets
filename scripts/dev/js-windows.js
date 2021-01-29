@@ -17,22 +17,30 @@ Constructor.prototype.valueOf = function(){
 	return this;
 };
 
+// @terminate, revokeObjectURL
+
 function Thread(){
+	// call to core contstructor
 	var blob = new Blob([document.getElementById('worker').textContent],{type:'text/javascript'});
 	this.source = URL.createObjectURL(blob);
 	this.worker = new Worker(this.source);
+	
+	
 	this.preinitialize.apply(this, arguments);
 	this.initialize.apply(this, arguments);	
 };
 
 Thread.prototype = Object.create(Constructor.prototype, {
+	// for debugging, all true
 	constructor : {
-		consfigurable : true,
+		configurable : true,
 		enumerable : true,
 		value : Thread,
 		writeable : true		
 	}	
 });
+
+// initializer, composition
 
 Thread.prototype.preinitialize = function(){
 	this.worker.addEventListener('message', this.onMessage.bind(this), true);
@@ -75,6 +83,8 @@ Standard.prototype.preinitialize = function(){
 Standard.prototype.initialize = function(){
 	
 };
+
+// todo : setup scope `this` .call(context)
 
 Standard.prototype.open = function(focus){
 	var self = this;
