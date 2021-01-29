@@ -111,6 +111,8 @@ Standard.prototype.close = function(){
 	}
 };
 
+// todo : setup storage or url as commutator for the entities within the row within the table
+
 Standard.prototype.write = function(html){
 	var self = this;	
 	self.cid.document.write(html);
