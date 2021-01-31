@@ -18,13 +18,15 @@
   },
   {
     "title": "View Variables",
-    "uri": "javascript:(function()%7B%20var%20x%2C%20d%2C%20i%2C%20v%2C%20st%3B%20x%20%3D%20open()%3B%20d%20%3D%20x.document%3B%20d.open()%3B%20function%20hE(s)%20%7B%20s%20%3D%20s.replace(%2F%5C%5C%22%2Fg%2C%20'%22')%20.replace(%2F%26%2Fg%2C%20'%26amp%3B')%20.replace(%2F%22%2Fg%2C%20'%26quot%3B')%20.replace(%2F'%2Fg%2C%20'%26%2339%3B')%20.replace(%2F%3C%2Fg%2C%20'%26lt%3B')%20.replace(%2F%3E%2Fg%2C%20'%26gt%3B')%3B%20return%20s%3B%20%7D%20%20d.write(%20%22%3C!DOCTYPE%20html%3E%3Chtml%3E%3Chead%3E%3Cstyle%3Etd%7Bvertical-align%3Atop%3B%20white-space%3Apre%3B%20%7D%20table%2Ctd%2Cth%20%7B%20font-family%3A%20monospace%3B%20padding%3A3px%3B%20margin%3A%20auto%3B%20border-radius%3A2px%3B%20border%3A%201px%20solid%20rgba(0%2C0%2C0%2C0.15)%3B%20%7D%20div.er%20%7B%20color%3Ared%20%7D%3C%2Fstyle%3E%3C%2Fhead%3E%3Cbody%3E%3Ctable%20border%3D1%3E%3Cthead%3E%3Ctr%3E%3Cth%3EVariable%3C%2Fth%3E%3Cth%3EType%3C%2Fth%3E%3Cth%3EValue%20as%20string%3C%2Fth%3E%3C%2Ftr%3E%3C%2Fthead%3E%22%20)%3B%20%20for%20(i%20in%20window)%20%7B%20%20if%20(!(i%20in%20x))%20%7B%20v%20%3D%20window%5Bi%5D%3B%20d.write(%20%22%3Ctr%3E%3Ctd%3E%22%20%2B%20hE(i)%20%2B%20%22%3C%2Ftd%3E%3Ctd%3E%22%20%2B%20hE(typeof%20window%5Bi%5D)%20%2B%20%22%3C%2Ftd%3E%3Ctd%3E%22%20)%3B%20if%20(v%20%3D%3D%3D%20null)%20d.write(%22null%22)%3B%20else%20if%20(v%20%3D%3D%3D%20undefined)%20d.write(%22undefined%22)%3B%20else%20try%20%7B%20st%20%3D%20v.toString()%3B%20if%20(st.length)%20d.write(hE(v.toString()))%3B%20else%20d.write(%22%20%22)%3B%20%7D%20catch%20(er)%20%7B%20d.write(%22%3Cdiv%20class%3Der%3E%22%20%2B%20hE(er.toString())%20%2B%20%22%3C%2Fdiv%3E%22)%3B%20%7D%20d.write(%22%3C%2Fpre%3E%3C%2Ftd%3E%3C%2Ftr%3E%22)%3B%20%7D%20%7D%20%20d.write(%22%3C%2Ftable%3E%3C%2Fbody%3E%3C%2Fhtml%3E%22)%3B%20d.close()%3B%20%7D)()%3B%20%20",
+    "uri": "javascript:(function(){  })();",
     "description": "Lookup all global variables not native to the window and writes them to a table in a new window.",
-    "source":"https://github.com/Autoraidapi/bookmarklets/blob/93b1475693ddd6410345e9ae2915b1cdd8ff3228/assets/js/lib/developer/view-variables.js#L5",
+    "email":"View_Va.foo47rc5ed6y7qm2@u.box.com",
+    "address":"https://app.box.com/s/wx3c38b8mtlri9k8zoyk9a0h4jwfwvik",
+    "source":"https://github.com/Autoraidapi/bookmarklets/blob/master/scripts/dev/view-variables.js",
     "date": 1601046176513,
     "time": "08:02:56:513",
     "uid": "8f15ad8f-d562-c749-b4dc-f57de4812f96",
-    "id": 3
+    "id": 0
   },
   {
     "title": "JS Shell",

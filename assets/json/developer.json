@@ -1,0 +1,12 @@
+{
+    "title": "View Variables",
+    "uri": "javascript:(function(){  })();",
+    "description": "Lookup all global variables not native to the window and writes them to a table in a new window.",
+    "email": "View_Va.foo47rc5ed6y7qm2@u.box.com",
+    "address": "https://app.box.com/s/wx3c38b8mtlri9k8zoyk9a0h4jwfwvik",
+    "source": "https://github.com/Autoraidapi/bookmarklets/blob/master/scripts/dev/view-variables.js",
+    "date": 1601046176513,
+    "time": "08:02:56:513",
+    "uid": "8f15ad8f-d562-c749-b4dc-f57de4812f96",
+    "id": 0
+}

@@ -4,12 +4,10 @@
 			<img src="https://assets.codepen.io/1674766/<%= obj.src %>.<%= obj.ext %>" alt="<%= obj.src %>">
 		<% } %>
 		<% if(obj.ext.match(/mp3/)) { %>
-			<a href="https://assets.codepen.io/1674766/<%= obj.src %>.<%= obj.ext %>"><%= obj.src %></a>
 			<audio controls src="https://assets.codepen.io/1674766/<%= obj.src %>.<%= obj.ext %>" alt="<%= obj.src %>"></audio>
 		<% } %>	
-		<% if(obj.ext.match(/mp3/)) { %>
-			<a href="https://assets.codepen.io/1674766/<%= obj.src %>.<%= obj.ext %>"><%= obj.src %></a>
+		<% if(obj.ext.match(/mp4/)) { %>
 			<video controls src="https://assets.codepen.io/1674766/<%= obj.src %>.<%= obj.ext %>" alt="<%= obj.src %>"></video>
 		<% } %>			
-	</section>		
+	</section>
 </script>
